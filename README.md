@@ -6,7 +6,7 @@ This application support the [Getting Started with Java on Heroku](https://devce
 
 ## Running Locally
 
-Make sure you have Ruby installed.  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+Make sure you have Java and Maven installed.  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
 ```sh
 $ git clone https://github.com/heroku/java-getting-started.git
