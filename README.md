@@ -1,6 +1,8 @@
 # heroku-java-sample
 
-A barebones Java app, which can easily be deployed to Heroku.  This supports the new [Getting Started with Ruby on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java-new) tutorial.
+A barebones Java app, which can easily be deployed to Heroku.  
+
+This application support the [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java) article - check it out.
 
 ## Running Locally
 
