@@ -27,7 +27,7 @@ $ heroku open
 
 ## Documentation
 
-For more information about using Ruby on Heroku, see these Dev Center articles:
+For more information about using Java on Heroku, see these Dev Center articles:
 
 - [Java on Heroku](https://devcenter.heroku.com/categories/java)
 
