@@ -22,6 +22,7 @@ public class Main extends HttpServlet {
   private void showHome(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     resp.getWriter().print("Hello from Java!");
+    resp.getWriter().print("<html><body bgcolor=/"green/"></body></html>");
   }
 
   private void showDatabase(HttpServletRequest req, HttpServletResponse resp)
