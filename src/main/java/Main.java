@@ -26,10 +26,12 @@ public class Main extends HttpServlet {
 
   private void showDatabase(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+    Connection connection = null;
+    Statement stmt = null;
     try {
-      Connection connection = getConnection();
+      connection = getConnection();
 
-      Statement stmt = connection.createStatement();
+      stmt = connection.createStatement();
       stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
       stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
       ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
@@ -42,7 +44,35 @@ public class Main extends HttpServlet {
       resp.getWriter().print(out);
     } catch (Exception e) {
       resp.getWriter().print("There was an error: " + e.getMessage());
+    } finally {
+      ensureConnectionClosed(connection, stmt, null);
     }
+  }
+
+  public void ensureConnectionClosed(Connection conn, Statement ps, ResultSet rs) {
+      if (rs != null) {
+          try {
+              rs.close();
+          }
+          catch (SQLException e) {
+          }
+      }
+
+      if (ps != null) {
+          try {
+              ps.close();
+          }
+          catch (SQLException e) {
+          }
+      }
+
+      if (conn != null) {
+          try {
+              conn.close();
+          }
+          catch (SQLException e) {
+          }
+      }
   }
 
   private Connection getConnection() throws URISyntaxException, SQLException {
@@ -50,7 +80,9 @@ public class Main extends HttpServlet {
 
     String username = dbUri.getUserInfo().split(":")[0];
     String password = dbUri.getUserInfo().split(":")[1];
-    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
+    int port = dbUri.getPort();
+
+    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + port + dbUri.getPath();
 
     return DriverManager.getConnection(dbUrl, username, password);
   }
