@@ -27,11 +27,10 @@ public class Main extends HttpServlet {
   private void showDatabase(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     Connection connection = null;
-    Statement stmt = null;
     try {
       connection = getConnection();
 
-      stmt = connection.createStatement();
+      Statement stmt = connection.createStatement();
       stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
       stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
       ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
@@ -45,34 +44,8 @@ public class Main extends HttpServlet {
     } catch (Exception e) {
       resp.getWriter().print("There was an error: " + e.getMessage());
     } finally {
-      ensureConnectionClosed(connection, stmt, null);
+      if (connection != null) try{connection.close();} catch(SQLException e){}
     }
-  }
-
-  public void ensureConnectionClosed(Connection conn, Statement ps, ResultSet rs) {
-      if (rs != null) {
-          try {
-              rs.close();
-          }
-          catch (SQLException e) {
-          }
-      }
-
-      if (ps != null) {
-          try {
-              ps.close();
-          }
-          catch (SQLException e) {
-          }
-      }
-
-      if (conn != null) {
-          try {
-              conn.close();
-          }
-          catch (SQLException e) {
-          }
-      }
   }
 
   private Connection getConnection() throws URISyntaxException, SQLException {
@@ -87,7 +60,7 @@ public class Main extends HttpServlet {
     return DriverManager.getConnection(dbUrl, username, password);
   }
 
-  public static void main(String[] args) throws Exception{
+  public static void main(String[] args) throws Exception {
     Server server = new Server(Integer.valueOf(System.getenv("PORT")));
     ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
     context.setContextPath("/");
