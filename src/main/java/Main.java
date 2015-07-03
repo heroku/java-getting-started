@@ -1,72 +1,72 @@
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.*;
+import java.sql.*;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map;
+
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.*;
 
-public class Main extends HttpServlet {
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
+import static spark.Spark.*;
+import spark.template.freemarker.FreeMarkerEngine;
+import spark.ModelAndView;
+import static spark.Spark.get;
 
-    if (req.getRequestURI().endsWith("/db")) {
-      showDatabase(req,resp);
-    } else {
-      showHome(req,resp);
-    }
-  }
+public class Main {
 
-  private void showHome(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    resp.getWriter().print("Hello from Java!");
-  }
+  public static void main(String[] args) {
 
-  private void showDatabase(HttpServletRequest req, HttpServletResponse resp)
-      throws ServletException, IOException {
-    Connection connection = null;
-    try {
-      connection = getConnection();
+    port(Integer.valueOf(System.getenv("PORT")));
+    staticFileLocation("/public");
 
-      Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-      stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-      ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+    get("/hello", (req, res) -> "Hello World");
 
-      String out = "Hello!\n";
-      while (rs.next()) {
-          out += "Read from DB: " + rs.getTimestamp("tick") + "\n";
+    get("/", (request, response) -> {
+            Map<String, Object> attributes = new HashMap<>();
+            attributes.put("message", "Hello World!");
+
+            return new ModelAndView(attributes, "index.ftl");
+        }, new FreeMarkerEngine());
+
+    get("/db", (req, res) -> {
+      Connection connection = null;
+      Map<String, Object> attributes = new HashMap<>();
+      try {
+        connection = getConnection();
+
+        Statement stmt = connection.createStatement();
+        stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
+        stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
+        ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+
+        ArrayList<String> output = new ArrayList<String>();
+        while (rs.next()) {
+          output.add( "Read from DB: " + rs.getTimestamp("tick"));
+        }
+
+        attributes.put("results", output);
+        return new ModelAndView(attributes, "db.ftl");
+      } catch (Exception e) {
+        attributes.put("message", "There was an error: " + e);
+        return new ModelAndView(attributes, "error.ftl");
+      } finally {
+        if (connection != null) try{connection.close();} catch(SQLException e){}
       }
+  }, new FreeMarkerEngine());
 
-      resp.getWriter().print(out);
-    } catch (Exception e) {
-      resp.getWriter().print("There was an error: " + e.getMessage());
-    } finally {
-      if (connection != null) try{connection.close();} catch(SQLException e){}
-    }
   }
 
-  private Connection getConnection() throws URISyntaxException, SQLException {
+  private static Connection getConnection() throws URISyntaxException, SQLException {
     URI dbUri = new URI(System.getenv("DATABASE_URL"));
-
-    String username = dbUri.getUserInfo().split(":")[0];
-    String password = dbUri.getUserInfo().split(":")[1];
     int port = dbUri.getPort();
-
     String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + port + dbUri.getPath();
 
-    return DriverManager.getConnection(dbUrl, username, password);
+    if (dbUri.getUserInfo() != null) {
+      String username = dbUri.getUserInfo().split(":")[0];
+      String password = dbUri.getUserInfo().split(":")[1];
+      return DriverManager.getConnection(dbUrl, username, password);
+    } else {
+      return DriverManager.getConnection(dbUrl);
+    }
   }
 
-  public static void main(String[] args) throws Exception {
-    Server server = new Server(Integer.valueOf(System.getenv("PORT")));
-    ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-    context.setContextPath("/");
-    server.setHandler(context);
-    context.addServlet(new ServletHolder(new Main()),"/*");
-    server.start();
-    server.join();
-  }
 }
