@@ -11,6 +11,8 @@ import spark.template.freemarker.FreeMarkerEngine;
 import spark.ModelAndView;
 import static spark.Spark.get;
 
+import com.heroku.sdk.jdbc.DatabaseUrl;
+
 public class Main {
 
   public static void main(String[] args) {
@@ -31,7 +33,7 @@ public class Main {
       Connection connection = null;
       Map<String, Object> attributes = new HashMap<>();
       try {
-        connection = getConnection();
+        connection = DatabaseUrl.extract().getConnection();
 
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
@@ -53,20 +55,6 @@ public class Main {
       }
   }, new FreeMarkerEngine());
 
-  }
-
-  private static Connection getConnection() throws URISyntaxException, SQLException {
-    URI dbUri = new URI(System.getenv("DATABASE_URL"));
-    int port = dbUri.getPort();
-    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + port + dbUri.getPath();
-
-    if (dbUri.getUserInfo() != null) {
-      String username = dbUri.getUserInfo().split(":")[0];
-      String password = dbUri.getUserInfo().split(":")[1];
-      return DriverManager.getConnection(dbUrl, username, password);
-    } else {
-      return DriverManager.getConnection(dbUrl);
-    }
   }
 
 }
