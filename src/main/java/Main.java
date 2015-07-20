@@ -20,11 +20,11 @@ public class Main {
     port(Integer.valueOf(System.getenv("PORT")));
     staticFileLocation("/public");
 
-    get("/hello", (req, res) -> "Hello World");
+    get("/hello", (req, res) -> "Hello World -  - SHALTON O TESTADOR!");
 
     get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", "Hello World! - SHALTON O TESTADOR!");
+            attributes.put("message", "Hello World!");
 
             return new ModelAndView(attributes, "index.ftl");
         }, new FreeMarkerEngine());
