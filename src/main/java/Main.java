@@ -16,8 +16,12 @@ import com.heroku.sdk.jdbc.DatabaseUrl;
 public class Main {
 
   public static void main(String[] args) {
-
-    port(Integer.valueOf(System.getenv("PORT")));
+    String port = System.getenv("PORT");
+    if( port == null ) {
+      System.out.println( "No PORT specified, using 5000. ");
+      port = "5000";
+    }
+    port(Integer.valueOf(port));
     staticFileLocation("/public");
 
     get("/hello", (req, res) -> "Hello World");
