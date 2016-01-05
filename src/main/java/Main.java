@@ -22,6 +22,8 @@ public class Main {
 
     get("/hello", (req, res) -> "Hello World for Git!!!");
 
+    get("/goodmorning", (req, res) -> "Good morning!");
+
     get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
             attributes.put("message", "Hello World!");
