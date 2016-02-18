@@ -47,7 +47,7 @@
     </div>
   </div> <!-- row -->
    <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
+    DISCLAIMER : this application is of any utility if not working in the target organization.
   </div>
 </div>
 
