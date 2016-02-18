@@ -20,15 +20,20 @@ public class Main {
     port(Integer.valueOf(System.getenv("PORT")));
     staticFileLocation("/public");
 
-    get("/hello", (req, res) -> "Hello World");
-
+    get("/help", (req, res) -> "Nothing yet");
+    get("/search", (req, res) -> "Nothing yet at search");    
+    get("/share", (req, res) -> "Nothing yet at share");
+    
     get("/", (request, response) -> {
             Map<String, Object> attributes = new HashMap<>();
+            /*
             attributes.put("message", "Hello World!");
+            */
 
             return new ModelAndView(attributes, "index.ftl");
         }, new FreeMarkerEngine());
 
+/*
     get("/db", (req, res) -> {
       Connection connection = null;
       Map<String, Object> attributes = new HashMap<>();
@@ -54,7 +59,6 @@ public class Main {
         if (connection != null) try{connection.close();} catch(SQLException e){}
       }
     }, new FreeMarkerEngine());
-
   }
-
+*/
 }
