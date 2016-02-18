@@ -6,6 +6,9 @@ This application support the [Getting Started with Java on Heroku](https://devce
 
 It's currently [running](https://young-caverns-65432.herokuapp.com/).
 
+Build status on Travis CI:
+[![Build Status](https://travis-ci.org/lefevre00/java-getting-started.svg)](https://travis-ci.org/lefevre00/java-getting-started)
+
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ## Running Locally
