@@ -4,6 +4,8 @@ A barebones Java app, which can easily be deployed to Heroku.
 
 This application support the [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java) article - check it out.
 
+It's currently [running](https://young-caverns-65432.herokuapp.com/).
+
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 ## Running Locally
