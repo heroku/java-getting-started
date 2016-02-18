@@ -1,16 +1,10 @@
-# java-getting-started
+# Parking
 
-A barebones Java app, which can easily be deployed to Heroku.
+A simple application to share parking availability with your co-workers.
 
-This application support the [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java) article - check it out.
+This application is based on [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java)..
 
-It's currently [running](https://young-caverns-65432.herokuapp.com/).
+It's currently running [here](https://young-caverns-65432.herokuapp.com/).
 
-Build status on Travis CI:
-[![Build Status](https://travis-ci.org/lefevre00/java-getting-started.svg)](https://travis-ci.org/lefevre00/java-getting-started)
-
-## Documentation
-
-For more information about using Java on Heroku, see these Dev Center articles:
-
-- [Java on Heroku](https://devcenter.heroku.com/categories/java)
+Travis CI status :
+[![Build Status](https://travis-ci.org/lefevre00/parking.svg)](https://travis-ci.org/lefevre00/parking)
