@@ -19,7 +19,7 @@
     border-radius: 50%;
     overflow: hidden;
     width: 100px;
-    height: 100px;
+    height: 100%;
     margin: auto;
     border: 2px solid white; }
     .jumbotron .lang-logo img {

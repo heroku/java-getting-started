@@ -3,9 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.example</groupId>
+  <groupId>org.friends.apps</groupId>
   <version>1.0-SNAPSHOT</version>
-  <artifactId>helloworld</artifactId>
+  <artifactId>parking</artifactId>
   <dependencies>
     <dependency>
       <groupId>com.sparkjava</groupId>
@@ -26,6 +26,12 @@
       <groupId>com.heroku.sdk</groupId>
       <artifactId>heroku-jdbc</artifactId>
       <version>0.1.1</version>
+    </dependency>
+    <dependency>
+	  <groupId>com.h2database</groupId>
+	  <artifactId>h2</artifactId>
+	  <version>1.4.191</version>
+	  <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
@@ -55,4 +61,15 @@
       </plugin>
     </plugins>
   </build>
+  <scm>
+  	<url>https://github.com/lefevre00/parking/</url>
+  </scm>
+  <issueManagement>
+  	<url>https://github.com/lefevre00/parking/issues/</url>
+  	<system>github</system>
+  </issueManagement>
+  <ciManagement>
+  	<system>Travis</system>
+  	<url>https://travis-ci.org/lefevre00/parking/</url>
+  </ciManagement>
 </project>
