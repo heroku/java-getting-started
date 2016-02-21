@@ -2,3 +2,4 @@ target
 .env
 .idea/
 *.iml
+/hs_err_pid20415.log
