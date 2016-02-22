@@ -9,21 +9,24 @@
   
   <div class="jumbotron">
     <div class="container">
-      <div class="row></div>
-      <form method="post" action="/login/process" role="form">
-        <div class="form-group">
-	        <label for="email">Email</label>
-	        <input type="email class="form-control" id="email"/>
-        </div>
-        <div class="form-group">
-	        <label for="pwd">Mot de passe</label>
-	        <input type="password" class="form-control" id="pwd"/>
-        </div>
-      </form>
+      <div class="row>
+	      <form method="post" action="/login/process" role="form">
+	        <div class="form-group">
+		        <label for="email">Email</label>
+		        <input type="email" class="form-control" id="email" placeholder="adresse@email.fr"/>
+	        </div>
+	        <div class="form-group">
+		        <label for="pwd">Mot de passe</label>
+		        <input type="password" class="form-control" id="pwd" placeholder="********"/>
+	        </div>
+	        <div class="form-group">
+				<button class="btn btn-success" value="login">Se connecter</button>
+				<button class="btn btn-primary" value="create">Créer un compte</button>
+	        </div>
+	      </form>
       </div>
     </div>
   </div>
-
-Passe ton chemin
+  
 </body>
 </html>
