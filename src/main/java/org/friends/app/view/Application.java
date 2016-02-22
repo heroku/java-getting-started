@@ -31,7 +31,11 @@ public class Application {
 
 	    get("/login", new LoginFormRoute(), new FreeMarkerEngine());
 	    get("/login/process", (req, res) -> "Nothing yet at share");
-	    
+
+	    get("/book/:placeId", (req, res) -> {
+	        return "Are you looking for " + req.params(":placeId");
+	    });
+
 	    get("/search", new SearchRoute(), new FreeMarkerEngine());
 	    
 	    get("/", (request, response) -> {
