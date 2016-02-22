@@ -9,7 +9,7 @@
   
   <div class="jumbotron">
     <div class="container">
-      <div class="row>
+      <div class="row">
 	      <form method="post" action="/login/process" role="form">
 	        <div class="form-group">
 		        <label for="email">Email</label>
@@ -20,7 +20,7 @@
 		        <input type="password" class="form-control" id="pwd" placeholder="********"/>
 	        </div>
 	        <div class="form-group">
-				<button class="btn btn-success" value="login">Se connecter</button>
+				<input type="submit" class="btn btn-success" value="Se connecter"/>
 				<a class="btn btn-primary" href="/new">Créer un compte</a>
 	        </div>
 	      </form>

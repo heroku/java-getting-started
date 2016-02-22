@@ -31,7 +31,7 @@ public class Application {
 
 	    get("/login", new LoginFormRoute(), new FreeMarkerEngine());
 	    get("/new", (req, res) -> "This is where the user create his account");
-	    get("/login/process", (req, res) -> "Nothing yet at share");
+	    get("/login/process", (req, res) -> "Nothing yet at process login");
 
 	    get("/book/:placeId", (req, res) -> {
 	        return "Are you looking for " + req.params(":placeId");
