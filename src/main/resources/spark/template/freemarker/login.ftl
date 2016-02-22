@@ -21,7 +21,7 @@
 	        </div>
 	        <div class="form-group">
 				<button class="btn btn-success" value="login">Se connecter</button>
-				<button class="btn btn-primary" value="create">Créer un compte</button>
+				<a class="btn btn-primary" href="/new">Créer un compte</a>
 	        </div>
 	      </form>
       </div>
