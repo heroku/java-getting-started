@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 
 import org.friends.app.view.Application;
 
-public class StartApplication {
+public class StartParking {
 
 	 public static void main(String[] args) {
 	  	System.setProperty("PORT", "8080");
