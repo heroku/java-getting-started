@@ -18,7 +18,7 @@
         <h3>
           <a type="button" class="btn btn-lg btn-default" href="./share">
             <span class="glyphicon glyphicon-log-out"></span>
-            Je libÃ¨re ma place
+            Je libère ma place
           </a>
         </h3>
       </div>
