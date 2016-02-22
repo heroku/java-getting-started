@@ -14,11 +14,10 @@
       <div class="col-sm-10">
       	<#list places as place>
       	  <#if place.free>
-      	    <#assign class = "label-success">
+      	    <span class="col-sm-1"> <a class="label label-success" href="/book/${place.number}">${place.number}</a></span>
       	  <#else>
-      	    <#assign class = "label-default">
+            <span class="col-sm-1"><span class="label label-default">${place.number}</span></span>
       	  </#if>
-          <span class="col-sm-1"> <a class="label ${class}">${place.number}</a></span>
         </#list>
       </div>
       <div class="col-sm-1"> </div>
