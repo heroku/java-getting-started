@@ -26,7 +26,7 @@ public class SearchRoute implements TemplateViewRoute {
 
 	private List<Place> getPlaces() {
 		List<Place> places = new ArrayList<>();
-		List<Integer> freePlaces = placeService.getShared();
+		List<Integer> freePlaces = placeService.getAvailable();
 		for (int i = 1; i<150; i++) {
 			places.add(new Place(i, freePlaces.contains(i)));
 		}

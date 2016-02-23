@@ -1,7 +1,8 @@
 package org.friends.app.view;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
 import static spark.Spark.port;
+import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
 
 import java.net.URISyntaxException;

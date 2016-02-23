@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PlaceServiceBean {
 
-	public List<Integer> getShared() {
+	public List<Integer> getAvailable() {
 		return Arrays.asList(new Integer[]{1});
 	}
 }

@@ -1,6 +1,7 @@
 package org.friends.app.model;
 
 public class Place {
+	
 	private boolean free;
 	private int number;
 
