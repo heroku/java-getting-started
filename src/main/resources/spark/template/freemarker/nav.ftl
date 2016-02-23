@@ -9,7 +9,7 @@
         <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
       </li>
       <li>
-        <a href="/login"><span class="glyphicon glyphicon-user"></span> Login</a>
+        <a href="/user/login"><span class="glyphicon glyphicon-user"></span> Login</a>
       </li>
     </ul>
   </div>

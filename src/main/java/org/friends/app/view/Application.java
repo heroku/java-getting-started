@@ -1,6 +1,6 @@
 package org.friends.app.view;
 
-import static spark.Spark.get;
+import static spark.Spark.*;
 import static spark.Spark.port;
 import static spark.Spark.staticFileLocation;
 
@@ -26,22 +26,35 @@ public class Application {
 		port(getPort());
 	    staticFileLocation("/public");
 
-	    get("/help", (req, res) -> "Nothing yet at help");
-	    get("/share", (req, res) -> "Nothing yet at share");    
+	    get("/", (request, response) -> {
+	    	return new ModelAndView(null, "index.ftl");
+	    }, new FreeMarkerEngine());
 
-	    get("/login", new LoginFormRoute(), new FreeMarkerEngine());
-	    get("/new", (req, res) -> "This is where the user create his account");
-	    get("/login/process", (req, res) -> "Nothing yet at process login");
-
+	    
+	    /* User managment */
+	    get("/user/login", (req, res) -> {
+	    	return new ModelAndView(null, "login.ftl");
+	    }, new FreeMarkerEngine());
+	    post("/user/login", (req, res) -> "A user tried to login");
+	    
+	    get("/user/new", (req, res) -> "This is where the user create his account");
+	    post("/user/new", (req, res) -> "A user tried to create his account");
+	    
+	    get("/user/forget", (req, res) -> {
+	    	return new ModelAndView(null, "lostPwd.ftl");
+	    }, new FreeMarkerEngine());
+	    post("/user/forget", (req, res) -> "A user lost his password");
+	    
+	    
+	    /* places booking */
 	    get("/book/:placeId", (req, res) -> {
 	        return "Are you looking for " + req.params(":placeId");
 	    });
 
+	    get("/share", (req, res) -> "Nothing yet at share");    
 	    get("/search", new SearchRoute(), new FreeMarkerEngine());
 	    
-	    get("/", (request, response) -> {
-	            return new ModelAndView(null, "index.ftl");
-	        }, new FreeMarkerEngine());
+	    get("/help", (req, res) -> "Nothing yet at help");
 
 	    get("/db", (req, res) -> {
 	      Connection connection = null;
