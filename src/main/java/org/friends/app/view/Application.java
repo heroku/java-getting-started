@@ -1,5 +1,6 @@
 package org.friends.app.view;
 
+import static org.friends.app.Configuration.getPort;
 import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.post;
@@ -14,16 +15,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.heroku.sdk.jdbc.DatabaseUrl;
+
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import com.heroku.sdk.jdbc.DatabaseUrl;
-
 public class Application {
 	
-	public final static String PORT = "PORT";
-	
-	public void start(@SuppressWarnings("unused") String [] args) {
+	public void start() {
 		port(getPort());
 	    staticFileLocation("/public");
 
@@ -38,10 +37,11 @@ public class Application {
 	    }, new FreeMarkerEngine());
 	    post("/user/login", (req, res) -> "A user tried to login");
 	    
-	    get("/user/new",  (req, res) -> {
+	    get("/user/new", (req, res) -> {
 	    	return new ModelAndView(null, "createUser.ftl");
 	    }, new FreeMarkerEngine());
 	    post("/user/new", (req, res) -> "A user tried to create his account");
+	    
 	    
 	    get("/user/forget", (req, res) -> {
 	    	return new ModelAndView(null, "lostPwd.ftl");
@@ -93,14 +93,5 @@ public class Application {
 
 	protected Connection getConnection() throws SQLException, URISyntaxException {
 		return DatabaseUrl.extract().getConnection();
-	}
-
-	private static Integer getPort() {
-		String port = System.getenv(PORT);
-		if (port == null)
-			port = System.getProperty(PORT);
-		if (port == null)
-			throw new RuntimeException("Port not defined");
-		return Integer.valueOf(port);
 	}
 }
