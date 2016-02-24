@@ -26,6 +26,7 @@ public class UserServiceBean {
 	 * Création d'un utilisateur.
 	 * Voici les règles a respecter lors de la création :
 	 * <ul>
+	 *   <li>Un utilisateur doit comporter un email</li>
 	 *   <li>Aucun utilisateur ne comporte le même email</li>
 	 * </ul>
 	 * @param user
