@@ -7,9 +7,8 @@
 <body>
   <#include "nav.ftl">
   
-  <div class="jumbotron">
     <div class="container">
-      <div class="row form-container">
+      <div class="form-container">
 	      <form method="post" role="form">
 	        <div class="form-group">
 		        <label for="email">Email</label>
@@ -29,7 +28,6 @@
 	      </form>
       </div>
     </div>
-  </div>
   
 </body>
 </html>

@@ -21,7 +21,7 @@
 	        </div>
 	        <div class="form-group">
 				<input type="submit" class="btn btn-success" value="Se connecter"/>
-				<a class="btn btn-primary" href="/user/new">Créer un compte</a>
+				<a class="btn btn-primary" href="/user/new">Cr&eacute;er un compte</a>
 				<a href="/user/forget">Mot de passe perdu ?</a>
 	        </div>
 	      </form>

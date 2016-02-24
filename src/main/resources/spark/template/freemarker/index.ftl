@@ -16,9 +16,9 @@
       </div>
       <div class="col-md-6">
         <h3>
-          <a type="button" class="btn btn-lg btn-default" href="/share">
+          <a type="button" class="btn btn-lg btn-default" href="/sharePlace">
             <span class="glyphicon glyphicon-log-out"></span>
-            Je lib�re ma place
+            Je lib&egrave;re ma place
           </a>
         </h3>
       </div>
