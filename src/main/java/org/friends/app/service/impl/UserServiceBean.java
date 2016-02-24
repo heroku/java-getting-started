@@ -8,6 +8,8 @@ import org.friends.app.model.User;
 
 import com.google.common.base.Strings;
 
+import spark.utils.Assert;
+
 public class UserServiceBean {
 
 	private static List<User> userCache = new ArrayList<>();
@@ -20,7 +22,19 @@ public class UserServiceBean {
 		return user.isPresent() ? user.get() : null;
 	}
 	
-	public void create(User user) {}
+	/**
+	 * Création d'un utilisateur.
+	 * Voici les règles a respecter lors de la création :
+	 * <ul>
+	 *   <li>Aucun utilisateur ne comporte le même email</li>
+	 * </ul>
+	 * @param user
+	 */
+	public void create(User user) {
+		Assert.notNull(user);
+		Assert.notNull(user.getEmail());
+	}
+	
 	public void update(User user) {}
 	public void delete(User user) {}
 	public void reset(User user) {}
