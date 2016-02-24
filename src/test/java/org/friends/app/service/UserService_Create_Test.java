@@ -1,7 +1,5 @@
 package org.friends.app.service;
 
-import java.io.InvalidObjectException;
-
 import org.friends.app.model.User;
 import org.friends.app.service.impl.UserServiceBean;
 import org.junit.Test;
