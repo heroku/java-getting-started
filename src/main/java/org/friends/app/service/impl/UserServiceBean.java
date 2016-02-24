@@ -5,14 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.friends.app.model.User;
-import org.h2.util.StringUtils;
+
+import com.google.common.base.Strings;
 
 public class UserServiceBean {
 
 	private static List<User> userCache = new ArrayList<>();
 	
 	public User findUserByEmail(String email) {
-		if (StringUtils.isNullOrEmpty(email))
+		if (Strings.isNullOrEmpty(email))
 			return null;
 		
 		Optional<User> user = userCache.stream().filter(u -> u.getEmail().equalsIgnoreCase(email)).findFirst();

@@ -28,6 +28,11 @@
       <version>0.1.1</version>
     </dependency>
     <dependency>
+	  <groupId>com.google.guava</groupId>
+	  <artifactId>guava</artifactId>
+	  <version>19.0</version>
+    </dependency>
+    <dependency>
 	  <groupId>com.h2database</groupId>
 	  <artifactId>h2</artifactId>
 	  <version>1.4.191</version>
