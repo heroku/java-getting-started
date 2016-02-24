@@ -38,7 +38,9 @@ public class Application {
 	    }, new FreeMarkerEngine());
 	    post("/user/login", (req, res) -> "A user tried to login");
 	    
-	    get("/user/new", (req, res) -> "This is where the user create his account");
+	    get("/user/new",  (req, res) -> {
+	    	return new ModelAndView(null, "createUser.ftl");
+	    }, new FreeMarkerEngine());
 	    post("/user/new", (req, res) -> "A user tried to create his account");
 	    
 	    get("/user/forget", (req, res) -> {
