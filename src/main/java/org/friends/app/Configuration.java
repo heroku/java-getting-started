@@ -3,6 +3,7 @@ package org.friends.app;
 public class Configuration {
 
 	public final static String PORT = "PORT";
+	public static final String PARKING_MODE = "PARKING_MODE";
 
 	public static String getMailServiceLogin() {
 		return System.getenv("SENDGRID_USERNAME");

@@ -22,6 +22,12 @@ import spark.template.freemarker.FreeMarkerEngine;
 
 public class Application {
 	
+	private static Application instance;
+
+	public Application() {
+		if (instance == null) instance = this;
+	}
+	
 	public void start() {
 		port(getPort());
 	    staticFileLocation("/public");
@@ -93,5 +99,9 @@ public class Application {
 
 	protected Connection getConnection() throws SQLException, URISyntaxException {
 		return DatabaseUrl.extract().getConnection();
+	}
+	
+	public static Application instance() {
+		return instance;
 	}
 }
