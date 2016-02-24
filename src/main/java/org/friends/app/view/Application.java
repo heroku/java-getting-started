@@ -52,7 +52,12 @@ public class Application {
 	        return "Are you looking for " + req.params(":placeId");
 	    });
 
-	    get("/share", (req, res) -> "Nothing yet at share");    
+	    get("/sharePlace", new SharePlace(), new FreeMarkerEngine());  
+	    
+	    get("/sharePlaceValidation", (req, res) -> "TODO");
+	    
+	    
+	    
 	    get("/search", new SearchRoute(), new FreeMarkerEngine());
 	    
 	    get("/help", (req, res) -> "Nothing yet at help");
