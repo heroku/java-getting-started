@@ -60,10 +60,9 @@ public class Application {
 	        return "Are you looking for " + req.params(":placeId");
 	    });
 
-	    get("/sharePlace", new SharePlace(), new FreeMarkerEngine());  
-	    
-	    get("/sharePlaceValidation", (req, res) -> "TODO");
-	    
+	    get("/sharePlace", new SharePlace(), new FreeMarkerEngine()); 
+	    post("/sharePlace",(req, res) -> "Vous libérez la place   " + req.queryParams("number") +" du " + req.queryParams("dateDebut") +" du " + req.queryParams("dateFin"));
+
 	    
 	    
 	    get("/search", new SearchRoute(), new FreeMarkerEngine());

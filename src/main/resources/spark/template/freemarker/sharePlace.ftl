@@ -11,17 +11,18 @@
 
 <div class="container">
     <div class="row">
+    <form method="post" role="form">
         <div class='col-sm-6'>
-           <div class="well">
-			        Je lib&egrave;re la place n°<strong>141</strong> pour la journ&eacute;e du   <input type="text" class="span2" value="02/03/16" data-date-format="dd/mm/yy" id="dp2" >
+           <div class="well text-center">
+           			<input type="hidden" name="number" value="${placeNumber}"/>
+			        Je lib&egrave;re la place nÂ°<strong>${placeNumber}</strong> pour la journ&eacute;e du 
+			         <input type="text" class="span2" value="02/03/16" data-date-format="dd/mm/yy" id="dpd1" length="10" size="10" name="dateDebut"/> au
+			         <input type="text" class="span2" value="02/03/16" data-date-format="dd/mm/yy" id="dpd2" length="10" size="10" name="dateFin"/>
 			      <br/>
-			            <a type="button" class="btn btn-lg btn-default" href="/sharePlaceValidation">
-			        <span class="glyphicon glyphicon-log-on"></span>
-			        OK
-			      </a>
+			            <input type="submit" class="btn btn-ok" value="Valider"/>
           </div>
         </div>
-
+	</form>
     </div>
 </div>
 <script>
@@ -61,6 +62,6 @@
           checkout.hide();
         }).data('datepicker');
 		});
-	</script>
+			</script>
 </body>
 </html>
