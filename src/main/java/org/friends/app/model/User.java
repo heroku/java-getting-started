@@ -11,6 +11,13 @@ public class User {
 	private Integer placeNumber;
 	private String pwd;
 	
+	public User() {}
+	
+	public User(String email, String mdp) {
+		emailAMDM = email;
+		pwd = mdp;
+	}
+	
 	/**
 	 * @return the idUser
 	 */

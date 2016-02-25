@@ -12,8 +12,8 @@ public class UserServiceBean {
 	/**
 	 * Authentification de l'utilisateur
 	 * 
-	 * @param email
-	 * @param pwd
+	 * @param email email AMDM
+	 * @param pwd mot de passe
 	 * @return
 	 * @throws Exception
 	 */

@@ -8,6 +8,6 @@ public class UserBuilder {
 	}
 
 	public User build() {
-		return new User();
+		return new User("email@amdm.fr", "mdp");
 	}
 }
