@@ -1,5 +1,6 @@
 package org.friends.app;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 
 import org.friends.app.view.Application;
@@ -11,7 +12,7 @@ public class StartParking {
 		System.setProperty(Configuration.PARKING_MODE, "dev");
 		
 		new Application() {
-			protected java.sql.Connection getConnection() throws java.sql.SQLException ,java.net.URISyntaxException {
+			protected Connection getConnection() throws java.sql.SQLException ,java.net.URISyntaxException {
 				try {
 					Class.forName("org.h2.Driver");
 				} catch (ClassNotFoundException e) {
