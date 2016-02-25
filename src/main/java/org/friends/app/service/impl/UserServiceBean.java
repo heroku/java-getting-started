@@ -27,12 +27,8 @@ public class UserServiceBean {
 			return null;
 		
 		// Email validator
-		if (!emailValidate(email))
+		if (!emailAMDMValidate(email))
 			throw new Exception("L'email saisi est incorrect !");
-		
-		// On vérifie qu'il s'agit bien d'un email AMDM
-		if (!email.toLowerCase().endsWith("@amdm.fr"))
-			throw new Exception("email incorrect !");
 		
 		User user = findUserByEmail(email);
 		if (user == null)
@@ -65,12 +61,8 @@ public class UserServiceBean {
 		Assert.notNull(user.getPwd());
 		
 		// Email validator
-		if (!emailValidate(user.getEmailAMDM()))
+		if (!emailAMDMValidate(user.getEmailAMDM()))
 			throw new Exception("L'email saisi est incorrect !");
-		
-		// On vérifie qu'il s'agit bien d'un email AMDM
-		if (!user.getEmailAMDM().toLowerCase().endsWith("@amdm.fr"))
-			throw new Exception("email incorrect !");
 		
 		userDao.persist(user);
 	}
@@ -89,7 +81,7 @@ public class UserServiceBean {
 	 * @param email
 	 * @return
 	 */
-	public static boolean emailValidate(final String email){
+	public static boolean emailAMDMValidate(final String email){
 		
 	    Pattern pattern;
 	    Matcher matcher;
