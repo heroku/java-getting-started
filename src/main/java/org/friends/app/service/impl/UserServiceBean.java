@@ -1,8 +1,13 @@
 package org.friends.app.service.impl;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.friends.app.dao.UserDao;
 import org.friends.app.model.User;
+
 import com.google.common.base.Strings;
+
 import spark.utils.Assert;
 
 public class UserServiceBean {
@@ -21,7 +26,9 @@ public class UserServiceBean {
 		if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(pwd))
 			return null;
 		
-		// TODO Email validator
+		// Email validator
+		if (!emailValidate(email))
+			throw new Exception("L'email saisi est incorrect !");
 		
 		// On vérifie qu'il s'agit bien d'un email AMDM
 		if (!email.toLowerCase().endsWith("@amdm.fr"))
@@ -57,7 +64,9 @@ public class UserServiceBean {
 		Assert.notNull(user.getEmailAMDM());
 		Assert.notNull(user.getPwd());
 		
-		// TODO Email validator
+		// Email validator
+		if (!emailValidate(user.getEmailAMDM()))
+			throw new Exception("L'email saisi est incorrect !");
 		
 		// On vérifie qu'il s'agit bien d'un email AMDM
 		if (!user.getEmailAMDM().toLowerCase().endsWith("@amdm.fr"))
@@ -72,4 +81,24 @@ public class UserServiceBean {
 	public User findUserByCookie(String cookie) {
 		throw new UnsupportedOperationException("TODO");
 	}
+	
+	
+	/**
+	 * On valide le format de l'email saisi qui doit être celui de l'AMDM
+	 * 
+	 * @param email
+	 * @return
+	 */
+	public static boolean emailValidate(final String email){
+		
+	    Pattern pattern;
+	    Matcher matcher;
+	    String EMAIL_PATTERN = "^[A-Za-z]+\\.([A-Za-z]+)*@amdm.fr";
+	    pattern = Pattern.compile(EMAIL_PATTERN);
+	    
+	    matcher = pattern.matcher(email);
+        return matcher.matches();
+		
+	}	
+	
 }
