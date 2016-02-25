@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+encoding//src/main/resources/spark/template/freemarker/index.ftl=UTF-8
+encoding/<project>=UTF-8
+separateDerivedEncodings=true
