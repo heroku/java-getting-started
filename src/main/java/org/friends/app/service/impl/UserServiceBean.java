@@ -45,12 +45,12 @@ public class UserServiceBean {
 	}
 	
 	/**
-	 * Création d'un utilisateur.
-	 * Voici les règles a respecter lors de la création :
+	 * Creation d'un utilisateur.
+	 * Voici les regles a respecter lors de la creation :
 	 * <ul>
 	 *   <li>Un utilisateur doit comporter un email</li>
 	 *   <li>Un utilisateur doit avoir un mot de passe</li>
-	 *   <li>Aucun utilisateur ne comporte le même email</li>
+	 *   <li>Aucun utilisateur ne comporte le meme email</li>
 	 * </ul>
 	 * @param user
 	 * @throws Exception 
@@ -76,7 +76,7 @@ public class UserServiceBean {
 	
 	
 	/**
-	 * On valide le format de l'email saisi qui doit être celui de l'AMDM
+	 * On valide le format de l'email saisi qui doit etre celui de l'AMDM
 	 * 
 	 * @param email
 	 * @return
