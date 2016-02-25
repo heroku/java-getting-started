@@ -17,7 +17,8 @@ public class StartParking {
 				} catch (ClassNotFoundException e) {
 					throw new RuntimeException("Could not find H2");
 				}
-		        return DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+			Connection con = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+		        return con;
 			};
 		}.start();
 	}
