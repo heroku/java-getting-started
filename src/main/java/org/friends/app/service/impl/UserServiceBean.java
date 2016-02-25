@@ -82,13 +82,11 @@ public class UserServiceBean {
 	 * @return
 	 */
 	public static boolean emailAMDMValidate(final String email){
-		
-	    Pattern pattern;
-	    Matcher matcher;
+
 	    String EMAIL_PATTERN = "^[A-Za-z]+\\.([A-Za-z]+)*@amdm.fr";
-	    pattern = Pattern.compile(EMAIL_PATTERN);
+	    Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	    
-	    matcher = pattern.matcher(email);
+	    Matcher matcher = pattern.matcher(email);
         return matcher.matches();
 		
 	}	
