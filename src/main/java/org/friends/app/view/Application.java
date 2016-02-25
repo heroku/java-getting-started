@@ -23,7 +23,7 @@ public class Application {
 	
 	public final static String PORT = "PORT";
 	
-	public void start(String [] args) {
+	public void start(@SuppressWarnings("unused") String [] args) {
 		port(getPort());
 	    staticFileLocation("/public");
 
@@ -38,7 +38,9 @@ public class Application {
 	    }, new FreeMarkerEngine());
 	    post("/user/login", (req, res) -> "A user tried to login");
 	    
-	    get("/user/new", (req, res) -> "This is where the user create his account");
+	    get("/user/new",  (req, res) -> {
+	    	return new ModelAndView(null, "createUser.ftl");
+	    }, new FreeMarkerEngine());
 	    post("/user/new", (req, res) -> "A user tried to create his account");
 	    
 	    get("/user/forget", (req, res) -> {
@@ -52,9 +54,10 @@ public class Application {
 	        return "Are you looking for " + req.params(":placeId");
 	    });
 
-	    get("/sharePlace", new SharePlace(), new FreeMarkerEngine());  
+	    get("/sharePlace", new SharePlace(), new FreeMarkerEngine()); 
+	    post("/sharePlace",(req, res) -> "Vous libérez la place   " + req.queryParams("number") +" du " + req.queryParams("dateDebut") +" du " + req.queryParams("dateFin"));
 	    
-	    get("/sharePlaceValidation", (req, res) -> "TODO");
+
 	    
 	    
 	    
@@ -93,7 +96,7 @@ public class Application {
 		return DatabaseUrl.extract().getConnection();
 	}
 
-	private Integer getPort() {
+	private static Integer getPort() {
 		String port = System.getenv(PORT);
 		if (port == null)
 			port = System.getProperty(PORT);
