@@ -63,6 +63,8 @@ public class Application {
 	    get("/sharePlace", new SharePlace(), new FreeMarkerEngine()); 
 	    post("/sharePlace",(req, res) -> "Vous libérez la place   " + req.queryParams("number") +" du " + req.queryParams("dateDebut") +" du " + req.queryParams("dateFin"));
 	    
+
+
 	    
 	    
 	    
