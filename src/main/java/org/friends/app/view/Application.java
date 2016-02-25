@@ -64,7 +64,6 @@ public class Application {
 	    post("/sharePlace",(req, res) -> "Vous libérez la place   " + req.queryParams("number") +" du " + req.queryParams("dateDebut") +" du " + req.queryParams("dateFin"));
 	    
 	    
-	    
 	    get("/search", new SearchRoute(), new FreeMarkerEngine());
 	    
 	    get("/help", (req, res) -> "Nothing yet at help");
