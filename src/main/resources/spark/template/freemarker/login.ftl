@@ -7,13 +7,21 @@
 <body>
   <#include "nav.ftl">
   
+  <#if error != "">
+  	${error}
+  </#if>
+  
   <div class="jumbotron">
     <div class="container">
       <div class="row">
 	      <form method="post" role="form">
 	        <div class="form-group">
 		        <label for="email">Email</label>
-		        <input type="email" class="form-control" id="email" placeholder="adresse@email.fr"/>
+		        <#if email == "">
+		          <input type="email" class="form-control" id="email" placeholder="adresse@email.fr"/>
+		        <#else>
+  		          <input type="email" class="form-control" id="email" placeholder="adresse@email.fr" value="${email}"/>
+                </#if>
 	        </div>
 	        <div class="form-group">
 		        <label for="pwd">Mot de passe</label>

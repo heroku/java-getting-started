@@ -3,7 +3,7 @@ package org.friends.app;
 public class Configuration {
 
 	public final static String PORT = "PORT";
-	public static final String PARKING_MODE = "PARKING_MODE";
+	public static final String DEPLOY_MODE = "PARKING_MODE";
 
 	public static String getMailServiceLogin() {
 		return System.getenv("SENDGRID_USERNAME");
@@ -20,5 +20,9 @@ public class Configuration {
 		if (port == null)
 			throw new RuntimeException("Port not defined");
 		return Integer.valueOf(port);
+	}
+
+	public static boolean development() {
+		return System.getProperty(DEPLOY_MODE) != null;
 	}
 }

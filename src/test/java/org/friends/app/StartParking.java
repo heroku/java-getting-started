@@ -9,7 +9,7 @@ public class StartParking {
 
 	 public static void main(String[] args) {
 	  	System.setProperty("PORT", "8080");
-		System.setProperty(Configuration.PARKING_MODE, "dev");
+		System.setProperty(Configuration.DEPLOY_MODE, "dev");
 		
 		new Application() {
 			protected Connection getConnection() throws java.sql.SQLException ,java.net.URISyntaxException {
