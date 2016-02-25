@@ -14,7 +14,7 @@ public class UserServiceBean {
 	public User findUserByEmail(String email) {
 		if (Strings.isNullOrEmpty(email))
 			return null;
-		return userDao.findFirst(user -> user.getEmail().equals(email));
+		return userDao.findFirst(user -> user.getEmailAMDM().equals(email));
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public class UserServiceBean {
 	 */
 	public void create(User user) {
 		Assert.notNull(user);
-		Assert.notNull(user.getEmail());
+		Assert.notNull(user.getEmailAMDM());
 		userDao.persist(user);
 	}
 	
