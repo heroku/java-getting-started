@@ -15,8 +15,8 @@
         <div class='col-sm-6'>
            <div class="well text-center">
            			<input type="hidden" name="number" value="${placeNumber}"/>
-			        Je lib&egrave;re la place n&deg;<strong>${placeNumber}</strong> pour la (ou les) journ&eacute;e(s) du 
-			         <input type="text" class="span2" value="" data-date-format="dd/mm/yyyy" id="dpd1" length="10" size="10" name="dateDebut"/> au
+			        Je lib&egrave;re la place n&deg;<strong>${placeNumber}</strong> pour la (ou les) journ&eacute;e(s) <br/>
+			        du <input type="text" class="span2" value="" data-date-format="dd/mm/yyyy" id="dpd1" length="10" size="10" name="dateDebut"/> au
 			         <input type="text" class="span2" value="" data-date-format="dd/mm/yyyy" id="dpd2" length="10" size="10" name="dateFin"/>
 			      <br/>
 			            <input type="submit" class="btn btn-ok" value="Valider"/>
