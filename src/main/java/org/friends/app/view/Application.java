@@ -36,11 +36,12 @@ public class Application {
 		staticFileLocation("/public");
 
 		/* Auto compress response */
-//		after((request, response) -> {
-//			response.header("Content-Encoding", "gzip");
-//		});
-
-
+		after((request, response) -> {
+			String header = request.raw().getHeader("Accept-Encoding");
+			if (header != null && header.contains("gzip"))
+				response.header("Content-Encoding", "gzip");
+		});
+		
 		/* When in production, controle that user first logged in*/
 		if (!Configuration.development()) {
 			Filter checkLoggedIn = new Filter() {
@@ -117,6 +118,12 @@ public class Application {
 	      }
 	    }, new FreeMarkerEngine());
 		 */
+		
+		/* Intercept 404 */
+		get("*", (request, response) -> {
+			response.redirect("/user/login");
+			return "404";
+		});
 	}
 
 	protected Connection getConnection() throws SQLException, URISyntaxException {

@@ -27,7 +27,7 @@
 		        <label for="pwd">Mot de passe</label>
 		        <input type="password" class="form-control" id="pwd" placeholder="********"/>
 	        </div>
-	        <div class="form-group">
+	        <div class="form-group col-sm-6 col-sm-offset-3">
 				<input type="submit" class="btn btn-success" value="Se connecter"/>
 				<a class="btn btn-primary" href="/user/new">Cr&eacute;er un compte</a>
 				<a href="/user/forget">Mot de passe perdu ?</a>
