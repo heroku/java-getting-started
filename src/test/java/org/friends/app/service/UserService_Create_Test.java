@@ -70,7 +70,88 @@ public class UserService_Create_Test {
 	}	
 	
 	/*
-	 * Test de validation de données
+	 * Test email 
+	 */
+	@Test(expected=Exception.class)
+	public void un_user_doit_avoir_un_email_valide_cas_1() throws Exception {
+		User user = UserBuilder.unUser().build("prenom.nom@amdmfr", "mdp");
+		service.create(user);
+	}		
+	
+	/*
+	 * Test email 
+	 */
+	@Test(expected=Exception.class)
+	public void un_user_doit_avoir_un_email_valide_cas_2() throws Exception {
+		User user = UserBuilder.unUser().build("prenom.nom@am.dm.fr", "mdp");
+		service.create(user);
+	}		
+	
+	/*
+	 * Test email 
+	 */
+	@Test(expected=Exception.class)
+	public void un_user_doit_avoir_un_email_valide_cas_3() throws Exception {
+		User user = UserBuilder.unUser().build("prenom..nom@amdm.fr", "mdp");
+		service.create(user);
+	}	
+	
+	/*
+	 * Test email 
+	 */
+	@Test(expected=Exception.class)
+	public void un_user_doit_avoir_un_email_valide_cas_4() throws Exception {
+		User user = UserBuilder.unUser().build("pre-nom.nom@am-dm.fr", "mdp");
+		service.create(user);
+	}		
+	
+	/*
+	 * Test email 
+	 */
+	@Test(expected=Exception.class)
+	public void un_user_doit_avoir_un_email_valide_cas_5() throws Exception {
+		User user = UserBuilder.unUser().build("pre--nom.nom@amdm.fr", "mdp");
+		service.create(user);
+	}	
+	
+	/*
+	 * Test email 
+	 */
+	@Test(expected=Exception.class)
+	public void un_user_doit_avoir_un_email_valide_cas_6() throws Exception {
+		User user = UserBuilder.unUser().build("prenom.@amdm.fr", "mdp");
+		service.create(user);
+	}		
+	
+	/*
+	 * Email OK
+	 */
+	@Test()
+	public void un_user_doit_avoir_un_email_valide_cas_7() throws Exception {
+		User user = UserBuilder.unUser().build("pre-nom.nom@amdm.fr", "mdp");
+		service.create(user);
+	}
+	
+	/*
+	 * Email OK 
+	 */
+	@Test()
+	public void un_user_doit_avoir_un_email_valide_cas_8() throws Exception {
+		User user = UserBuilder.unUser().build("prenom.no-m@amdm.fr", "mdp");
+		service.create(user);
+	}		
+	
+	/*
+	 * Email Ok
+	 */
+	@Test()
+	public void un_user_doit_avoir_un_email_valide_cas_9() throws Exception {
+		User user = UserBuilder.unUser().build("pre-nom.no-m@amdm.fr", "mdp");
+		service.create(user);
+	}	
+	
+	/*
+	 * Email ok
 	 */
 	@Test()
 	public void un_user_doit_avoir_un_email_valide_et_un_mdp() throws Exception {
