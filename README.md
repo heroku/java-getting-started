@@ -8,3 +8,4 @@ It's currently running [here](https://takemyplace.herokuapp.com/).
 
 Travis CI status :
 [![Build Status](https://travis-ci.org/lefevre00/parking.svg)](https://travis-ci.org/lefevre00/parking)
+(https://www.versioneye.com/user/projects/56d04bd96b21e51624a90285/badge.svg?style=flat)
