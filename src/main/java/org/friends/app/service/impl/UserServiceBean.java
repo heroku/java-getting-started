@@ -77,13 +77,14 @@ public class UserServiceBean {
 	
 	/**
 	 * On valide le format de l'email saisi qui doit être celui de l'AMDM
+	 * L'email doit avoir le format prenom.nom@amdm.fr (un '-' dans le prénom et le nom sont possibles)
 	 * 
 	 * @param email
 	 * @return
 	 */
 	public static boolean emailAMDMValidate(final String email){
 
-	    String EMAIL_PATTERN = "^[A-Za-z]+\\.([A-Za-z]+)*@amdm.fr";
+		String EMAIL_PATTERN = "^([A-Za-z]+\\-?)*\\.([A-Za-z]+\\-?)*@amdm.fr$";
 	    Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 	    
 	    Matcher matcher = pattern.matcher(email);
