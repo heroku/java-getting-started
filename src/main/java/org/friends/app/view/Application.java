@@ -36,9 +36,9 @@ public class Application {
 		staticFileLocation("/public");
 
 		/* Auto compress response */
-		after((request, response) -> {
-			response.header("Content-Encoding", "gzip");
-		});
+//		after((request, response) -> {
+//			response.header("Content-Encoding", "gzip");
+//		});
 
 
 		/* When in production, controle that user first logged in*/
