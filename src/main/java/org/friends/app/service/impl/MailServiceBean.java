@@ -18,7 +18,8 @@ public class MailServiceBean {
 		email.setText("My first email through SendGrid");
 
 		try {
-			SendGrid.Response response = sendgrid.send(email);
+			//SendGrid.Response response =
+					sendgrid.send(email);
 		} catch (SendGridException e) {
 			System.out.println(e);
 		}
