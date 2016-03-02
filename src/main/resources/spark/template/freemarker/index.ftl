@@ -10,7 +10,7 @@
   <div class="jumbotron text-center">
       <div class="col-md-6">
         <h3><a type="button" class="btn btn-lg btn-default" href="/protected/search" class="button">
-           <span class="glyphicon glyphicon-eye-open"></span>
+           <span class="glyphicon glyphicon-search"></span>
            Je cherche une place</a>
         </h3>
       </div>

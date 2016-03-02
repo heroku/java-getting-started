@@ -1,5 +1,8 @@
 package org.friends.app.model;
 
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
+
 /**
  * A user of the application.
  * @author michael
@@ -73,6 +76,12 @@ public class User {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
-	
+
+	/**
+	 * TODO suffixe avec le date pour que le cookie soit unique pour un user donné
+	 * @return
+	 */
+	public String createCookie() {
+		return Hashing.sha1().hashString(emailAMDM, Charsets.UTF_8 ).toString();
+	}
 }

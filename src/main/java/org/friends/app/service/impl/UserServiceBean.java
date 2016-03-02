@@ -3,7 +3,9 @@ package org.friends.app.service.impl;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.friends.app.dao.SessionDao;
 import org.friends.app.dao.UserDao;
+import org.friends.app.model.Session;
 import org.friends.app.model.User;
 
 import com.google.common.base.Strings;
@@ -13,6 +15,7 @@ import spark.utils.Assert;
 public class UserServiceBean {
 	
 	UserDao userDao = new UserDao();
+	SessionDao sessionDao = new SessionDao();
 	
 	/**
 	 * Authentification de l'utilisateur
@@ -22,7 +25,7 @@ public class UserServiceBean {
 	 * @return
 	 * @throws Exception
 	 */
-	public User Authenticate (String email, String pwd) throws Exception{
+	public User authenticate (String email, String pwd) throws Exception{
 		if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(pwd))
 			return null;
 		
@@ -34,6 +37,9 @@ public class UserServiceBean {
 		if (user == null)
 			throw new Exception("Utilisateur introuvable !");
 		
+		if (!email.equals(user.getEmailAMDM()))
+			throw new Exception("Email inconnu !");
+
 		if (!pwd.equals(user.getPwd()))
 			throw new Exception("Mot de passe incorrect !");
 		
@@ -42,6 +48,13 @@ public class UserServiceBean {
 	
 	public User findUserByEmail(String email) {
 		return userDao.findFirst(user -> user.getEmailAMDM().equals(email));
+	}
+
+	public User findUserByCookie(String cookie) {
+		Session session = sessionDao.findFirst(s -> s.getCookie().equals(cookie));
+		if (session == null)
+			return null;
+		return userDao.findFirst(u -> u.getIdUser().equals(session.getUserId())); 
 	}
 	
 	/**
@@ -70,10 +83,6 @@ public class UserServiceBean {
 	public void update(User user) {}
 	public void delete(User user) {}
 	public void reset(User user) {}
-	public User findUserByCookie(String cookie) {
-		throw new UnsupportedOperationException("TODO");
-	}
-	
 	
 	/**
 	 * On valide le format de l'email saisi qui doit être celui de l'AMDM

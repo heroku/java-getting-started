@@ -7,8 +7,10 @@
 <body>
   <#include "nav.ftl">
   
-  <#if error != "">
+  <#if error??>
+  	<div class="bg-warning">
   	${error}
+  	</1div>
   </#if>
   
   <div class="jumbotron">
@@ -17,20 +19,20 @@
 	      <form method="post" role="form">
 	        <div class="form-group">
 		        <label for="email">Email</label>
-		        <#if email == "">
-		          <input type="email" class="form-control" id="email" placeholder="adresse@email.fr"/>
+		        <#if email??>
+  		          <input type="email" class="form-control" name="email" placeholder="adresse@email.fr" value="${email}"/>
 		        <#else>
-  		          <input type="email" class="form-control" id="email" placeholder="adresse@email.fr" value="${email}"/>
+		          <input type="email" class="form-control" name="email" placeholder="adresse@email.fr"/>
                 </#if>
 	        </div>
 	        <div class="form-group">
 		        <label for="pwd">Mot de passe</label>
-		        <input type="password" class="form-control" id="pwd" placeholder="********"/>
+		        <input type="password" class="form-control" name="pwd" id="pwd" placeholder="********"/>
 	        </div>
-	        <div class="form-group col-sm-6 col-sm-offset-3">
+	        <div class="form-group">
 				<input type="submit" class="btn btn-success" value="Se connecter"/>
-				<a class="btn btn-primary" href="/user/new">Cr&eacute;er un compte</a>
 				<a href="/user/forget">Mot de passe perdu ?</a>
+				<a class="btn btn-primary pull-right" href="/user/new">Cr&eacute;er un compte</a>
 	        </div>
 	      </form>
       </div>

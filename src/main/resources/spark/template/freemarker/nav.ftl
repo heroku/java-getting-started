@@ -6,10 +6,10 @@
   <div class="container">
     <ul class="nav navbar-nav">
       <li class="active">
-        <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+        <a href="/"><span class="glyphicon glyphicon-home"></span> Accueil</a>
       </li>
       <li>
-        <a href="/user/login"><span class="glyphicon glyphicon-user"></span> Login</a>
+        <a href="/user/login"><span class="glyphicon glyphicon-user"></span> Se connecter</a>
       </li>
     </ul>
   </div>
