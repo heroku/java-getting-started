@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.friends.app.Configuration;
+import org.friends.app.Constants;
 
 import com.heroku.sdk.jdbc.DatabaseUrl;
 
@@ -47,8 +48,9 @@ public class Application {
 			Filter checkLoggedIn = new Filter() {
 				@Override
 				public void handle(Request request, Response response) throws Exception {
-					if (StringUtils.isEmpty(request.cookie("takemyplace"))) {
+					if (StringUtils.isEmpty(request.cookie(Constants.COOKIE))) {
 						response.redirect("/user/login");
+						request.session(true);
 					}
 				}
 			};
@@ -63,7 +65,7 @@ public class Application {
 
 		/* User managment */
 		get("/user/login", new LoginRoute(), new FreeMarkerEngine());
-		post("/user/login", new ValidLoginRoute(), new FreeMarkerEngine());
+		post("/user/login", new ValidationLoginRoute(), new FreeMarkerEngine());
 
 		get("/user/new", (req, res) -> {
 			return new ModelAndView(null, "createUser.ftl");
