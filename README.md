@@ -14,7 +14,7 @@ Make sure you have Java and Maven installed.  Also, install the [Heroku Toolbelt
 $ git clone https://github.com/heroku/java-getting-started.git
 $ cd java-getting-started
 $ mvn install
-$ foreman start web
+$ heroku local:start
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
