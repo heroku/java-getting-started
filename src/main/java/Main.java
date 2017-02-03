@@ -1,10 +1,10 @@
-import com.heroku.sdk.jdbc.DatabaseUrl;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +14,8 @@ import static spark.Spark.*;
 
 public class Main {
 
+  private static HikariDataSource dataSource;
+
   public static void main(String[] args) {
 
     port(Integer.valueOf(System.getenv("PORT")));
@@ -22,18 +24,22 @@ public class Main {
     get("/hello", (req, res) -> "Hello World");
 
     get("/", (request, response) -> {
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", "Hello World!");
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put("message", "Hello World!");
 
-            return new ModelAndView(attributes, "index.ftl");
-        }, new FreeMarkerEngine());
+        return new ModelAndView(attributes, "index.ftl");
+    }, new FreeMarkerEngine());
+
+    String jdbcUrl = System.getenv("JDBC_DATABASE_URL");
+    if (jdbcUrl != null) {
+      HikariConfig config = new  HikariConfig();
+      config.setJdbcUrl(jdbcUrl);
+      dataSource = new HikariDataSource(config);
+    }
 
     get("/db", (req, res) -> {
-      Connection connection = null;
       Map<String, Object> attributes = new HashMap<>();
-      try {
-        connection = DatabaseUrl.extract().getConnection();
-
+      try(Connection connection = dataSource.getConnection()) {
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
         stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
@@ -49,8 +55,6 @@ public class Main {
       } catch (Exception e) {
         attributes.put("message", "There was an error: " + e);
         return new ModelAndView(attributes, "error.ftl");
-      } finally {
-        if (connection != null) try{connection.close();} catch(SQLException e){}
       }
     }, new FreeMarkerEngine());
 
