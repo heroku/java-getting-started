@@ -28,12 +28,10 @@ public class Main {
         return new ModelAndView(attributes, "index.ftl");
     }, new FreeMarkerEngine());
 
-    String jdbcUrl = System.getenv("JDBC_DATABASE_URL");
     HikariConfig config = new  HikariConfig();
-    config.setJdbcUrl(jdbcUrl);
-    final HikariDataSource dataSource = (jdbcUrl != null) ?
-      new HikariDataSource(config) :
-      new HikariDataSource();
+    config.setJdbcUrl(System.getenv("JDBC_DATABASE_URL"));
+    final HikariDataSource dataSource = (config.getJdbcUrl() != null) ?
+      new HikariDataSource(config) : new HikariDataSource();
 
     get("/db", (req, res) -> {
       Map<String, Object> attributes = new HashMap<>();
