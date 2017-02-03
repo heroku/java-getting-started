@@ -14,8 +14,6 @@ import static spark.Spark.*;
 
 public class Main {
 
-  private static HikariDataSource dataSource;
-
   public static void main(String[] args) {
 
     port(Integer.valueOf(System.getenv("PORT")));
@@ -31,11 +29,11 @@ public class Main {
     }, new FreeMarkerEngine());
 
     String jdbcUrl = System.getenv("JDBC_DATABASE_URL");
-    if (jdbcUrl != null) {
-      HikariConfig config = new  HikariConfig();
-      config.setJdbcUrl(jdbcUrl);
-      dataSource = new HikariDataSource(config);
-    }
+    HikariConfig config = new  HikariConfig();
+    config.setJdbcUrl(jdbcUrl);
+    final HikariDataSource dataSource = (jdbcUrl != null) ?
+      new HikariDataSource(config) :
+      new HikariDataSource();
 
     get("/db", (req, res) -> {
       Map<String, Object> attributes = new HashMap<>();
