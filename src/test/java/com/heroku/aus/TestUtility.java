@@ -22,7 +22,7 @@ public class TestUtility {
 	public void testNumberAdd() {
 		Utility u = new Utility();
 		int result = u.addTwoNumbers(numberOne, numberTwo);
-		assertTrue("Expecting 5, received "+result, result == 5);
+		assertTrue("Expecting 6, received "+result, result == 6);
 		
 	}
 	
