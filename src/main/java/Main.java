@@ -28,7 +28,7 @@ public class Main {
         return new ModelAndView(attributes, "index.ftl");
     }, new FreeMarkerEngine());
 
-    HikariConfig config = new  HikariConfig();
+    HikariConfig config = new HikariConfig();
     config.setJdbcUrl(System.getenv("JDBC_DATABASE_URL"));
     final HikariDataSource dataSource = (config.getJdbcUrl() != null) ?
       new HikariDataSource(config) : new HikariDataSource();
