@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite1" verbose="1">
+	<test name="HerokuCITest">
+		<packages>
+			<package name="com.heroku.aus.test" />
+		</packages>
+	</test>
+	<listeners>
+		<listener class-name="org.tap4j.ext.testng.listener.TapListenerSuite" />
+	</listeners>
+</suite>
