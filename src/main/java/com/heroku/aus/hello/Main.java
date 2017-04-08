@@ -1,3 +1,4 @@
+package com.heroku.aus.hello;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import spark.ModelAndView;
