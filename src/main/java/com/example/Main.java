@@ -36,7 +36,7 @@ import java.util.Map;
 
 @Controller
 @SpringBootApplication
-public class MainController {
+public class Main {
 
   @Value("${spring.datasource.url}")
   private String dbUrl;
@@ -45,7 +45,7 @@ public class MainController {
   private DataSource dataSource;
 
   public static void main(String[] args) throws Exception {
-    SpringApplication.run(MainController.class, args);
+    SpringApplication.run(Main.class, args);
   }
 
   @RequestMapping("/")
