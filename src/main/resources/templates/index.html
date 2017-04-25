@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <#include "header.ftl">
-</head>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
 
 <body>
-
-  <#include "nav.ftl">
 
 <div class="jumbotron text-center">
   <div class="container">
@@ -60,7 +55,6 @@
     Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
   </div>
 </div>
-
 
 </body>
 </html>
