@@ -11,6 +11,7 @@
 			<artifactId>spark-core</artifactId>
 			<version>2.2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.sparkjava</groupId>
 			<artifactId>spark-template-freemarker</artifactId>
