@@ -17,7 +17,9 @@ public class Main {
 
   public static void main(String[] args) {
 
-    port(Integer.valueOf(System.getenv("PORT")));
+	int port = System.getenv("PORT") != null ? Integer.valueOf(System.getenv("PORT")) : 8080;
+	  
+    port(port);
     staticFileLocation("/public");
 
     get("/hello", (req, res) -> "Hello World");

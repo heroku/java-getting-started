@@ -85,7 +85,7 @@
 					<appendAssemblyId>false</appendAssemblyId>
 					<archive>
 						<manifest>
-							<mainClass>Main</mainClass>
+							<mainClass>com.heroku.aus.hello.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
