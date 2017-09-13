@@ -1,5 +1,5 @@
 # java-getting-started !
-# Test commit
+# Test commit 2
 
 [![CircleCI](https://circleci.com/gh/heroku/java-getting-started.svg?style=svg)](https://circleci.com/gh/heroku/java-getting-started)
 
