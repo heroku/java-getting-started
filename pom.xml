@@ -10,7 +10,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.2.RELEASE</version>
+    <version>1.5.10.RELEASE</version>
   </parent>
   <name>java-getting-started</name>
 
@@ -18,9 +18,9 @@
     <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
-    <webjars-jquery-ui.version>1.11.4</webjars-jquery-ui.version>
-    <webjars-jquery.version>2.2.4</webjars-jquery.version>
+    <webjars-bootstrap.version>4.0.0</webjars-bootstrap.version>
+    <webjars-jquery-ui.version>1.12.1</webjars-jquery-ui.version>
+    <webjars-jquery.version>3.3.1</webjars-jquery.version>
     <thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
   </properties>
 
