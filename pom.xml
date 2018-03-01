@@ -10,7 +10,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.10.RELEASE</version>
+    <version>2.0.0.RELEASE</version>
+    <relativePath/>
   </parent>
   <name>java-getting-started</name>
 
@@ -21,11 +22,9 @@
     <webjars-bootstrap.version>4.0.0</webjars-bootstrap.version>
     <webjars-jquery-ui.version>1.12.1</webjars-jquery-ui.version>
     <webjars-jquery.version>3.3.1</webjars-jquery.version>
-    <thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
   </properties>
 
   <dependencies>
-    <!-- Spring and Spring Boot dependencies -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
@@ -56,10 +55,6 @@
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.webjars</groupId>
-      <artifactId>webjars-locator</artifactId>
     </dependency>
     <dependency>
       <groupId>org.webjars</groupId>
