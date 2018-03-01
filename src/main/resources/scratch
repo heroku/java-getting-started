@@ -1,0 +1,19 @@
+@RequestMapping("/sfdata")
+String sfdata(Map<String, Object> model) {
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+
+    ResultSet rs = stmt.executeQuery("SELECT NAME FROM SALESFORCE.ACCOUNT");
+
+    ArrayList<String> output = new ArrayList<String>();
+    while (rs.next()) {
+      output.add(rs.getString("NAME"));
+    }
+
+    model.put("records", output);
+    return "db";
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
