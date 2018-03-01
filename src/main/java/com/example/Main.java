@@ -54,7 +54,7 @@ public class Main {
   }
 
 
-  /*
+  
   @RequestMapping("/sfdata")
   String sfdata(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
@@ -74,7 +74,7 @@ public class Main {
       return "error";
     }
   }
-  */
+
 
 
   @Bean
