@@ -79,7 +79,7 @@ public class Main {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
 
-      ResultSet rs = stmt.executeQuery("SELECT NAME FROM SALESFORCE.ACCOUNT");
+      ResultSet rs = stmt.executeQuery("SELECT NAME FROM SALESFORCEWT.ACCOUNT");
 
       ArrayList<String> output = new ArrayList<String>();
       while (rs.next()) {
