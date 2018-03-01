@@ -57,33 +57,13 @@ public class Main {
   String db(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("heroCREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
+      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
       stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
       ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
 
       ArrayList<String> output = new ArrayList<String>();
       while (rs.next()) {
         output.add("Read from DB: " + rs.getTimestamp("tick"));
-      }
-
-      model.put("records", output);
-      return "db";
-    } catch (Exception e) {
-      model.put("message", e.getMessage());
-      return "error";
-    }
-  }
-
-  @RequestMapping("/sfdata")
-  String sfdata(Map<String, Object> model) {
-    try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
-
-      ResultSet rs = stmt.executeQuery("SELECT NAME FROM SALESFORCEWT.ACCOUNT");
-
-      ArrayList<String> output = new ArrayList<String>();
-      while (rs.next()) {
-        output.add("Account: " + rs.getString("NAME"));
       }
 
       model.put("records", output);
