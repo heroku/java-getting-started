@@ -53,17 +53,18 @@ public class Main {
     return "index";
   }
 
-  @RequestMapping("/db")
-  String db(Map<String, Object> model) {
+
+  /*
+  @RequestMapping("/sfdata")
+  String sfdata(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-      stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-      ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+
+      ResultSet rs = stmt.executeQuery("SELECT NAME FROM SALESFORCE.ACCOUNT");
 
       ArrayList<String> output = new ArrayList<String>();
       while (rs.next()) {
-        output.add("Read from DB: " + rs.getTimestamp("tick"));
+        output.add("" + rs.getString("NAME"));
       }
 
       model.put("records", output);
@@ -73,6 +74,7 @@ public class Main {
       return "error";
     }
   }
+  */
 
 
   @Bean
