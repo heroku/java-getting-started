@@ -123,6 +123,16 @@
                   <artifactId>postgresql</artifactId>
                   <destFileName>postgres.jar</destFileName>
                 </artifactItem>
+                <artifactItem>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-api</artifactId>
+                  <destFileName>slf4j-api.jar</destFileName>
+                </artifactItem>                
+                <artifactItem>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-nop</artifactId>
+                  <destFileName>slf4j-nop.jar</destFileName>
+                </artifactItem>    
               </artifactItems>
             </configuration>
           </execution>
