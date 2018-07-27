@@ -116,7 +116,6 @@
                 <artifactItem>
                   <groupId>org.flywaydb</groupId>
                   <artifactId>flyway-core</artifactId>
-                  <version>3.2.1</version>
                   <destFileName>flyway.jar</destFileName>
                 </artifactItem>
                 <artifactItem>
