@@ -72,6 +72,11 @@ public class Main {
       model.put("message", e.getMessage());
       return "error";
     }
+    @RequestMapping("/hello")
+      String hello(Map<String, Object> model) {
+      model.put ("message", "Welcome to my app!");
+      return "hello";
+    }
   }
 
   @Bean
