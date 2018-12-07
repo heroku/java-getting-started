@@ -272,7 +272,7 @@ Once dependencies are installed, you can run your app locally.
 Start your application locally with the `heroku local` CLI command (make sure you've already run `mvn clean install`):
 
 ```term
-:::>> background.start("heroku local web", name: "local1", wait: "Started Main in", timeout: 20)
+:::>> background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 30)
 :::-- background.stop(name: "local1")
 ```
 
@@ -340,7 +340,8 @@ Now test your changes locally:
 
 ```term
 :::>- $ mvn clean install
-$ heroku local web
+:::>> background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
+:::-- background.stop(name: "local2")
 ```
 
 Visiting your application's `/hello` path at [http://localhost:5000/hello](http://localhost:5000/hello), you should see some great scientific conversions displayed:
@@ -379,7 +380,7 @@ At runtime, config vars are exposed to your app as environment variables. For ex
 
 ```java
 :::-- sed -e '56,68d' src/main/java/com/example/Main.java
-:::>> file.write src/main/java/com/example/Main.java#56
+:::>> file.append("src/main/java/com/example/Main.java#56")
 @RequestMapping("/hello")
 String hello(Map<String, Object> model) {
     RelativisticModel.select();
@@ -425,7 +426,9 @@ Deploy your updated application to Heroku to see this in action.
 The `heroku run` command lets you run maintenance and administrative tasks on your app in a [one-off dyno](one-off-dynos). It can also lets you launch a REPL process attached to your local terminal for experimenting in your app's environment, or code that you deployed with your application:
 
 ```term
-:::>> $ heroku run java -version
+:::-- $ heroku run java -version
+:::-- | grep -vq starting
+:::-> | grep -vq connecting
 ```
 
 If you receive an error, `Error connecting to process`, then you might need to [configure your firewall](one-off-dynos#timeout-awaiting-process).
@@ -496,45 +499,11 @@ The example app you deployed already has database functionality, which you can r
 The code to access the database is straightforward. Here's the method to insert values into a table called `tick`:
 
 ```java
-@Value("${spring.datasource.url}")
-private String dbUrl;
-
-@Autowired
-private DataSource dataSource;
+:::-- sed -e '45,49p' src/main/java/com/example/Main.java
 
 ...
 
-@RequestMapping("/db")
-String db(Map<String, Object> model) {
-    try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-      stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-      ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
-
-      ArrayList<String> output = new ArrayList<String>();
-      while (rs.next()) {
-        output.add("Read from DB: " + rs.getTimestamp("tick"));
-      }
-
-      model.put("records", output);
-      return "db";
-    } catch (Exception e) {
-      model.put("message", e.getMessage());
-      return "error";
-    }
-}
-
-@Bean
-public DataSource dataSource() throws SQLException {
-    if (dbUrl == null || dbUrl.isEmpty()) {
-      return new HikariDataSource();
-    } else {
-      HikariConfig config = new HikariConfig();
-      config.setJdbcUrl(dbUrl);
-      return new HikariDataSource(config);
-    }
-}
+:::-- sed -e '66,109p' src/main/java/com/example/Main.java
 ```
 
 This ensures that when you access your app using the `/db` route, a new row is added to the `tick` table, and all rows are then returned so that they can be rendered in the output.
