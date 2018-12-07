@@ -2,3 +2,5 @@ target
 .env
 .idea/
 *.iml
+docs/tmp/
+docs/java-getting-started/
