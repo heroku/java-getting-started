@@ -17,7 +17,7 @@ end
 
 <h2 data-next-message="I'm ready to start">Introduction</h2>
 
-This tutorial will have you deploying a Java app in minutes. 
+This tutorial will have you deploying a Java app in minutes.
 
 Hang on for a few more minutes to learn how it all works, so you can make the most out of Heroku.
 
@@ -71,16 +71,16 @@ Download and run the installer for your platform:
   </div>
 </div>
 
-When installation completes, you can use the `heroku` command from your terminal. 
+When installation completes, you can use the `heroku` command from your terminal.
 
 <div class="only-windows">On Windows, start the Command Prompt (cmd.exe) or Powershell to access the command shell.</div>
 
-Use the `heroku login` command to log in to the Heroku CLI: 
+Use the `heroku login` command to log in to the Heroku CLI:
 
 ```term
 $ heroku login
 heroku: Press any key to open up the browser to login or q to exit
- ›   Warning: If browser does not open, visit 
+ ›   Warning: If browser does not open, visit
  ›   https://cli-auth.heroku.com/auth/browser/***
 heroku: Waiting for login...
 Logging in... done
@@ -98,11 +98,11 @@ Note that if you’re behind a firewall that requires use of a proxy to connect 
 In this step, you will prepare a sample application that's ready to be deployed to Heroku.
 
 >callout
->If you are new to Heroku, it is recommended that you 
+>If you are new to Heroku, it is recommended that you
 >complete this tutorial using the Heroku-provided sample application.
 >
 >However, if you have your own existing application that you want to deploy
->instead, see <a href="https://devcenter.heroku.com/articles/preparing-a-codebase-for-heroku-deployment" target="_blank">this article</a> 
+>instead, see <a href="https://devcenter.heroku.com/articles/preparing-a-codebase-for-heroku-deployment" target="_blank">this article</a>
 >to learn how to prepare it for Heroku deployment.
 
 To create a local copy of a sample app that you can deploy to Heroku, execute the following commands in your local command shell or terminal:
@@ -111,6 +111,9 @@ To create a local copy of a sample app that you can deploy to Heroku, execute th
 ```term
 :::>- $ git clone https://github.com/heroku/java-getting-started
 :::>- $ cd java-getting-started
+:::-- $ git checkout -t origin/spring-2.0.7
+:::-- $ git checkout master
+:::-- $ git merge spring-2.0.7
 ```
 
 You now have a functioning Git repository that contains a simple Java application. The application includes a `pom.xml` file, which is used by Java's dependency manager, Maven.
@@ -132,7 +135,8 @@ By default, Heroku generates a random name (in this case `warm-eyrie-9006`) for 
 Now deploy your code:
 
 ```term
-:::>> $ git push heroku master
+:::>- $ git push heroku master
+:::-> | $ (head -6; echo "..."; tail -18)
 ```
 
 The application is now deployed. Ensure that at least one instance of the app is running:
@@ -154,23 +158,12 @@ Heroku aggregates all of the output streams from both your app and the platform'
 View information about your running app using the `heroku logs --tail` command:
 
 ```term
-$ heroku logs --tail
-2017-04-20T15:06:14.198559+00:00 heroku[web.1]: Starting process with command `java $JAVA_OPTS -Dserver.port=43161 -jar target/java-getting-started-1.0.jar`
-2017-04-20T15:06:16.478043+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
-2017-04-20T15:06:16.484066+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx350m -Xss512k -Dfile.encoding=UTF-8
-2017-04-20T15:06:19.396477+00:00 app[web.1]:   _    _                _
-2017-04-20T15:06:19.396487+00:00 app[web.1]:  | |  | |              | |
-2017-04-20T15:06:19.396488+00:00 app[web.1]:  | |__| | ___ _ __ ___ | | ___   _
-2017-04-20T15:06:19.396489+00:00 app[web.1]:  |  __  |/ _ \ '__/ _ \| |/ / | | |
-2017-04-20T15:06:19.396489+00:00 app[web.1]:  | |  | |  __/ | | (_) |   <| |_| |
-2017-04-20T15:06:19.396490+00:00 app[web.1]:  |_|  |_|\___|_|  \___/|_|\_\\__,_|
-2017-04-20T15:06:19.396491+00:00 app[web.1]:
-...
-2017-04-20T15:06:33.472964+00:00 app[web.1]: 2017-04-20 15:06:33.472  INFO 4 --- [           main] com.example.Main               : Started Main in 15.345 seconds (JVM running for 16.989)
-2017-04-20T15:06:33.778990+00:00 heroku[web.1]: State changed from starting to up
+:::>- background.start("heroku logs --tail", name: "tail", wait: "Tomcat started", timeout: 45)
+:::-> | tail -10
+:::-- background.stop(name: "tail")
 ```
 
-Visit your application in the browser again to generate another log message. 
+Visit your application in the browser again to generate another log message.
 
 Press `CTRL+C` to stop streaming logs.
 
@@ -180,7 +173,7 @@ Heroku apps use a special plaintext file called the [Procfile](procfile) to expl
 
 The `Procfile` in the example app you deployed looks like this:
 
-```
+```yaml
 :::-> $ cat Procfile
 ```
 
@@ -190,7 +183,7 @@ Procfiles can contain additional process types. For example, you might declare o
 
 <h2 data-next-message="I know how to scale my app">Scale the app</h2>
 
-Right now, your app is running on a single web [dyno](dynos). A dyno is a lightweight Linux container that runs the command specified in your `Procfile`. 
+Right now, your app is running on a single web [dyno](dynos). A dyno is a lightweight Linux container that runs the command specified in your `Procfile`.
 
 You can check how many dynos are running using the `heroku ps` command:
 
@@ -200,7 +193,7 @@ You can check how many dynos are running using the `heroku ps` command:
 
 By default, your app is deployed on a free dyno. Free dynos sleep after thirty minutes of inactivity (i.e., if they don't receive any traffic).  This causes a delay of a few seconds for the first request upon waking. Subsequent requests will perform normally.
 
-Free dynos consume from a monthly, account-level quota of [free dyno hours](free-dyno-hours). As long as the quota is not exhausted, your free apps can continue to run. 
+Free dynos consume from a monthly, account-level quota of [free dyno hours](free-dyno-hours). As long as the quota is not exhausted, your free apps can continue to run.
 
 To avoid dyno sleeping, you can upgrade to a hobby or professional dyno type as described in [Dyno Types](dyno-types). For example, if you migrate your app to a professional dyno, you can easily scale it by running a command telling Heroku to spin up a specific number of dynos, each running your web process type.
 
@@ -212,7 +205,7 @@ Scale the number of web dynos to zero:
 :::>- $ heroku ps:scale web=0
 ```
 
-Access the app again by refreshing your browser or running `heroku open`.  You will get an error message because your app no longer has any web dynos available to serve requests. 
+Access the app again by refreshing your browser or running `heroku open`.  You will get an error message because your app no longer has any web dynos available to serve requests.
 
 Scale it up again:
 
@@ -220,7 +213,7 @@ Scale it up again:
 :::>- $ heroku ps:scale web=1
 ```
 
-To prevent abuse, scaling a non-free application to more than one dyno requires [account verification](account-verification). 
+To prevent abuse, scaling a non-free application to more than one dyno requires [account verification](account-verification).
 
 <h2 data-next-message="I've installed the app dependencies locally">Declare app dependencies</h2>
 
@@ -243,12 +236,13 @@ Another file, `system.properties`, indicates the version of Java to use (Heroku 
 Run `mvn clean install` in your local directory to install the dependencies, preparing your system for running the app locally. Note that this app requires Java 8, but you can push your own apps using a different version of Java.
 
 ```term
-:::>> $ mvn clean install
+:::>- $ mvn clean install
+:::-> | $ (echo "..."; tail -7)
 ```
 
 If you do not have Maven installed, or get an error like `'mvn' is not recognized as an internal or external command`, then you can use the wrapper command instead by running `mvnw clean install` on Windows or `./mvnw clean install` on Mac and Linux. This both installs Maven and runs the Maven command.
 
-The Maven process compiles and build a JAR, with dependencies, placing it into your application's `target` directory. This process is accomplished with the `spring-boot-maven-plugin` in the `pom.xml`. 
+The Maven process compiles and build a JAR, with dependencies, placing it into your application's `target` directory. This process is accomplished with the `spring-boot-maven-plugin` in the `pom.xml`.
 
 If you aren't using Spring in your app, you can accomplish this with the following plugin configuration in the `pom.xml` file.
 
@@ -272,13 +266,14 @@ Once dependencies are installed, you can run your app locally.
 Start your application locally with the `heroku local` CLI command (make sure you've already run `mvn clean install`):
 
 ```term
-:::>> background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 30)
+:::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 30)
+:::-> | $ (echo "..."; tail -4)
 :::-- background.stop(name: "local1")
 ```
 
 Just like the Heroku platform, `heroku local` examines your `Procfile` to determine what command to run.
 
-Open [http://localhost:5000](http://localhost:5000) with your web browser. You should see your app running locally. 
+Open [http://localhost:5000](http://localhost:5000) with your web browser. You should see your app running locally.
 
 To stop the app from running locally, go back to your terminal window and press `CTRL+C` to exit.
 
@@ -340,7 +335,8 @@ Now test your changes locally:
 
 ```term
 :::>- $ mvn clean install
-:::>> background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
+:::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
+:::-> | $ (echo "..."; tail -4)
 :::-- background.stop(name: "local2")
 ```
 
@@ -378,8 +374,11 @@ Heroku lets you externalize your app's configuration by storing data such as enc
 
 At runtime, config vars are exposed to your app as environment variables. For example, modify `src/main/java/com/example/Main.java` so that the method obtains an energy value from the `ENERGY` environment variable:
 
+```
+:::-- $ sed -e '56,68d' src/main/java/com/example/Main.java
+```
+
 ```java
-:::-- sed -e '56,68d' src/main/java/com/example/Main.java
 :::>> file.append("src/main/java/com/example/Main.java#56")
 @RequestMapping("/hello")
 String hello(Map<String, Object> model) {
@@ -426,9 +425,8 @@ Deploy your updated application to Heroku to see this in action.
 The `heroku run` command lets you run maintenance and administrative tasks on your app in a [one-off dyno](one-off-dynos). It can also lets you launch a REPL process attached to your local terminal for experimenting in your app's environment, or code that you deployed with your application:
 
 ```term
-:::-- $ heroku run java -version
-:::-- | grep -vq starting
-:::-> | grep -vq connecting
+:::>- $ heroku run java -version
+:::-> | $ tail -4
 ```
 
 If you receive an error, `Error connecting to process`, then you might need to [configure your firewall](one-off-dynos#timeout-awaiting-process).
@@ -499,11 +497,7 @@ The example app you deployed already has database functionality, which you can r
 The code to access the database is straightforward. Here's the method to insert values into a table called `tick`:
 
 ```java
-:::-- sed -e '45,49p' src/main/java/com/example/Main.java
-
-...
-
-:::-- sed -e '66,109p' src/main/java/com/example/Main.java
+:::-> $ sed -n '45,50p;78,109p' src/main/java/com/example/Main.java
 ```
 
 This ensures that when you access your app using the `/db` route, a new row is added to the `tick` table, and all rows are then returned so that they can be rendered in the output.
@@ -529,22 +523,18 @@ Assuming that you have [Postgres installed locally](heroku-postgresql#local-setu
 
 ```term
 $ heroku pg:psql
-heroku pg:psql
-psql (9.3.2, server 9.3.3)
-SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256)
+psql (10.1, server 9.6.10)
+SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
 Type "help" for help.
-=> SELECT * FROM ticks;
+
+DATABASE=> SELECT * FROM ticks;
             tick
 ----------------------------
- 2014-08-08 14:48:25.155241
- 2014-08-08 14:51:32.287816
- 2014-08-08 14:51:52.667683
- 2014-08-08 14:51:53.1871
- 2014-08-08 14:51:54.75061
- 2014-08-08 14:51:55.161848
- 2014-08-08 14:51:56.197663
- 2014-08-08 14:51:56.851729
-(8 rows)
+2018-03-01 20:53:27.148139
+2018-03-01 20:53:29.288995
+2018-03-01 20:53:29.957118
+2018-03-01 21:07:28.880162
+(4 rows)
 => \q
 ```
 
