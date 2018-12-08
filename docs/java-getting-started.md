@@ -111,9 +111,9 @@ To create a local copy of a sample app that you can deploy to Heroku, execute th
 ```term
 :::>- $ git clone https://github.com/heroku/java-getting-started
 :::>- $ cd java-getting-started
-:::-- $ git checkout -t origin/$(git remote get-url heroku 2> /dev/null | sed 's/https:\/\/git.heroku.com\/\(.*\).git/\1/')
+:::-- $ git checkout -t origin/spring-2.0.7
 :::-- $ git checkout master
-:::-- $ git merge $(git remote get-url heroku 2> /dev/null | sed 's/https:\/\/git.heroku.com\/\(.*\).git/\1/')
+:::-- $ git merge spring-2.0.7
 ```
 
 You now have a functioning Git repository that contains a simple Java application. The application includes a `pom.xml` file, which is used by Java's dependency manager, Maven.
@@ -135,7 +135,8 @@ By default, Heroku generates a random name (in this case `warm-eyrie-9006`) for 
 Now deploy your code:
 
 ```term
-:::>> $ git push heroku master
+:::>- $ git push heroku master
+:::-> | $ (head -6; echo "..."; tail -18)
 ```
 
 The application is now deployed. Ensure that at least one instance of the app is running:
@@ -157,20 +158,9 @@ Heroku aggregates all of the output streams from both your app and the platform'
 View information about your running app using the `heroku logs --tail` command:
 
 ```term
-$ heroku logs --tail
-2017-04-20T15:06:14.198559+00:00 heroku[web.1]: Starting process with command `java $JAVA_OPTS -Dserver.port=43161 -jar target/java-getting-started-1.0.jar`
-2017-04-20T15:06:16.478043+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
-2017-04-20T15:06:16.484066+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx350m -Xss512k -Dfile.encoding=UTF-8
-2017-04-20T15:06:19.396477+00:00 app[web.1]:   _    _                _
-2017-04-20T15:06:19.396487+00:00 app[web.1]:  | |  | |              | |
-2017-04-20T15:06:19.396488+00:00 app[web.1]:  | |__| | ___ _ __ ___ | | ___   _
-2017-04-20T15:06:19.396489+00:00 app[web.1]:  |  __  |/ _ \ '__/ _ \| |/ / | | |
-2017-04-20T15:06:19.396489+00:00 app[web.1]:  | |  | |  __/ | | (_) |   <| |_| |
-2017-04-20T15:06:19.396490+00:00 app[web.1]:  |_|  |_|\___|_|  \___/|_|\_\\__,_|
-2017-04-20T15:06:19.396491+00:00 app[web.1]:
-...
-2017-04-20T15:06:33.472964+00:00 app[web.1]: 2017-04-20 15:06:33.472  INFO 4 --- [           main] com.example.Main               : Started Main in 15.345 seconds (JVM running for 16.989)
-2017-04-20T15:06:33.778990+00:00 heroku[web.1]: State changed from starting to up
+:::>- background.start("heroku logs --tail", name: "tail", wait: "Tomcat started", timeout: 45)
+:::-> | tail -10
+:::-- background.stop(name: "tail")
 ```
 
 Visit your application in the browser again to generate another log message.
@@ -183,7 +173,7 @@ Heroku apps use a special plaintext file called the [Procfile](procfile) to expl
 
 The `Procfile` in the example app you deployed looks like this:
 
-```
+```yaml
 :::-> $ cat Procfile
 ```
 
@@ -246,7 +236,8 @@ Another file, `system.properties`, indicates the version of Java to use (Heroku 
 Run `mvn clean install` in your local directory to install the dependencies, preparing your system for running the app locally. Note that this app requires Java 8, but you can push your own apps using a different version of Java.
 
 ```term
-:::>> $ mvn clean install
+:::>- $ mvn clean install
+:::-> | $ (echo "..."; tail -7)
 ```
 
 If you do not have Maven installed, or get an error like `'mvn' is not recognized as an internal or external command`, then you can use the wrapper command instead by running `mvnw clean install` on Windows or `./mvnw clean install` on Mac and Linux. This both installs Maven and runs the Maven command.
@@ -275,7 +266,8 @@ Once dependencies are installed, you can run your app locally.
 Start your application locally with the `heroku local` CLI command (make sure you've already run `mvn clean install`):
 
 ```term
-:::>> background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 30)
+:::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 30)
+:::-> | $ (echo "..."; tail -4)
 :::-- background.stop(name: "local1")
 ```
 
@@ -343,7 +335,8 @@ Now test your changes locally:
 
 ```term
 :::>- $ mvn clean install
-:::>> background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
+:::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
+:::-> | $ (echo "..."; tail -4)
 :::-- background.stop(name: "local2")
 ```
 
@@ -432,7 +425,8 @@ Deploy your updated application to Heroku to see this in action.
 The `heroku run` command lets you run maintenance and administrative tasks on your app in a [one-off dyno](one-off-dynos). It can also lets you launch a REPL process attached to your local terminal for experimenting in your app's environment, or code that you deployed with your application:
 
 ```term
-:::>> $ heroku run java -version
+:::>- $ heroku run java -version
+:::-> | $ tail -4
 ```
 
 If you receive an error, `Error connecting to process`, then you might need to [configure your firewall](one-off-dynos#timeout-awaiting-process).
@@ -503,7 +497,7 @@ The example app you deployed already has database functionality, which you can r
 The code to access the database is straightforward. Here's the method to insert values into a table called `tick`:
 
 ```java
-:::-> $ sed -n '45,49p;90,109p' src/main/java/com/example/Main.java
+:::-> $ sed -n '45,50p;78,109p' src/main/java/com/example/Main.java
 ```
 
 This ensures that when you access your app using the `/db` route, a new row is added to the `tick` table, and all rows are then returned so that they can be rendered in the output.
