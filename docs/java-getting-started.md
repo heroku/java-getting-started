@@ -111,9 +111,6 @@ To create a local copy of a sample app that you can deploy to Heroku, execute th
 ```term
 :::>- $ git clone https://github.com/heroku/java-getting-started
 :::>- $ cd java-getting-started
-:::-- $ git checkout -t origin/spring-2.0.7
-:::-- $ git checkout master
-:::-- $ git merge spring-2.0.7
 ```
 
 You now have a functioning Git repository that contains a simple Java application. The application includes a `pom.xml` file, which is used by Java's dependency manager, Maven.
@@ -335,6 +332,7 @@ Now test your changes locally:
 
 ```term
 :::>- $ mvn clean install
+:::-> | $ (echo "..."; tail -7)
 :::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
 :::-> | $ (echo "..."; tail -4)
 :::-- background.stop(name: "local2")
