@@ -111,6 +111,9 @@ To create a local copy of a sample app that you can deploy to Heroku, execute th
 ```term
 :::>- $ git clone https://github.com/heroku/java-getting-started
 :::>- $ cd java-getting-started
+:::-- $ git checkout -t origin/$(git remote get-url heroku 2> /dev/null | sed 's/https:\/\/git.heroku.com\/\(.*\).git/\1/')
+:::-- $ git checkout master
+:::-- $ git merge $(git remote get-url heroku 2> /dev/null | sed 's/https:\/\/git.heroku.com\/\(.*\).git/\1/')
 ```
 
 You now have a functioning Git repository that contains a simple Java application. The application includes a `pom.xml` file, which is used by Java's dependency manager, Maven.
