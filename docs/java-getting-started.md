@@ -155,7 +155,7 @@ Heroku aggregates all of the output streams from both your app and the platform'
 View information about your running app using the `heroku logs --tail` command:
 
 ```term
-:::>- background.start("heroku logs --tail", name: "tail", wait: "Tomcat started", timeout: 45)
+:::>- background.start("heroku logs --tail", name: "tail", wait: "State changed from starting to up", timeout: 45)
 :::-> | tail -10
 :::-- background.stop(name: "tail")
 ```
