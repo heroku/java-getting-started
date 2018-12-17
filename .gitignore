@@ -1,6 +1,9 @@
-target
+target/
 .env
 .idea/
 *.iml
+.classpath
+.project
+.settings/
 docs/tmp/
 docs/java-getting-started/
