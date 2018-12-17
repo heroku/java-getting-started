@@ -9,7 +9,7 @@ end
 ```
 <!--
   rundoc src:
-  https://github.com/jkutner/rundoc/blob/master/java-getting-started.md
+  https://github.com/heroku/java-getting-started/blob/master/java-getting-started.md
 
   Command:
   $ rundoc build --path java-getting-started.md
