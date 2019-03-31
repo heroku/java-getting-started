@@ -74,6 +74,12 @@ public class Main {
     }
   }
 
+  @RequestMapping("/hello")
+  String hello(Map<String, Object> model) {
+    model.put("message", "Hello Heroku!!");
+    return "index";
+  }
+
   @Bean
   public DataSource dataSource() throws SQLException {
     if (dbUrl == null || dbUrl.isEmpty()) {
