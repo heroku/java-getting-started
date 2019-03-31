@@ -74,9 +74,9 @@ public class Main {
     }
   }
 
-  @RequestMapping("/hello")
+  @RequestMapping("/hello", method = RequestMethod.get)
   String hello(Map<String, Object> model) {
-    model.put("message", "Hello Heroku!!");
+    model.addAttribute("message", "Hello Springboot");
     return "index";
   }
 
