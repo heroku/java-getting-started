@@ -102,4 +102,22 @@
     </plugins>
   </build>
 
+  <packaging>${packaging.type}</packaging>
+  <profiles>
+     <profile>
+       <id>jar</id>
+       <activation>
+         <activeByDefault>true</activeByDefault>
+       </activation>
+       <properties>
+          <packaging.type>jar</packaging.type>
+       </properties>
+     </profile>
+     <profile>
+       <id>war</id>
+       <properties>
+          <packaging.type>war</packaging.type>
+       </properties>
+     </profile>
+   </profiles>
 </project>
