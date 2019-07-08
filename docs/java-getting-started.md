@@ -129,7 +129,7 @@ First, create an app on Heroku, which prepares Heroku to receive your source cod
 
 When you create an app, a Git remote (named `heroku`) is also created and associated with your local Git repository.  
 
-By default, Heroku generates a random name (in this case `warm-eyrie-9006`) for your app. You can pass a parameter to specify your own app name.
+By default, Heroku generates a random name for your app. You can pass a parameter to specify your own app name.
 
 Now deploy your code:
 
