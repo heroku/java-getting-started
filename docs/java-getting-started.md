@@ -490,7 +490,7 @@ The `heroku pg` command provides more in-depth information on your app's Heroku 
 :::>> $ heroku pg
 ```
 
-This indicates that the app has a `Hobby-dev` database (the free plan), running Postgres 9.3.3, currently with zero rows of data.
+This indicates that the app has a `Hobby-dev` database (the free plan), running Postgres, currently with zero rows of data.
 
 The example app you deployed already has database functionality, which you can reach by visiting your app's `/db` path. For example, if your app's root URL is `https://wonderful-app-287.herokuapp.com/` then visit `https://wonderful-app-287.herokuapp.com/db`.
 
