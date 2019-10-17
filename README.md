@@ -2,6 +2,8 @@
 
 A barebones Java app, which can easily be deployed to Heroku.
 
+Hopefully this text will persist.
+
 This application supports the [Getting Started with Java on Heroku](https://devcenter.heroku.com/articles/getting-started-with-java) article - check it out.
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
