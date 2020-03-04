@@ -48,10 +48,10 @@ public static void main(String[] args) throws Exception {
   SpringApplication.run(Main.class, args);
 }
 
-@RequestMapping("/")
+/* @RequestMapping("/")
 String index() {
   return "index";
-}
+}*/
 
 @RequestMapping("/hello")
 String hello(Map<String, Object> model) {
