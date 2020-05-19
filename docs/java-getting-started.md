@@ -265,7 +265,7 @@ Once dependencies are installed, you can run your app locally.
 Start your application locally with the `heroku local` CLI command (make sure you've already run `mvn clean install`):
 
 ```term
-:::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 30)
+:::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 75)
 :::-> | (echo "..."; tail -4)
 :::-- background.stop(name: "local1")
 ```
@@ -335,7 +335,7 @@ Now test your changes locally:
 ```term
 :::>- $ mvn clean install
 :::-> | (echo "..."; tail -7)
-:::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
+:::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 75)
 :::-> | (echo "..."; tail -4)
 :::-- background.stop(name: "local2")
 ```
@@ -426,7 +426,7 @@ The `heroku run` command lets you run maintenance and administrative tasks on yo
 
 ```term
 :::>- $ heroku run java -version
-:::-> | $ tail -4
+:::-> | tail -4
 ```
 
 If you receive an error, `Error connecting to process`, then you might need to [configure your firewall](one-off-dynos#timeout-awaiting-process).
