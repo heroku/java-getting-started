@@ -127,7 +127,7 @@ First, create an app on Heroku, which prepares Heroku to receive your source cod
 :::>> $ heroku create
 ```
 
-When you create an app, a Git remote (named `heroku`) is also created and associated with your local Git repository.  
+When you create an app, a Git remote (named `heroku`) is also created and associated with your local Git repository.
 
 By default, Heroku generates a random name for your app. You can pass a parameter to specify your own app name.
 
@@ -135,7 +135,7 @@ Now deploy your code:
 
 ```term
 :::>- $ git push heroku master
-:::-> | $ (head -6; echo "..."; tail -18)
+:::-> | (head -6; echo "..."; tail -18)
 ```
 
 The application is now deployed. Ensure that at least one instance of the app is running:
@@ -236,7 +236,7 @@ Run `mvn clean install` in your local directory to install the dependencies, pre
 
 ```term
 :::>- $ mvn clean install
-:::-> | $ (echo "..."; tail -7)
+:::-> | (echo "..."; tail -7)
 ```
 
 If you do not have Maven installed, or get an error like `'mvn' is not recognized as an internal or external command`, then you can use the wrapper command instead by running `mvnw clean install` on Windows or `./mvnw clean install` on Mac and Linux. This both installs Maven and runs the Maven command.
@@ -265,8 +265,8 @@ Once dependencies are installed, you can run your app locally.
 Start your application locally with the `heroku local` CLI command (make sure you've already run `mvn clean install`):
 
 ```term
-:::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 30)
-:::-> | $ (echo "..."; tail -4)
+:::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 75)
+:::-> | (echo "..."; tail -4)
 :::-- background.stop(name: "local1")
 ```
 
@@ -312,7 +312,7 @@ String hello(Map<String, Object> model) {
     model.put("science", "E=mc^2: 12 GeV = " + m.toString());
     return "hello";
 }
-```  
+```
 
 Finally, create a `src/main/resources/templates/hello.html` file with these contents:
 
@@ -334,9 +334,9 @@ Now test your changes locally:
 
 ```term
 :::>- $ mvn clean install
-:::-> | $ (echo "..."; tail -7)
-:::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
-:::-> | $ (echo "..."; tail -4)
+:::-> | (echo "..."; tail -7)
+:::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 75)
+:::-> | (echo "..."; tail -4)
 :::-- background.stop(name: "local2")
 ```
 
@@ -426,7 +426,7 @@ The `heroku run` command lets you run maintenance and administrative tasks on yo
 
 ```term
 :::>- $ heroku run java -version
-:::-> | $ tail -4
+:::-> | tail -4
 ```
 
 If you receive an error, `Error connecting to process`, then you might need to [configure your firewall](one-off-dynos#timeout-awaiting-process).

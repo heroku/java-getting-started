@@ -113,7 +113,7 @@ Now deploy your code:
 
 ```term
 :::>- $ git push heroku master
-:::-> | $ (head -6; echo "..."; tail -18)
+:::-> | (head -6; echo "..."; tail -18)
 ```
 
 Heroku automatically detects the application as a Maven/Java app due to the presence of a `pom.xml` file. It installed Java 8 by default, but you can easily configure this with a `system.properties` file as described in the [Specifying a Java version](https://devcenter.heroku.com/articles/java-support#specifying-a-java-version) Dev Center article. It will run your app using the [default command](https://devcenter.heroku.com/articles/java-support#default-web-process-type).
