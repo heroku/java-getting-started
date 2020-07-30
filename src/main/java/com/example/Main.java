@@ -78,7 +78,7 @@ public class Main {
 String torihikisakilist(Map<String, Object> model){
   try (Connection connection = dataSource.getConnection()) {
     Statement stmt = connection.createStatement();
-    ResultSet rs = stmt.executeQuery("SELECT * FROM da9771mpqa5hle.Torihikisaki__c");
+    ResultSet rs = stmt.executeQuery("SELECT * FROM salesforce.Torihikisaki__c");
 
     ArrayList<String> output = new ArrayList<String>();
     while (rs.next()) {
