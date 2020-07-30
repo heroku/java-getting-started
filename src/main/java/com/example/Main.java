@@ -73,6 +73,26 @@ public class Main {
       return "error";
     }
   }
+  
+  @RequestMapping("/torihikisakilist")
+String torihikisakilist(Map<String, Object> model){
+  try (Connection connection = dataSource.getConnection()) {
+    Statement stmt = connection.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT * FROM スキーマ名.Torihikisaki__c");
+
+    ArrayList<String> output = new ArrayList<String>();
+    while (rs.next()) {
+      output.add(rs.getString("Name") + "," + rs.getString("Jusho__c"));
+    }
+
+    model.put("records", output);
+    return "torihikisakilist";
+  } catch (Exception e) {
+    model.put("message", e.getMessage());
+    return "error";
+  }
+}
+  
 
   @Bean
   public DataSource dataSource() throws SQLException {
