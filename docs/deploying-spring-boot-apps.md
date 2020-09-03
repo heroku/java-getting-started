@@ -9,7 +9,7 @@ end
 ```
 <!--
   rundoc src:
-  https://github.com/heroku/java-getting-started/blob/master/deploying-spring-boot-apps.md
+  https://github.com/heroku/java-getting-started/blob/main/deploying-spring-boot-apps.md
 
   Command:
   $ rundoc build --path deploying-spring-boot-apps.md
@@ -112,7 +112,7 @@ for your app. You can rename it later with the `heroku apps:rename` command.
 Now deploy your code:
 
 ```term
-:::>- $ git push heroku master
+:::>- $ git push heroku main || git push heroku master
 :::-> | (head -6; echo "..."; tail -18)
 ```
 
@@ -220,7 +220,7 @@ public class DatabaseConfig {
 ```
 :::-- $ git add .
 :::-- $ git commit -m "database"
-:::-- $ git push heroku master
+:::-- $ git push heroku main || git push heroku master
 :::-- $ cd ..
 :::-- $ mv demo deploying-spring-boot-apps
 ```

@@ -9,7 +9,7 @@ end
 ```
 <!--
   rundoc src:
-  https://github.com/heroku/java-getting-started/blob/master/java-getting-started.md
+  https://github.com/heroku/java-getting-started/blob/main/java-getting-started.md
 
   Command:
   $ rundoc build --path java-getting-started.md
@@ -112,7 +112,7 @@ To create a local copy of a sample app that you can deploy to Heroku, execute th
 :::>- $ git clone https://github.com/heroku/java-getting-started
 :::>- $ cd java-getting-started
 :::-- $ git fetch
-:::-- $ git merge origin/master
+:::-- $ git merge origin/main
 ```
 
 You now have a functioning Git repository that contains a simple Java application. The application includes a `pom.xml` file, which is used by Java's dependency manager, Maven.
@@ -134,7 +134,7 @@ By default, Heroku generates a random name for your app. You can pass a paramete
 Now deploy your code:
 
 ```term
-:::>- $ git push heroku master
+:::>- $ git push heroku main
 :::-> | (head -6; echo "..."; tail -18)
 ```
 
@@ -218,7 +218,7 @@ To prevent abuse, scaling a non-free application to more than one dyno requires 
 
 Heroku automatically identifies an app as a Java app if it contains a `pom.xml` file in the root directory. You can create a `pom.xml` file for your own apps with the `mvn archetype:create` command.
 
-The demo app you deployed already has a `pom.xml` ([see it here](https://github.com/heroku/java-getting-started/blob/master/pom.xml)). Here's an excerpt:
+The demo app you deployed already has a `pom.xml` ([see it here](https://github.com/heroku/java-getting-started/blob/main/pom.xml)). Here's an excerpt:
 
 ```xml
 :::-> $ sed -n '27,35p' pom.xml
@@ -359,7 +359,7 @@ Next, commit the changes to the repository:
 Now deploy, just as you did previously:
 
 ```term
-:::>- $ git push heroku master
+:::>- $ git push heroku main
 ```
 
 Finally, check that your updated code is successfully deployed:
