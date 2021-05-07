@@ -42,7 +42,7 @@ import static javax.measure.unit.SI.KILOGRAM;
 
 @Controller
 @SpringBootApplication
-@RestController
+//@RestController
 public class Main {
 
   @Value("${spring.datasource.url}")
