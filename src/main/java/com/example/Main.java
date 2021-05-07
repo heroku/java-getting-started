@@ -42,7 +42,7 @@ import static javax.measure.unit.SI.KILOGRAM;
 
 @Controller
 @SpringBootApplication
-//@RestController
+@RestController
 public class Main {
 
   @Value("${spring.datasource.url}")
@@ -60,7 +60,7 @@ public class Main {
     return "index";
   }
 
-  @RequestMapping("/db")
+  public @RequestMapping("/db")
   String db(Map<String, Object> model) {
     try (Connection connection = dataSource.getConnection()) {
       Statement stmt = connection.createStatement();
