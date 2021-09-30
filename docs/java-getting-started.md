@@ -123,7 +123,7 @@ The `Procfile` in the example app source code looks like this:
 
 This file declares a single process type, `web`, and the command needed to run it. The name `web` is important. It declares that this process type attaches to Heroku's [HTTP routing](http-routing) stack, and is able to receive web traffic.
 
-Procfiles can contain additional process types. For example, you can declare a background worker that processes items off a queue. This tutorial doesn't cover include other processes but you can refer to [The Procfile](procfile) and [The Process Model](process-model) for more info.
+Procfiles can contain additional process types. For example, you can declare a background worker that processes items off a queue. This tutorial doesn't cover other processes but you can refer to [The Procfile](procfile) and [The Process Model](process-model) for more info.
 
 The example app also includes a `pom.xml` file, which is used by Java's dependency manager, Maven. The next step covers how to use this file to declare dependencies. 
 
