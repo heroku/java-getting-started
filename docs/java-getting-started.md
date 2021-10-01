@@ -382,9 +382,9 @@ Your local environment is now ready to run your app and connect to the database.
 
 <h2 data-next-message="I can run my app locally">Run the App Locally</h2>
 
-Ensure you've already run `mvn clean install` before running your app locally.
+Ensure you've already run `mvn clean install` before [running your app locally](heroku-local).
 
-Start your application locally with the [`heroku local` CLI command](heroku-local):
+Start your application locally with the `heroku local` CLI command:
 
 ```term
 :::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 75)
