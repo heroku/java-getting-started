@@ -1,0 +1,146 @@
+@charset "ISO-8859-1";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
+	;
+
+* {
+	margin: 0;
+	padding: 0;
+	background-color: #d8ebf9;
+	text-decoration: none;
+	list-style: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+a {
+	display: center;
+	width: 100px;
+	height: 30px;
+	line-height: 40px;
+	padding: 12px 5px;
+	margin: -4px;
+	background-color:  #3465a4;
+	color: #eeeeec;
+	border-radius: 5px;
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+}
+.buscarnome {
+	background-color: #c3d9fd;
+}
+strong {
+	background-color: #c3d9fd;
+}
+span {
+	display: flex;
+	width: 900px;
+	height: 30px;
+	padding: 12px 5px;
+	background-color: #c3d9fd;
+	color: #3465a4;
+	border-radius: 5px;
+	text-decoration: none;
+	text-align: center;
+	font-weight: bold;
+}
+.me {
+	display: flex;
+	width: 500px;
+	height: 40px;
+	height: 10px;
+	background-color: #3465a4;
+	color: #eeeeec;
+	text-align: center;
+	font-weight: width;
+}
+.index {
+}
+.meuh1 {
+	display: flex;
+	width: 600px;
+	height: 40px;
+	height: 10px;
+	background-color: #3465a4;
+	color: #eeeeec;
+	text-align: center;
+	font-weight: width;
+}
+.meua {
+	display: center;
+	font-size: 28px;
+	background-color: #3465a4;
+	color: #204a87;
+	text-align: center;
+	font-weight: width;
+}
+h2 {
+	font-size: 34px;
+}
+h2, h3 {
+	background-color: #c3d9fd;
+	color: #3465a4;
+}
+li {
+	background-color: #3465a4;
+	border-radius: 5px;
+}
+.lim {
+	background-color: #c3d9fd;
+}
+.menu {
+	display: flex;
+	flex-direction: row;
+	gap: 2,4rem;
+	width: 100%;
+	justify-content: center;
+	padding: 0.9rem;
+	background-color: #3465a4;
+	color: white;
+	font-weight: bold;
+}
+.bananaMain {
+	background-image: url("/BananaBacana/img/2.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100vw;
+	height: 110vh;
+}
+.bananaNav ul {
+	display: flex;
+	flex-direction: row;
+	gap: 3rem;
+	width: 100%;
+	justify-content: center;
+	padding: 0.9rem;
+	background-color: #3465a4;
+	color: #babdb6;
+	font-weight: bold;
+}
+.indexForm {
+	display: flex; 
+	flex-direction: column;
+	padding: 45px;
+	width: 400px; 
+	height: 630px;
+	background-color: #c3d9fd;
+	margin: 0 auto;
+	margin-top: 40px;
+	border-radius: 15px; 
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+	width: 900px; 
+	align-items: center;
+	align-self: center; 
+}
+.indexForm input {
+	border-radius: 8px;
+	border: 1px solid gray;
+	width: 80px;
+	padding: 10px;
+	width: 400px;
+	background-color: #a0becd;
+}
+
+
+
