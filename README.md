@@ -29,7 +29,7 @@ JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/java_database_name
 
 ```sh
 $ heroku create
-$ git push heroku master
+$ git push heroku main
 $ heroku open
 ```
 
