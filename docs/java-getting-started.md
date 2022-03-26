@@ -9,7 +9,7 @@ end
 ```
 <!--
   rundoc src:
-  https://github.com/heroku/java-getting-started/blob/master/java-getting-started.md
+  https://github.com/heroku/java-getting-started/blob/main/java-getting-started.md
 
   Command:
   $ rundoc build --path java-getting-started.md
@@ -112,7 +112,7 @@ To create a local copy of a sample app that you can deploy to Heroku, execute th
 :::>- $ git clone https://github.com/heroku/java-getting-started
 :::>- $ cd java-getting-started
 :::-- $ git fetch
-:::-- $ git merge origin/master
+:::-- $ git merge origin/main
 ```
 
 You now have a functioning Git repository that contains a simple Java application. The application includes a `pom.xml` file, which is used by Java's dependency manager, Maven.
@@ -127,15 +127,15 @@ First, create an app on Heroku, which prepares Heroku to receive your source cod
 :::>> $ heroku create
 ```
 
-When you create an app, a Git remote (named `heroku`) is also created and associated with your local Git repository.  
+When you create an app, a Git remote (named `heroku`) is also created and associated with your local Git repository.
 
 By default, Heroku generates a random name for your app. You can pass a parameter to specify your own app name.
 
 Now deploy your code:
 
 ```term
-:::>- $ git push heroku master
-:::-> | $ (head -6; echo "..."; tail -18)
+:::>- $ git push heroku main
+:::-> | (head -6; echo "..."; tail -18)
 ```
 
 The application is now deployed. Ensure that at least one instance of the app is running:
@@ -218,7 +218,7 @@ To prevent abuse, scaling a non-free application to more than one dyno requires 
 
 Heroku automatically identifies an app as a Java app if it contains a `pom.xml` file in the root directory. You can create a `pom.xml` file for your own apps with the `mvn archetype:create` command.
 
-The demo app you deployed already has a `pom.xml` ([see it here](https://github.com/heroku/java-getting-started/blob/master/pom.xml)). Here's an excerpt:
+The demo app you deployed already has a `pom.xml` ([see it here](https://github.com/heroku/java-getting-started/blob/main/pom.xml)). Here's an excerpt:
 
 ```xml
 :::-> $ sed -n '27,35p' pom.xml
@@ -236,7 +236,7 @@ Run `mvn clean install` in your local directory to install the dependencies, pre
 
 ```term
 :::>- $ mvn clean install
-:::-> | $ (echo "..."; tail -7)
+:::-> | (echo "..."; tail -7)
 ```
 
 If you do not have Maven installed, or get an error like `'mvn' is not recognized as an internal or external command`, then you can use the wrapper command instead by running `mvnw clean install` on Windows or `./mvnw clean install` on Mac and Linux. This both installs Maven and runs the Maven command.
@@ -265,8 +265,8 @@ Once dependencies are installed, you can run your app locally.
 Start your application locally with the `heroku local` CLI command (make sure you've already run `mvn clean install`):
 
 ```term
-:::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 30)
-:::-> | $ (echo "..."; tail -4)
+:::>- background.start("heroku local web", name: "local1", wait: "Tomcat started", timeout: 75)
+:::-> | (echo "..."; tail -4)
 :::-- background.stop(name: "local1")
 ```
 
@@ -312,7 +312,7 @@ String hello(Map<String, Object> model) {
     model.put("science", "E=mc^2: 12 GeV = " + m.toString());
     return "hello";
 }
-```  
+```
 
 Finally, create a `src/main/resources/templates/hello.html` file with these contents:
 
@@ -334,9 +334,9 @@ Now test your changes locally:
 
 ```term
 :::>- $ mvn clean install
-:::-> | $ (echo "..."; tail -7)
-:::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 30)
-:::-> | $ (echo "..."; tail -4)
+:::-> | (echo "..."; tail -7)
+:::>- background.start("heroku local web", name: "local2", wait: "Tomcat started", timeout: 75)
+:::-> | (echo "..."; tail -4)
 :::-- background.stop(name: "local2")
 ```
 
@@ -359,7 +359,7 @@ Next, commit the changes to the repository:
 Now deploy, just as you did previously:
 
 ```term
-:::>- $ git push heroku master
+:::>- $ git push heroku main
 ```
 
 Finally, check that your updated code is successfully deployed:
@@ -426,7 +426,7 @@ The `heroku run` command lets you run maintenance and administrative tasks on yo
 
 ```term
 :::>- $ heroku run java -version
-:::-> | $ tail -4
+:::-> | tail -4
 ```
 
 If you receive an error, `Error connecting to process`, then you might need to [configure your firewall](one-off-dynos#timeout-awaiting-process).
