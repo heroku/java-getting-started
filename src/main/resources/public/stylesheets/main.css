@@ -1,82 +1,67 @@
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
-
 body{
-    background: black;
-    font-family: "Quicksand", sans-serif;
-    color:white;
+  background: black;
+  font-family: "Quicksand", sans-serif;
+  color:white;
 }
 
 .container{
-    
-    /* background: rgba(211, 211, 211, 0.568); */
-    padding: 20px;
-    border-radius: 25px;
-    /* display: inline-block; */
-    width: 40% ;
-    margin:  100px auto;
+  
+  /* background: rgba(211, 211, 211, 0.568); */
+  padding: 20px;
+  border-radius: 25px;
+  /* display: inline-block; */
+  width: 40% ;
+  margin:  100px auto;
 }
 
 .leadForm{
-    background: rgba(211, 211, 211, 0.568);
-    padding: 20px;
-    border-radius: 25px;
-    display: inline-block;
-    /* width: ; */
+  background: rgba(211, 211, 211, 0.568);
+  padding: 20px;
+  border-radius: 25px;
+  display: inline-block;
+  /* width: ; */
 }
 
 .formField{
-    padding: 10px;
-    /* background: aquamarine; */
+  display: inline-block;
+  margin: 15px;
+  padding: 10px;
+  /* background: aquamarine; */
 }
 
 .submitButton{
-    /* background: antiquewhite; */
-    width:500px;
-    height: 40px;
-    border-radius: 35px;
-    border: none;
+  /* background: antiquewhite; */
+  width:500px;
+  height: 40px;
+  border-radius: 35px;
+  border: none;
 }
 .submitInput{
-    width:150px;
-    height: 40px;
-    border-radius: 35px;
-    border: none;
+  width:150px;
+  height: 40px;
+  border-radius: 35px;
+  border: none;
 
 }
 
 label{
-    font-size: 250%;
-    padding: 10px;
+  /* background: brown; */
+  font-size: 250%;
+  padding: 10px;
+  padding-bottom: 0;
+  margin: 15px 10px;
 }
 
-.inputForm{
-    width: 30%;
-    margin: 10px;
-    margin-bottom: 40px;
+.formInput{
+  border-radius: 50px;
+  padding: 15px;
+  width: 30%;
+  /* margin-top: 0; */
+  /* margin: 10px; */
+  margin-bottom: 40px;
 }
 
+::placeholder{
+  font-family: "Quicksand", sans-serif;
+  
+}
