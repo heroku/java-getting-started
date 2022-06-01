@@ -25,3 +25,58 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
+body{
+    background: black;
+    font-family: "Quicksand", sans-serif;
+    color:white;
+}
+
+.container{
+    
+    /* background: rgba(211, 211, 211, 0.568); */
+    padding: 20px;
+    border-radius: 25px;
+    /* display: inline-block; */
+    width: 40% ;
+    margin:  100px auto;
+}
+
+.leadForm{
+    background: rgba(211, 211, 211, 0.568);
+    padding: 20px;
+    border-radius: 25px;
+    display: inline-block;
+    /* width: ; */
+}
+
+.formField{
+    padding: 10px;
+    /* background: aquamarine; */
+}
+
+.submitButton{
+    /* background: antiquewhite; */
+    width:500px;
+    height: 40px;
+    border-radius: 35px;
+    border: none;
+}
+.submitInput{
+    width:150px;
+    height: 40px;
+    border-radius: 35px;
+    border: none;
+
+}
+
+label{
+    font-size: 250%;
+    padding: 10px;
+}
+
+.inputForm{
+    width: 30%;
+    margin: 10px;
+    margin-bottom: 40px;
+}
+
