@@ -7,43 +7,49 @@
          function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
         </script>
     <title>Success Motors Forms</title>
+    <link rel="stylesheet" href="../stylesheets/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet"> 
 </head>
-<body>       
-    
+<body>   
+    <div class="container">
+        <div class="leadForm">     
+
     <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
     
     <input type=hidden name='captcha_settings' value='{"keyname":"REcaptchaDemo","fallback":"true","orgId":"00D5i000002Pj58","ts":""}'>
     <input type=hidden name="oid" value="00D5i000002Pj58">
     <input type=hidden name="retURL" value="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-    
-    <!--  ----------------------------------------------------------------------  -->
-    <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-    <!--  these lines if you wish to test in debug mode.                          -->
-    <!--  <input type="hidden" name="debug" value=1>                              -->
-    <!--  <input type="hidden" name="debugEmail" value="ulianamss@gmail.com">     -->
-    <!--  ----------------------------------------------------------------------  -->
-    
-    Company Name:<input  id="00N5i000004LWec" maxlength="50" name="00N5i000004LWec" size="20" type="text" /><br>
-    
-    <label for="first_name">First Name</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
-    
-    <label for="last_name">Last Name</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
-    
-    <label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
-    
-    <label for="phone">Phone</label><input  id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
-    
-    <div class="formField"><label for="product">Product:</label>
-        <select required="true" id="00N5i000004LWeh" name="00N5i000004LWeh">
-                    <option value="R001C1">Car</option>
-                    <option value="ProductCode">Part</option>
-                    <option value="ProductCode">Accessory</option>
-                </select><br></div>
-    <div class="g-recaptcha" data-sitekey="6LeUxVAgAAAAAFSZeS97UwWb1qy2cyKUlHfm27tl"></div><br>
-    <input type="submit" name="submit">
-    
-    </form>
-   
+                
+                
+                <div class="formField"><label for="company_name">Company Name:</label><input required="true" class="formInput" placeholder="Company Name" id="00N5i000004LWec" maxlength="50" name="00N5i000004LWec" size="20" type="text" /><br></div>
+                
+                <div class="formField"><label for="first_name">First Name</label><input required="true" class="formInput" placeholder="First Name" id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br></div>
+                
+                <div class="formField"><label for="last_name">Last Name</label><input required="true" class="formInput" placeholder="Last Name" id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br></div>
+                
+                <div class="formField"><label for="email">Email</label><input required="true" class="formInput" placeholder="Email" id="email" maxlength="80" name="email" size="20" type="email" /><br></div>
+                
+                <div class="formField"><label for="phone">Phone</label><input class="formInput" required="true" placeholder="Phone" id="phone" maxlength="40" name="phone" size="20" type="phone" /><br></div>
+
+                <div class="formField"><label for="product">Product:</label><select required="true" id="00N5i000004LWeh" name="00N5i000004LWeh">
+
+                <!-- Product:<input  id="00N5i000004LWeh" maxlength="100" name="00N5i000004LWeh" size="20" type="text" /><br> -->
+
+
+
+                <div class="formField"><label for="product">Product:</label>
+                    <select required="true" id="00N5i000004LWeh" name="00N5i000004LWeh">
+                                <option value="R001C1">Car</option>
+                                <option value="ProductCode">Part</option>
+                                <option value="ProductCode">Accessory</option>
+                            </select><br></div>
+                <div class="g-recaptcha" data-sitekey="6LeUxVAgAAAAAFSZeS97UwWb1qy2cyKUlHfm27tl"></div><br>
+
+                <div class="submitButton"><input class="submitInput" type="submit" name="submit"></div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
-
