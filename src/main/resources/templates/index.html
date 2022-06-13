@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
-        <script src="https://www.google.com/recaptcha/api.js"></script>
+       <script src="https://www.google.com/recaptcha/api.js"></script>
         <script>
          function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
         </script>
@@ -18,10 +18,10 @@
 
     <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
     
-    <input type=hidden name='captcha_settings' value='{"keyname":"REcaptchaDemo","fallback":"true","orgId":"00D5i000002Pj58","ts":""}'>
+    <input type=hidden name='captcha_settings' value='{"keyname":"reCaptcha","fallback":"true","orgId":"00D5i000002Pj58","ts":""}'>
     <input type=hidden name="oid" value="00D5i000002Pj58">
-    <input type=hidden name="retURL" value="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                
+    <input type=hidden name="retURL" value="http://">
+            
                 
                 <div class="formField"><label for="company">Company Name:</label><input required="true" class="formInput" placeholder="Company Name" pattern="^[A-Za-zА-Яа-яЁё\s]+$"  id="company" maxlength="50" name="company" size="20" type="text" /><br></div>
                 
@@ -45,14 +45,8 @@
                                 <option value="ProductCode">Part</option>
                                 <option value="ProductCode">Accessory</option>
                             </select><br></div>
-                <div 
-                     class="g-recaptcha"
-                     required="true" 
-                     data-sitekey="6LeUxVAgAAAAAFSZeS97UwWb1qy2cyKUlHfm27tl"
-                     data-callback="onRecaptchaSuccess"
-                     data-expired-callback="onRecaptchaResponseExpiry"
-                     data-error-callback="onRecaptchaError">
-                </div><br>
+                <div class="g-recaptcha" data-sitekey="6Ld6GWogAAAAADCsfm4b8yjaezKWFO2fs5lok8zO"></div><br>
+
 
                 <div class="submitButton"><input class="submitInput" type="submit" name="submit"></div>
             </form>
