@@ -37,7 +37,7 @@ GEM
     dotenv (2.7.6)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     mini_mime (1.0.2)
     mini_portile2 (2.8.0)
     minitest (5.16.2)
