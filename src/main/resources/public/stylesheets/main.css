@@ -25,3 +25,31 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
+.jumbotron2 {
+  background: #2c249e;
+  color: white;
+  padding-bottom: 80px; }
+  .jumbotron2 .btn-primary {
+    background: #5f5ac7;
+    border-color: #5a5ac7; }
+    .jumbotron2 .btn-primary:hover {
+      background: #4a46c1; }
+  .jumbotron2 p {
+    color: #d9ccee;
+    max-width: 75%;
+    margin: 1em auto 2em; }
+  .navbar + .jumbotron2 {
+    margin-top: -20px; }
+  .jumbotron2 .lang-logo {
+    display: block;
+    background: #B01302;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border: 2px solid white; }
+    .jumbotron2 .lang-logo img {
+      max-width: 100%; }
+      
+      
