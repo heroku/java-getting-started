@@ -14,8 +14,9 @@ This application supports the [Getting Started with Java on Heroku](https://devc
 
 Alternatively, you can deploy it using this Heroku Button:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/heroku/java-js-getting-started)
 For more information about using Java on Heroku, see these Dev Center articles:
 
 - [Java on Heroku](https://devcenter.heroku.com/categories/java)
+
+
