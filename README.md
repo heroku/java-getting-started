@@ -18,6 +18,8 @@ By default, apps use Eco dynos if you are subscribed to Eco. Otherwise, it defau
 Eligible students can apply for platform credits through our new [Heroku for GitHub Students program](https://blog.heroku.com/github-student-developer-program).
 
 ```text
+$ git clone https://github.com/heroku/java-getting-started
+$ cd java-getting-started
 $ heroku create
 $ git push heroku main
 $ heroku open
@@ -30,6 +32,8 @@ By default, apps on [Fir](https://devcenter.heroku.com/articles/generations#fir)
 first.
 
 ```text
+$ git clone https://github.com/heroku/java-getting-started
+$ cd java-getting-started
 $ heroku create --space <space-name>
 $ git push heroku main
 $ heroku ps:wait
