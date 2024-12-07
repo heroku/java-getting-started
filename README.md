@@ -2,6 +2,11 @@
 
 A barebones Java app, which can easily be deployed to Heroku.
 
+This application supports the tutorials for both the [Cedar and Fir generations](https://devcenter.heroku.com/articles/generations) of the Heroku platform. You can check them out here:
+
+- [Getting Started on Heroku with Java](https://devcenter.heroku.com/articles/getting-started-with-java)
+- [Getting Started on Heroku Fir with Java (maven)](https://devcenter.heroku.com/articles/getting-started-with-java-maven-fir)
+
 ## Deploying to Heroku
 
 Using resources for this example app counts towards your usage. [Delete your app](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-apps-destroy) and [database](https://devcenter.heroku.com/articles/heroku-postgresql#removing-the-add-on) as soon as you are done experimenting to control costs.
