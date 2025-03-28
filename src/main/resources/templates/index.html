@@ -1,61 +1,784 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MathCode Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2b6cb0;
+      --secondary: #1a365d;
+      --accent: #ed8936;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --success: #48bb78;
+      --gradient: linear-gradient(45deg, var(--primary), var(--secondary));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--light);
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-left: 10px;
+    }
+
+    .logo-icon {
+      color: var(--accent);
+      font-size: 28px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      margin-left: 30px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      background: var(--gradient);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(43, 108, 176, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--gradient);
+      color: white;
+      padding: 150px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      left: -150px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .hero-image {
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* About Section */
+    .about {
+      padding: 100px 0;
+      background-color: white;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+      text-align: left;
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--primary);
+      bottom: -10px;
+      left: 0;
+    }
+
+    /* Subjects Section */
+    .subjects {
+      padding: 100px 0;
+      background-color: #f8f9fa;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-header h2::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--primary);
+      bottom: -10px;
+      left: 25%;
+    }
+
+    .section-header p {
+      color: #6c757d;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .subject-card {
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .subject-icon {
+      background: var(--gradient);
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 48px;
+    }
+
+    .subject-content {
+      padding: 25px;
+    }
+
+    .subject-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .subject-content ul {
+      padding-left: 20px;
+      color: #6c757d;
+    }
+
+    .subject-content ul li {
+      margin-bottom: 8px;
+    }
+
+    /* Teaching Approach */
+    .approach {
+      padding: 100px 0;
+      background-color: white;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .approach-card {
+      text-align: center;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .approach-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .approach-icon {
+      background: var(--gradient);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: white;
+      font-size: 28px;
+    }
+
+    .approach-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 100px 0;
+      background-color: #f8f9fa;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+    }
+
+    .contact-details {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .contact-details li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .contact-details i {
+      color: var(--primary);
+      margin-right: 15px;
+      font-size: 20px;
+      margin-top: 5px;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #212529;
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background-color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .hero-content, .about-content, .contact-container {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text, .section-title {
+        text-align: center;
+      }
+
+      .section-title h2::after {
+        left: 25%;
+      }
+
+      .hero-image, .about-image {
+        margin-top: 40px;
+      }
+
+      .contact-info {
+        order: 2;
+      }
+
+      .contact-form {
+        order: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 120px 0 80px;
+      }
+
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title h2, .section-header h2 {
+        font-size: 2rem;
+      }
+    }
+
+    /* Mobile Menu (simplified version) */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
 <body>
+<!-- Header -->
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <i class="fas fa-square-root-variable logo-icon"></i>
+        <h1>MathCode Academy</h1>
+      </div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#approach">Teaching</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </div>
+</header>
 
-<div class="jumbotron text-center">
-    <div class="container">
-        <a href="/" class="lang-logo">
-            <img alt="" src="/lang-logo.png">
-        </a>
-        <h1>Getting Started with Java on Heroku</h1>
-        <p>This is a sample Java application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-        <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-java"><span class="glyphicon glyphicon-flash"></span> Getting Started on Heroku with Java</a>
-        <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-java-maven-fir"><span class="glyphicon glyphicon-flash"></span> Getting Started on Heroku Fir with Java</a>
-        <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/java-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Math & Computer Science Made Simple</h1>
+        <p>Personalized teaching that builds confidence and unlocks potential in mathematics and computer programming.</p>
+        <a href="#contact" class="btn">Schedule a Consultation</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1581089781785-603411fa81e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Math and Computer Science Education">
+      </div>
     </div>
-</div>
-<div class="container">
-    <div class="lead">
-        To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to either of the following tutorials:
-        <ul>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java" class="alert-link">Getting Started on Heroku with Java</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java-maven-fir" class="alert-link">Getting Started on Heroku Fir with Java</a></li>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80" alt="Teacher helping student">
+      </div>
+      <div class="about-text">
+        <div class="section-title">
+          <h2>About Me</h2>
+        </div>
+        <p>With over 9 years of teaching experience in mathematics and computer science, I'm dedicated to helping students develop strong foundations and practical skills they can use in the real world.</p>
+        <p>My teaching philosophy combines clear explanations of complex concepts with hands-on practice and real-world applications. I believe every student can excel with the right guidance and support.</p>
+        <p>Whether you're struggling with basic concepts, looking to advance your skills, or preparing for exams, I provide personalized instruction tailored to your learning style and goals.</p>
+        <a href="#contact" class="btn" style="margin-top: 20px;">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Subjects Section -->
+<section class="subjects" id="subjects">
+  <div class="container">
+    <div class="section-header">
+      <h2>What I Teach</h2>
+      <p>Specialized instruction in mathematics and computer science for students of all levels</p>
+    </div>
+    <div class="subjects-grid">
+      <div class="subject-card">
+        <div class="subject-icon">
+          <i class="fas fa-calculator"></i>
+        </div>
+        <div class="subject-content">
+          <h3>Mathematics</h3>
+          <ul>
+            <li>Algebra & Pre-Calculus</li>
+            <li>Calculus & Advanced Mathematics</li>
+            <li>Statistics & Probability</li>
+            <li>Discrete Mathematics</li>
+            <li>Exam Preparation (SAT, ACT, AP)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="subject-card">
+        <div class="subject-icon">
+          <i class="fas fa-code"></i>
+        </div>
+        <div class="subject-content">
+          <h3>Computer Programming</h3>
+          <ul>
+            <li>Introduction to Programming</li>
+            <li>Python, Java & JavaScript</li>
+            <li>Web Development Basics</li>
+            <li>Data Structures & Algorithms</li>
+            <li>Project-Based Coding</li>
+          </ul>
+        </div>
+      </div>
+      <div class="subject-card">
+        <div class="subject-icon">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <div class="subject-content">
+          <h3>Computer Science</h3>
+          <ul>
+            <li>Computer Science Fundamentals</li>
+            <li>Computational Thinking</li>
+            <li>Database Design Basics</li>
+            <li>Computer Science AP Prep</li>
+            <li>College-Level CS Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teaching Approach -->
+<section class="approach" id="approach">
+  <div class="container">
+    <div class="section-header">
+      <h2>My Teaching Approach</h2>
+      <p>How I help students achieve success in mathematics and computer science</p>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-card">
+        <div class="approach-icon">
+          <i class="fas fa-user"></i>
+        </div>
+        <h3>Personalized Learning</h3>
+        <p>Instruction tailored to your specific needs, learning style, and pace for maximum effectiveness.</p>
+      </div>
+      <div class="approach-card">
+        <div class="approach-icon">
+          <i class="fas fa-project-diagram"></i>
+        </div>
+        <h3>Conceptual Understanding</h3>
+        <p>Focus on building strong foundations and deep understanding rather than just memorizing formulas.</p>
+      </div>
+      <div class="approach-card">
+        <div class="approach-icon">
+          <i class="fas fa-hands-helping"></i>
+        </div>
+        <h3>Practical Application</h3>
+        <p>Learn how to apply concepts to real-world problems and projects that demonstrate skills.</p>
+      </div>
+      <div class="approach-card">
+        <div class="approach-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Continuous Feedback</h3>
+        <p>Regular assessments and feedback to track progress and adjust teaching strategies as needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2>Get In Touch</h2>
+      <p>Have questions or ready to start learning? Contact me today!</p>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <ul class="contact-details">
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <strong>Location:</strong>
+              <p>Lowell, Arkansas(US)</p>
+              <p>In-person and online sessions available</p>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>Email:</strong>
+              <p>samjaytaylor22@gmail.com</p>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <div>
+              <strong>Phone:</strong>
+              <p>(757)-752-0752</p>
+            </div>
+          </li>
+          <li>
+            <i class="fas fa-clock"></i>
+            <div>
+              <strong>Teaching Hours:</strong>
+              <p>Monday - Friday: 3:00 PM - 8:00 PM</p>
+              <p>Saturday: 9:00 AM - 3:00 PM</p>
+            </div>
+          </li>
         </ul>
+      </div>
+      <div class="contact-form">
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" class="form-control" required>
+              <option value="">Select Subject</option>
+              <option value="Math">Mathematics</option>
+              <option value="Programming">Computer Programming</option>
+              <option value="CS">Computer Science</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" class="form-control" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
     </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-6">
-            <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-            <ul>
-                <li>This app was deployed to Heroku using Git.</li>
-                <li>When Heroku received the source code, it fetched all the dependencies in <a href="https://github.com/heroku/java-getting-started/blob/main/pom.xml">pom.xml</a>, creating a deployable build artifact.</li>
-                <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the build artifact can be mounted and executed.</li>
-                <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-            </ul>
-        </div>
-        <div class="col-md-6">
-            <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-            <ul>
-                <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-java">Getting Started on Heroku with Java</a> or <a href="https://devcenter.heroku.com/articles/getting-started-with-java-maven-fir">Getting Started on Heroku Fir with Java</a> guide, then please head back to the tutorial and follow the next steps!</li>
-            </ul>
-            <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-            <ul>
-                <li><a href="https://www.heroku.com/home">Heroku</a></li>
-                <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-                <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java">Getting Started on Heroku with Java</a></li>
-                <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java-maven-fir">Getting Started on Heroku Fir with Java</a></li>
-                <li><a href="https://devcenter.heroku.com/articles/deploying-java">Deploying Java Apps on Heroku</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row" style="margin-top:1em">
-        <div class="col-md-12">
-            <p class="alert alert-info" role="alert">
-                Please do work through the Getting Started guide, even if you do know how to build such an application. The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-            </p>
-        </div>
-    </div>
-</div>
+  </div>
+</section>
 
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="logo" style="justify-content: center;">
+        <i class="fas fa-square-root-variable logo-icon"></i>
+        <h1>MathCode Academy</h1>
+      </div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <p>&copy; 2025 MathCode Academy. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Simple JavaScript for header scroll effect
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', window.scrollY > 0);
+  });
+
+  // Mobile menu toggle (simplified)
+  document.querySelector('.menu-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
 </body>
 </html>
