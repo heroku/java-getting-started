@@ -8,506 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #2b6cb0;
-      --secondary: #1a365d;
-      --accent: #ed8936;
-      --light: #f8f9fa;
-      --dark: #212529;
-      --success: #48bb78;
-      --gradient: linear-gradient(45deg, var(--primary), var(--secondary));
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      color: var(--dark);
-      background-color: var(--light);
-      overflow-x: hidden;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-
-    /* Header Styles */
-    header {
-      background-color: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo h1 {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-left: 10px;
-    }
-
-    .logo-icon {
-      color: var(--accent);
-      font-size: 28px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--dark);
-      margin-left: 30px;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .btn {
-      background: var(--gradient);
-      color: white;
-      padding: 12px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(43, 108, 176, 0.3);
-    }
-
-    /* Hero Section */
-    .hero {
-      background: var(--gradient);
-      color: white;
-      padding: 150px 0 100px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -150px;
-      left: -150px;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      align-items: center;
-    }
-
-    .hero-text h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .hero-text p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-      opacity: 0.9;
-    }
-
-    .hero-image {
-      position: relative;
-    }
-
-    .hero-image img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    }
-
-    /* About Section */
-    .about {
-      padding: 100px 0;
-      background-color: white;
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .about-image img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .section-title {
-      text-align: left;
-      margin-bottom: 25px;
-    }
-
-    .section-title h2 {
-      font-size: 2.5rem;
-      color: var(--dark);
-      margin-bottom: 15px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-title h2::after {
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--primary);
-      bottom: -10px;
-      left: 0;
-    }
-
-    /* Subjects Section */
-    .subjects {
-      padding: 100px 0;
-      background-color: #f8f9fa;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-header h2 {
-      font-size: 2.5rem;
-      color: var(--dark);
-      margin-bottom: 15px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-header h2::after {
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--primary);
-      bottom: -10px;
-      left: 25%;
-    }
-
-    .section-header p {
-      color: #6c757d;
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .subjects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .subject-card {
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .subject-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .subject-icon {
-      background: var(--gradient);
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 48px;
-    }
-
-    .subject-content {
-      padding: 25px;
-    }
-
-    .subject-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: var(--dark);
-    }
-
-    .subject-content ul {
-      padding-left: 20px;
-      color: #6c757d;
-    }
-
-    .subject-content ul li {
-      margin-bottom: 8px;
-    }
-
-    /* Teaching Approach */
-    .approach {
-      padding: 100px 0;
-      background-color: white;
-    }
-
-    .approach-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .approach-card {
-      text-align: center;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-    }
-
-    .approach-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .approach-icon {
-      background: var(--gradient);
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      color: white;
-      font-size: 28px;
-    }
-
-    .approach-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 15px;
-      color: var(--dark);
-    }
-
-    /* Contact Section */
-    .contact {
-      padding: 100px 0;
-      background-color: #f8f9fa;
-    }
-
-    .contact-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-    }
-
-    .contact-info h3 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: var(--dark);
-    }
-
-    .contact-details {
-      list-style: none;
-      margin-bottom: 30px;
-    }
-
-    .contact-details li {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-
-    .contact-details i {
-      color: var(--primary);
-      margin-right: 15px;
-      font-size: 20px;
-      margin-top: 5px;
-    }
-
-    .contact-form {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
-    }
-
-    textarea.form-control {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #212529;
-      color: white;
-      padding: 30px 0;
-      text-align: center;
-    }
-
-    .footer-content {
-      margin-bottom: 20px;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      color: white;
-      transition: all 0.3s ease;
-    }
-
-    .social-links a:hover {
-      background-color: var(--primary);
-      transform: translateY(-5px);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 992px) {
-      .hero-content, .about-content, .contact-container {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-text, .section-title {
-        text-align: center;
-      }
-
-      .section-title h2::after {
-        left: 25%;
-      }
-
-      .hero-image, .about-image {
-        margin-top: 40px;
-      }
-
-      .contact-info {
-        order: 2;
-      }
-
-      .contact-form {
-        order: 1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding: 120px 0 80px;
-      }
-
-      .hero-text h1 {
-        font-size: 2.5rem;
-      }
-
-      .section-title h2, .section-header h2 {
-        font-size: 2rem;
-      }
-    }
-
-    /* Mobile Menu (simplified version) */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: var(--primary);
-      cursor: pointer;
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="stylesheets/style.css"/>
+  <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
 <!-- Header -->
@@ -523,6 +25,7 @@
         <a href="#about">About</a>
         <a href="#subjects">Subjects</a>
         <a href="#approach">Teaching</a>
+        <a href="#testimonials">Testimonials</a>
         <a href="#contact">Contact</a>
       </div>
       <button class="menu-toggle">
@@ -665,6 +168,46 @@
   </div>
 </section>
 
+<!-- Testimonials Section -->
+<section class="approach" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2>Student Testimonials</h2>
+      <p>What my students and their parents have to say about our learning journey together</p>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-card">
+        <div class="approach-icon">
+          <i class="fas fa-quote-left"></i>
+        </div>
+        <h3>Sarah M. - College Student</h3>
+        <p>"I was struggling with Calculus II and about to drop the course when I found MathCode Academy. After just a few sessions, the concepts finally clicked. I ended up with an A- in the class!"</p>
+      </div>
+      <div class="approach-card">
+        <div class="approach-icon">
+          <i class="fas fa-quote-left"></i>
+        </div>
+        <h3>David P. - High School Junior</h3>
+        <p>"The programming projects we worked on were actually fun! I went from hating computer science to deciding to major in it when I go to college next year."</p>
+      </div>
+      <div class="approach-card">
+        <div class="approach-icon">
+          <i class="fas fa-quote-left"></i>
+        </div>
+        <h3>Jennifer K. - Parent</h3>
+        <p>"Our daughter's confidence in math has completely transformed. Her teacher noticed the improvement within weeks. The personalized approach makes all the difference."</p>
+      </div>
+      <div class="approach-card">
+        <div class="approach-icon">
+          <i class="fas fa-quote-left"></i>
+        </div>
+        <h3>Michael T. - Adult Learner</h3>
+        <p>"I needed to learn Python for a career change at age 40. The clear teaching style and patience helped me master the basics and land my new role in tech!"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Contact Section -->
 <section class="contact" id="contact">
   <div class="container">
@@ -709,18 +252,22 @@
         </ul>
       </div>
       <div class="contact-form">
-        <form>
+        <form action="/contact" method="POST" id="contactForm">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" class="form-control" required>
+            <input type="text" id="name" name="name" class="form-control" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" class="form-control" required>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone (Optional)</label>
+            <input type="tel" id="phone" name="phone" class="form-control">
           </div>
           <div class="form-group">
             <label for="subject">Subject</label>
-            <select id="subject" class="form-control" required>
+            <select id="subject" name="subject" class="form-control" required>
               <option value="">Select Subject</option>
               <option value="Math">Mathematics</option>
               <option value="Programming">Computer Programming</option>
@@ -730,7 +277,7 @@
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" class="form-control" required></textarea>
+            <textarea id="message" name="message" class="form-control" required></textarea>
           </div>
           <button type="submit" class="btn">Send Message</button>
         </form>
@@ -757,28 +304,5 @@
     <p>&copy; 2025 MathCode Academy. All rights reserved.</p>
   </div>
 </footer>
-
-<script>
-  // Simple JavaScript for header scroll effect
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('header');
-    header.classList.toggle('scrolled', window.scrollY > 0);
-  });
-
-  // Mobile menu toggle (simplified)
-  document.querySelector('.menu-toggle').addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.toggle('active');
-  });
-
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  });
-</script>
 </body>
 </html>
