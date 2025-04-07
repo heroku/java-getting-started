@@ -1,5 +1,7 @@
 package com.heroku.java.controllers;
 
+import com.heroku.java.models.Person;
+import com.heroku.java.services.PersonService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,11 +24,13 @@ import java.util.logging.Logger;
 /**
  * Controller for handling contact form submissions.
  */
-@Controller
+@RestController
+@RequiredArgsConstructor
 public class ContactController {
 
     private static final Logger logger = Logger.getLogger(ContactController.class.getName());
 
+    private final PersonService personService;
     /**
      * Handles the contact form submission from the website.
      *
@@ -76,13 +81,16 @@ public class ContactController {
 
     // Helper method to save the submission to a database
     private void saveSubmissionToDatabase(ContactSubmission submission) {
-        // Implementation would depend on your persistence layer
-        // This could use JPA, JDBC, etc.
+        String[] splitName = submission.name.split(" ");
+            Person newPerson = new Person();
+            newPerson.setEmail(submission.email);
+            newPerson.setPhone(submission.phone);
+            newPerson.setMessage(submission.message);
+            newPerson.setFirstName(splitName[0]);
+            newPerson.setLastName(splitName[1]);
+            newPerson.setSubject(submission.subject);
+            personService.savePerson(newPerson);
 
-        // For example with a ContactSubmissionRepository (Spring Data JPA):
-        // contactSubmissionRepository.save(submission);
-
-        // For demonstration, we're just logging
         logger.log(Level.INFO, "Saving submission to database: {0}", submission);
     }
 
