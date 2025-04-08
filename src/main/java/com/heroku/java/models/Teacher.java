@@ -1,21 +1,17 @@
 package com.heroku.java.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "persons")
 @Data
+@Entity
+@Table(name = "teachers")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
-
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,8 +20,5 @@ public class Person {
     private String lastName;
     private String email;
     private String phone;
-    private String message;
-    private String subject;
-
-    private boolean isRead = false;
+    private boolean isActive;
 }
