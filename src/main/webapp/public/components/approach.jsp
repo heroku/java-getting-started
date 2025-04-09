@@ -4,8 +4,8 @@
 <section class="approach" id="approach">
   <div class="container">
     <div class="section-header">
-      <h2>My Teaching Approach</h2>
-      <p>How I help students achieve success in mathematics and computer science</p>
+      <h2>Our Teaching Approaches</h2>
+      <p>How we help students achieve success in their chosen field</p>
     </div>
     <div class="approach-grid">
       <c:if test="${not empty approaches}">

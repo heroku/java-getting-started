@@ -6,10 +6,6 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-content">
-      <div class="logo" style="justify-content: center;">
-        <i class="fas fa-square-root-variable logo-icon"></i>
-        <h1>MathCode Academy</h1>
-      </div>
       <div class="social-links">
         <a href="${not empty socialLinks ? socialLinks.facebook : '#'}"><i class="fab fa-facebook-f"></i></a>
         <a href="${not empty socialLinks ? socialLinks.twitter : '#'}"><i class="fab fa-twitter"></i></a>
@@ -17,7 +13,7 @@
         <a href="${not empty socialLinks ? socialLinks.youtube : '#'}"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
-    <p>&copy; <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy" /> MathCode Academy. All rights reserved.</p>
+    <p>&copy; <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy" /> Tech Learning Hub. All rights reserved.</p>
   </div>
 </footer>
 

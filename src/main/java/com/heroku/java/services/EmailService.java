@@ -1,185 +1,136 @@
 package com.heroku.java.services;
 
 import com.heroku.java.models.ContactRequest;
+import com.heroku.java.models.Subject;
 import com.heroku.java.models.Teacher;
-import jakarta.annotation.PostConstruct;
-import jakarta.mail.Address;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import static com.heroku.java.utils.EmailTemplate.getMessageHtml;
 
 @Service
 @EnableScheduling
+@EnableAsync
 @RequiredArgsConstructor
+@Slf4j
 public class EmailService {
 
     private final JavaMailSender emailSender;
     private final ContactRequestService requestService;
-    private final TeacherService teacherService;
+    private final TeacherSubjectService teacherSubjectService;
 
-
-    private String getMessageHtml(String subject, EmailContactRequest request) {
-        return """
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>%s</title>
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        line-height: 1.6;
-                        color: #333333;
-                        max-width: 600px;
-                        margin: 0 auto;
-                        padding: 20px;
-                        background-color: #f9f9f9;
-                    }
-                    .container {
-                        background-color: #ffffff;
-                        border-radius: 8px;
-                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                        overflow: hidden;
-                    }
-                    .header {
-                        text-align: center;
-                        padding: 25px 20px;
-                        background-color: #2c5282;
-                        color: white;
-                    }
-                    .logo {
-                        max-width: 150px;
-                        margin-bottom: 15px;
-                    }
-                    h1 {
-                        font-size: 24px;
-                        margin: 0;
-                        color: white;
-                    }
-                    .content {
-                        padding: 30px 25px;
-                    }
-                    .footer {
-                        text-align: center;
-                        font-size: 12px;
-                        color: #666666;
-                        padding: 20px;
-                        background-color: #f5f5f5;
-                    }
-                    .button {
-                        display: inline-block;
-                        background-color: #3182ce;
-                        color: white;
-                        text-decoration: none;
-                        padding: 12px 24px;
-                        border-radius: 4px;
-                        margin-top: 20px;
-                        font-weight: bold;
-                        transition: background-color 0.3s;
-                    }
-                    .button:hover {
-                        background-color: #2c5282;
-                    }
-                    .personalized {
-                        font-weight: bold;
-                        color: #2c5282;
-                    }
-                    .social-links {
-                        margin-top: 15px;
-                    }
-                    .social-links a {
-                        display: inline-block;
-                        margin: 0 10px;
-                        color: #3182ce;
-                        text-decoration: none;
-                    }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <div class="header">
-                        <!-- Replace with your company logo if available -->
-                        <h1>%s</h1>
-                    </div>
-                
-                    <div class="content">
-                        <p>Hello <span class="personalized">%s</span>,</p>
-                
-                        <p>Thank you for contacting us. We've received your message and appreciate your interest.</p>
-                
-                        <p>Our team is reviewing your inquiry and <strong>we will get back to you within 24 hours</strong>.</p>
-                
-                        <p>In the meantime, feel free to explore our available courses and learning resources on our website.</p>
-                
-                        <p style="text-align: center;">
-                            <a href="https://sam-technology.org/subjects" class="button">Browse Our Subjects</a>
-                        </p>
-                        
-                        <p>If you have any urgent questions, please don't hesitate to call us at <strong>757-752-0752</strong>.</p>
-                    </div>
-                
-                    <div class="footer">
-                        <p>© 2025 Sam Technology. All rights reserved.</p>
-                        <p>2315 Hickory Wood Ave Lowell Arkansas, 72745</p>
-                    </div>
-                </div>
-            </body>
-            </html>
-            """.formatted(
-                subject,
-                subject,
-                request.getContactRequest() != null ? request.getContactRequest().getFirstName() + request.getContactRequest().getLastName() : "there"
-        );
-    }
-
-    public void sendEmail(EmailContactRequest request) throws MessagingException {
-        MimeMessage message = emailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(request.getFrom());
-
-        String[] recipientList = {"samjaytaylor22@gmail.com", request.getTo()};
-        helper.setTo(recipientList);
-
-        String subject = "Thanks for reaching out to Sam Technology!";
-        helper.setSubject(subject);
-        helper.setPriority(1);
-        helper.setText(getMessageHtml(subject, request), true);
-
-        emailSender.send(message);
-    }
-
-    @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
-    public void sendEmailScheduled() throws MessagingException {
-        List<ContactRequest> requests = (List<ContactRequest>) requestService.findAllUnsentRequests();
-        Teacher teacher = teacherService.findTeacherById(Long.valueOf(1));
-        requests.stream().parallel().forEach(request -> {
-            EmailContactRequest contactRequest = new EmailContactRequest();
-            contactRequest.setTo(request.getEmail());
-            contactRequest.setFrom(teacher.getEmail());
-            contactRequest.setContactRequest(request);
-            contactRequest.setTeacher(teacher);
+    /**
+     * Sends an email asynchronously
+     *
+     * @param request Email request details
+     * @return CompletableFuture with void result
+     */
+    @Async
+    public CompletableFuture<Void> sendEmailAsync(EmailContactRequest request) {
+        return CompletableFuture.runAsync(() -> {
             try {
-                sendEmail(contactRequest);
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            }
+                MimeMessage message = emailSender.createMimeMessage();
+                MimeMessageHelper helper = new MimeMessageHelper(message, true);
+                helper.setFrom(request.getFrom());
 
-            request.setRead(true);
-            requestService.updatePerson(request);
+                // Send to both teacher and requestor
+                String[] recipientList = {request.getTeacher().getEmail(), request.getTo()};
+                helper.setTo(recipientList);
+
+                String subject = "Thanks for reaching out to Sam Technology!";
+                helper.setSubject(subject);
+                helper.setPriority(1);
+                helper.setText(getMessageHtml(subject, request), true);
+
+                emailSender.send(message);
+                log.info("Email sent successfully to {} and {}",
+                        request.getTeacher().getEmail(), request.getTo());
+            } catch (MessagingException e) {
+                log.error("Failed to send email: {}", e.getMessage(), e);
+                throw new RuntimeException("Failed to send email", e);
+            }
         });
     }
+
+    /**
+     * Legacy synchronous method for backward compatibility
+     */
+    public void sendEmail(EmailContactRequest request) throws MessagingException {
+        try {
+            sendEmailAsync(request).get(); // Wait for completion
+        } catch (Exception e) {
+            if (e.getCause() instanceof MessagingException) {
+                throw (MessagingException) e.getCause();
+            }
+            throw new RuntimeException("Failed to send email", e);
+        }
+    }
+
+    /**
+     * Scheduled task that runs every minute to process unsent contact requests
+     */
+    @Scheduled(fixedDelay = 1, timeUnit = TimeUnit.MINUTES)
+    public void sendEmailScheduled() {
+        try {
+            List<ContactRequest> requests = (List<ContactRequest>) requestService.findAllUnsentRequests();
+            if (requests.isEmpty()) {
+                log.debug("No unsent contact requests found");
+                return;
+            }
+
+            log.info("Processing {} unsent contact requests", requests.size());
+            Teacher teacher = teacherSubjectService.findTeacherById(1L);
+
+            // Process emails asynchronously but collect futures
+            List<CompletableFuture<Void>> futures = requests.stream()
+                    .map(request -> {
+                        EmailContactRequest contactRequest = new EmailContactRequest();
+                        contactRequest.setTo(request.getEmail());
+                        contactRequest.setFrom(teacher.getEmail());
+                        contactRequest.setContactRequest(request);
+                        contactRequest.setTeacher(teacher);
+
+                        // Send email and mark as read when complete
+                        return sendEmailAsync(contactRequest)
+                                .thenRun(() -> {
+                                    request.setRead(true);
+                                    requestService.updatePerson(request);
+                                    log.debug("Request marked as read: {}", request.getId());
+                                })
+                                .exceptionally(ex -> {
+                                    log.error("Failed to process request {}: {}",
+                                            request.getId(), ex.getMessage(), ex);
+                                    return null;
+                                });
+                    })
+                    .toList();
+
+            // Wait for all emails to complete (optional - remove if you want full async)
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+            log.info("Completed processing {} contact requests", requests.size());
+
+        } catch (Exception e) {
+            log.error("Error in scheduled email task: {}", e.getMessage(), e);
+        }
+    }
+
     @Data
-    public static class EmailContactRequest{
+    public static class EmailContactRequest {
         private String from;
         private String to;
         private Teacher teacher;

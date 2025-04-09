@@ -41,6 +41,6 @@ public class SubjectService {
          probe.setActive(true);
 
          Example<Subject> example = Example.of(probe);
-         return subjectRepository.findOne(example).orElse(null);
+         return subjectRepository.findAll(example).stream().findFirst().orElse(null);
     }
 }

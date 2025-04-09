@@ -5,15 +5,17 @@ import com.heroku.java.models.ContactRequest;
 import com.heroku.java.models.Subject;
 import com.heroku.java.services.ContactRequestService;
 import com.heroku.java.services.SubjectService;
+import com.heroku.java.services.VisitTrackingService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,32 +30,60 @@ import java.util.logging.Logger;
 public class ContactAPIController {
 
     private static final Logger logger = Logger.getLogger(ContactAPIController.class.getName());
+    private final VisitTrackingService visitTrackingService;
 
     private final ContactRequestService contactRequestService;
     private final SubjectService subjectService;
 
     /**
      * Handles the contact form submission from the website.
+     * Processing the form data sent via AJAX with URLSearchParams format.
      *
-     * @param contactRequest request from form to contact teacher
-     * @return ResponseEntity with status and message
+     * @param name The full name of the contact
+     * @param email The complete email constructed by the form
+     * @param phone The phone number (optional)
+     * @param subject The selected subject
+     * @param message The message content
+     * @return JSON response with success status and message
      */
-    @PostMapping("/api/contact")
-    public String submitContactForm(ContactForm contactRequest, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/error"; // Return to the form page
-        }
+    @PostMapping(value = "/api/contact", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> submitContactForm(
+            HttpServletRequest request,
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam(required = false) String phone,
+            @RequestParam String subject,
+            @RequestParam String message) {
+
+        visitTrackingService.trackVisit(request);
+
+        Map<String, Object> response = new HashMap<>();
 
         try {
-            // Your existing logic...
-            saveSubmissionToDatabase(contactRequest);
-            sendEmailNotification(contactRequest);
+            // Create a ContactForm object to maintain consistency with existing methods
+            ContactForm contactForm = new ContactForm(name, email, phone, subject, message);
 
-            // Redirect to the success page
-            return "redirect:/contact-success";
+            logger.log(Level.INFO, "Processing contact form: {0}", contactForm);
+
+            // Save submission to database
+            saveSubmissionToDatabase(contactForm);
+
+            // Send email notification
+            sendEmailNotification(contactForm);
+
+            // Return success response
+            response.put("success", true);
+            response.put("message", "Your message has been sent successfully! We'll get back to you soon.");
+            return ResponseEntity.ok(response);
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error processing contact form submission", e);
-            return  "redirect:/error"; // Return to the form page on error
+
+            // Return error response
+            response.put("success", false);
+            response.put("message", "An error occurred: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
@@ -88,7 +118,7 @@ public class ContactAPIController {
             newPerson.setSubject(foundSubject);
 
             contactRequestService.savePerson(newPerson);
-            logger.log(Level.INFO, "Saving submission to database: {0}", submission);
+            logger.log(Level.INFO, "Saved submission to database: {0}", submission);
         } else {
             throw new Exception("Subject not found: " + submission.getSubject());
         }
@@ -102,5 +132,4 @@ public class ContactAPIController {
         // For demonstration, we're just logging
         logger.log(Level.INFO, "Sending email notification for: {0}", submission.getEmail());
     }
-
 }
