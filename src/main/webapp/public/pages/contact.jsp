@@ -9,20 +9,40 @@
         /* Enhanced styling for the contact page */
         .contact {
             padding: 80px 0;
-            background-color: #f9f9f9;
+            background: linear-gradient(135deg, #f9f9f9 0%, #e0f7fa 100%);
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .section-header {
             text-align: center;
             margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-header h2 {
-            color: #2c3e50;
+            color: #1a237e;
             font-size: 36px;
             margin-bottom: 15px;
             position: relative;
             display: inline-block;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .section-header h2:after {
@@ -33,12 +53,25 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background: #3498db;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            border-radius: 3px;
+            animation: expandWidth 1s ease-out forwards;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 80px; }
         }
 
         .section-header p {
-            color: #7f8c8d;
+            color: #455a64;
             font-size: 18px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .contact-container {
@@ -46,6 +79,18 @@
             flex-wrap: wrap;
             gap: 30px;
             justify-content: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .contact-form {
@@ -53,34 +98,51 @@
             max-width: 600px;
             padding: 30px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform: perspective(1000px) rotateY(0deg);
+            backface-visibility: hidden;
+        }
+
+        .contact-form:hover {
+            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+            transform: perspective(1000px) rotateY(2deg) translateY(-5px);
         }
 
         .form-group {
             margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group:hover {
+            transform: translateX(5px);
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #34495e;
+            color: #1e3799;
+            transition: color 0.3s;
         }
 
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 16px;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
         }
 
         .form-control:focus {
             border-color: #3498db;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+            background-color: #fff;
+            transform: translateY(-2px);
         }
 
         .email-input-container {
@@ -97,58 +159,116 @@
 
         .email-separator {
             font-weight: bold;
-            color: #34495e;
+            color: #1e3799;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .email-domain {
             width: auto;
             min-width: 130px;
+            border-color: #3498db;
+            background-color: #f0f8ff;
         }
 
         .custom-domain {
             width: 100%;
             margin-top: 10px;
+            border: 2px dashed #3498db;
+            animation: borderPulse 2s infinite;
+        }
+
+        @keyframes borderPulse {
+            0% { border-color: #3498db; }
+            50% { border-color: #2ecc71; }
+            100% { border-color: #3498db; }
         }
 
         .btn-submit {
-            background-color: #3498db;
+            background: linear-gradient(to right, #3498db, #2980b9);
             color: white;
             border: none;
             padding: 14px 25px;
             font-size: 16px;
             font-weight: 600;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: all 0.4s ease;
             width: 100%;
             margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s;
         }
 
         .btn-submit:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+            background: linear-gradient(to right, #2980b9, #1a5276);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(41, 128, 185, 0.5);
+        }
+
+        .btn-submit:hover:before {
+            left: 100%;
         }
 
         .error-message {
             padding: 12px;
             background-color: #f8d7da;
             color: #721c24;
-            border-radius: 5px;
+            border-radius: 8px;
             margin-bottom: 20px;
+            border-left: 5px solid #dc3545;
+            box-shadow: 0 3px 10px rgba(220, 53, 69, 0.2);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
         }
 
         .success-message {
             padding: 12px;
             background-color: #d4edda;
             color: #155724;
-            border-radius: 5px;
+            border-radius: 8px;
             margin-bottom: 20px;
+            border-left: 5px solid #28a745;
+            box-shadow: 0 3px 10px rgba(40, 167, 69, 0.2);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .loading-indicator {
             text-align: center;
             color: #3498db;
             margin-bottom: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .message-container {
@@ -161,11 +281,18 @@
             right: 10px;
             font-size: 12px;
             color: #7f8c8d;
+            transition: all 0.3s ease;
         }
 
         textarea.form-control {
             resize: vertical;
             min-height: 150px;
+            background-color: #f8f9fa;
+            transition: height 0.3s ease;
+        }
+
+        textarea.form-control:focus {
+            min-height: 180px;
         }
 
         /* Responsive adjustments */
@@ -315,15 +442,62 @@
         }
     });
 
-    // Character counter for message
+    // Character counter for message with visual feedback
     document.getElementById('message').addEventListener('input', function() {
         const charCount = this.value.length;
-        document.getElementById('charCount').textContent = charCount;
+        const maxLength = 500;
+        const charCountElement = document.getElementById('charCount');
+        const charCounterElement = document.querySelector('.char-counter');
+
+        charCountElement.textContent = charCount;
+
+        // Add visual feedback as user approaches the limit
+        if (charCount > maxLength * 0.8) {
+            charCounterElement.style.color = '#e74c3c';
+            charCounterElement.style.fontWeight = 'bold';
+        } else if (charCount > maxLength * 0.6) {
+            charCounterElement.style.color = '#f39c12';
+            charCounterElement.style.fontWeight = 'normal';
+        } else {
+            charCounterElement.style.color = '#7f8c8d';
+            charCounterElement.style.fontWeight = 'normal';
+        }
     });
 
-    // Form submission with AJAX
+    // Add animation to form elements on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const formGroups = document.querySelectorAll('.form-group');
+        formGroups.forEach((group, index) => {
+            group.style.opacity = '0';
+            setTimeout(() => {
+                group.style.transition = 'all 0.5s ease';
+                group.style.opacity = '1';
+                group.style.transform = 'translateX(0)';
+            }, 100 * (index + 1));
+        });
+
+        // Add subtle animation to form controls on focus
+        const formControls = document.querySelectorAll('.form-control');
+        formControls.forEach(control => {
+            control.addEventListener('focus', function() {
+                this.style.transition = 'all 0.3s ease';
+                this.style.transform = 'translateY(-2px)';
+            });
+
+            control.addEventListener('blur', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+
+    // Form submission with AJAX and enhanced feedback
     document.getElementById('contactForm').addEventListener('submit', function(e) {
         e.preventDefault();
+
+        // Button animation on submit
+        const submitButton = this.querySelector('.btn-submit');
+        submitButton.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
+        submitButton.disabled = true;
 
         // Show loading indicator
         document.getElementById('loadingIndicator').style.display = 'block';
@@ -348,26 +522,43 @@
                 document.getElementById('loadingIndicator').style.display = 'none';
 
                 if (data.success) {
-                    // Show success message
-                    document.getElementById('successMessage').style.display = 'block';
+                    // Show success message with animation
+                    const successMsg = document.getElementById('successMessage');
+                    successMsg.style.display = 'block';
+                    successMsg.style.animation = 'slideDown 0.5s ease-out';
+
                     // Reset form
                     document.getElementById('contactForm').reset();
                     document.getElementById('charCount').textContent = '0';
+
+                    // Scroll to success message
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     // Show error message
-                    document.getElementById('errorMessage').textContent = data.message || 'An error occurred. Please try again.';
-                    document.getElementById('errorMessage').style.display = 'block';
+                    const errorMsg = document.getElementById('errorMessage');
+                    errorMsg.textContent = data.message || 'An error occurred. Please try again.';
+                    errorMsg.style.display = 'block';
+                    errorMsg.style.animation = 'shake 0.5s ease-in-out';
                 }
+
+                // Reset button
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                submitButton.disabled = false;
             })
             .catch(error => {
-                alert(error)
                 // Hide loading indicator
                 document.getElementById('loadingIndicator').style.display = 'none';
 
                 // Show error message
-                document.getElementById('errorMessage').textContent = 'An error occurred. Please try again later.';
-                document.getElementById('errorMessage').style.display = 'block';
+                const errorMsg = document.getElementById('errorMessage');
+                errorMsg.textContent = 'An error occurred. Please try again later.';
+                errorMsg.style.display = 'block';
+                errorMsg.style.animation = 'shake 0.5s ease-in-out';
                 console.error('Error:', error);
+
+                // Reset button
+                submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                submitButton.disabled = false;
             });
     });
 </script>
@@ -383,33 +574,69 @@
     }
 
     .info-card {
-        background: white;
+        background: linear-gradient(135deg, #fff 0%, #f0f8ff 100%);
         padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         text-align: center;
-        transition: transform 0.3s;
+        transition: all 0.5s ease;
+        border-top: 3px solid #3498db;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .info-card:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.5s ease;
+        border-radius: 12px;
     }
 
     .info-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3);
+    }
+
+    .info-card:hover:before {
+        opacity: 0.9;
+    }
+
+    .info-card:hover h3, .info-card:hover p {
+        color: white;
+    }
+
+    .info-card:hover .info-icon {
+        color: white;
+        transform: scale(1.2);
     }
 
     .info-icon {
-        font-size: 24px;
+        font-size: 32px;
         color: #3498db;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        transition: all 0.5s ease;
+        display: inline-block;
     }
 
     .info-card h3 {
         color: #2c3e50;
         margin-bottom: 10px;
-        font-size: 20px;
+        font-size: 22px;
+        transition: color 0.5s ease;
     }
 
     .info-card p {
         color: #7f8c8d;
         line-height: 1.6;
+        transition: color 0.5s ease;
     }
 
     @media (max-width: 992px) {

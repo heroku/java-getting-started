@@ -5,6 +5,7 @@ import com.heroku.java.models.ContactRequest;
 import com.heroku.java.models.Subject;
 import com.heroku.java.services.ContactRequestService;
 import com.heroku.java.services.SubjectService;
+import com.heroku.java.services.TeacherSubjectService;
 import com.heroku.java.services.VisitTrackingService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -30,10 +31,9 @@ import java.util.logging.Logger;
 public class ContactAPIController {
 
     private static final Logger logger = Logger.getLogger(ContactAPIController.class.getName());
-    private final VisitTrackingService visitTrackingService;
 
     private final ContactRequestService contactRequestService;
-    private final SubjectService subjectService;
+    private final TeacherSubjectService subjectService;
 
     /**
      * Handles the contact form submission from the website.
@@ -55,8 +55,6 @@ public class ContactAPIController {
             @RequestParam(required = false) String phone,
             @RequestParam String subject,
             @RequestParam String message) {
-
-        visitTrackingService.trackVisit(request);
 
         Map<String, Object> response = new HashMap<>();
 

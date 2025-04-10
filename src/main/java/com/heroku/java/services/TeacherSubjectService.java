@@ -6,6 +6,7 @@ import com.heroku.java.models.Subject;
 import com.heroku.java.models.Teacher;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class TeacherSubjectService {
 
     public void deleteAllTeachers() {teacherRepository.deleteAll();}
 
+    @Cacheable("subject")
     public Teacher findTeacherById(Long id) {
         Teacher probe = new Teacher();
         probe.setActive(true);
@@ -34,10 +36,12 @@ public class TeacherSubjectService {
         return teacherRepository.findOne(example).orElse(null);
     }
 
-    public Iterable<Teacher> findAllTeachers() { return teacherRepository
-            .findAll()
-            .stream()
-            .filter(Teacher::isActive).toList();
+    public Iterable<Teacher> findAllTeachers() {
+         Teacher probe = new Teacher();
+         probe.setActive(true);
+
+         Example<Teacher> example = Example.of(probe);
+         return teacherRepository.findAll(example);
     }
 
     public void saveSubject(Subject subject) {
@@ -60,10 +64,17 @@ public class TeacherSubjectService {
          return subjectRepository.findAll(example);
     }
 
+    @Cacheable("subject")
     public Subject findSubjectById(Long id) {
-        return subjectRepository.findById(id).orElse(null);
+         Subject probe = new Subject();
+         probe.setId(id);
+         probe.setActive(true);
+
+         Example<Subject> example = Example.of(probe);
+        return subjectRepository.findOne(example).orElse(null);
     }
 
+    @Cacheable("subject")
     public Subject findSubjectByName(String name) {
          Subject probe = new Subject();
          probe.setName(name);

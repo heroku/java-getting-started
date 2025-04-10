@@ -1,9 +1,10 @@
 package com.heroku.java.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.heroku.java.models.Subject;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.heroku.java.models.Teacher;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -13,23 +14,20 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeacherDTO{
+public class SubjectDTO {
     @Id
     @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
     private Long id;
 
+    @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private String firstName;
+    private String name;
 
+    @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private String lastName;
+    private String description;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private String email;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    private String phone;
-
+    @NotNull
     @JsonFormat(shape = JsonFormat.Shape.ARRAY)
-    private List<Subject> subjects;
+    private List<TeacherDTO> teachers;
 }

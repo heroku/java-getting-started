@@ -1,16 +1,17 @@
 package com.heroku.java.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Entity
-@Table(name = "contact_requests")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactRequest {
+@Table(name = "contact_requests", indexes = @Index(name = "idx_is_read", columnList = "isRead"))
+public class ContactRequest implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

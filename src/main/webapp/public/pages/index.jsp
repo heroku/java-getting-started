@@ -3,21 +3,31 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
+<head>
     <jsp:include page="../components/headElements.jsp" />
+    <!-- Add any page-specific meta tags or styles here -->
+</head>
 <body>
-    <!-- Include Header -->
+<div class="page-wrapper">
+    <!-- Header -->
     <jsp:include page="../components/header.jsp" />
 
-    <!-- Include Hero Section -->
-    <jsp:include page="../components/hero.jsp" />
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="section-hero">
+            <jsp:include page="../components/hero.jsp" />
+        </section>
 
-    <!-- Include Teaching Approach Section -->
-    <jsp:include page="../components/approach.jsp" />
+        <!-- Teaching Approach Section -->
+        <section class="section-approach">
+            <jsp:include page="../components/approach.jsp" />
+        </section>
+    </main>
 
-    <!-- Include Testimonials Section -->
-    <jsp:include page="../components/testimonials.jsp" />
-
-    <!-- Include Footer -->
+    <!-- Footer -->
     <jsp:include page="../components/footer.jsp" />
+</div>
+
+<!-- Add any page-specific scripts here -->
 </body>
 </html>

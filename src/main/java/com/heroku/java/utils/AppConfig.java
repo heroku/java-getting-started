@@ -1,11 +1,15 @@
 package com.heroku.java.utils;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 @EnableWebMvc
+@RequiredArgsConstructor
 public class AppConfig implements WebMvcConfigurer {
+
+     private final RequestInterceptorController requestInterceptorController;
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -31,9 +35,7 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/contact-success").setViewName("contact-success");
-        registry.addViewController("/error").setViewName("error");
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(requestInterceptorController);
     }
-
 }

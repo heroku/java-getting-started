@@ -4,18 +4,23 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "subjects")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Subject {
+@Table(name = "subjects",
+        indexes = {
+            @Index(name = "idx_subject_name", columnList = "name", unique = true),
+        }
+)
+
+public class Subject implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,10 +34,4 @@ public class Subject {
     @AssertTrue
     private boolean isActive = true;
 
-    @NotEmpty
-    @ManyToMany(
-            mappedBy = "subjects",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.MERGE)
-    private List<Teacher> teachers;
 }

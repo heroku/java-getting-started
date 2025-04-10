@@ -17,12 +17,11 @@
 <!-- Navigation dropdown (separate from header) -->
 <div class="nav-dropdown" id="nav-dropdown">
   <div class="nav-links" id="nav-links">
-    <a href="/" class="nav-item"><span>Home</span></a>
-<%--    <a href="/about" class="nav-item"><span>About</span></a>--%>
-    <a href="/subjects" class="nav-item"><span>Subjects</span></a>
-    <a href="/#approach" class="nav-item"><span>Teaching</span></a>
-    <a href="/#testimonials" class="nav-item"><span>Testimonials</span></a>
-    <a href="/contact" class="nav-item"><span>Contact</span></a>
+        <a href="/" class="nav-item"><span>Home</span></a>
+        <a href="/subjects" class="nav-item"><span>Subjects</span></a>
+        <a href="/#approach" class="nav-item"><span>Teaching</span></a>
+        <a href="/contact" class="nav-item"><span>Contact</span></a>
+        <a href="/testimonials" class="nav-item"><span>Testimonials</span></a>
   </div>
 </div>
 

@@ -2,18 +2,22 @@ package com.heroku.java.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "teachers")
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Teacher {
+@Table(name = "teachers",
+        indexes = {
+                @Index(name = "idx_first_name_3", columnList = "firstName"),
+                @Index(name = "idx_last_name_3", columnList = "lastName"),
+        })
+public class Teacher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

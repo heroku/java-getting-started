@@ -1,22 +1,40 @@
 package com.heroku.java.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.sql.Timestamp;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class ContactForm {
     @NotEmpty
-    private final String name;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private String name;
+
     @NotEmpty
     @Email
-    private final String email;
-    @NotEmpty
-    private final String phone;
-    @NotEmpty
-    private final String subject;
-    @NotEmpty
-    private final String message;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private String email;
 
-    private final long timestamp = getTimestamp();
+    @NotEmpty
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private String phone;
+
+    @NotEmpty
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private String subject;
+
+    @NotEmpty
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private String message;
+
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
+    private final Long timestamp = Timestamp.valueOf("2020-01-01 00:00:00").getTime();
 }

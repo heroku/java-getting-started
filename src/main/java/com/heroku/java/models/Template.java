@@ -1,20 +1,27 @@
 package com.heroku.java.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "templates")
-public class Template {
+@Table(name = "templates",
+        indexes = @Index(name = "idx_template_format", columnList = "template_format", unique = true))
+public class Template implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(max = Integer.MAX_VALUE)
     private String templateType;
-    private String templateFormat;
+
+    @Lob
+    @Column(name = "template_format")
+    private byte[] templateFormat;
 }
