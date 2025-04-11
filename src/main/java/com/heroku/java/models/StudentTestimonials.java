@@ -49,7 +49,7 @@ public class StudentTestimonials implements Serializable {
     @Max(5)
     private Integer rating;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 

@@ -1,5 +1,6 @@
 package com.heroku.java.utils;
 
+import com.heroku.java.dto.TeacherDTO;
 import com.heroku.java.models.Subject;
 import com.heroku.java.models.Teacher;
 import com.heroku.java.services.EmailService;
@@ -539,7 +540,7 @@ public class EmailTemplate {
     /**
      * Helper method to format teacher subjects as HTML tags
      */
-    private static String formatSubjectTags(Teacher teacher) {
+    private static String formatSubjectTags(TeacherDTO teacher) {
         if (teacher == null || teacher.getSubjects() == null || teacher.getSubjects().isEmpty()) {
             return "<span class=\"subject-tag\">N/A</span>";
         }

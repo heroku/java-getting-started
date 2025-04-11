@@ -4,7 +4,7 @@
   <div class="container">
     <div class="hero-content">
       <div class="hero-text">
-        <h1><span class="text-gradient">Learning, Education, and Life </span>Made Simple</h1>
+        <h1><span class="text-gradient">Empowering Your Journey in Learning and Education </span>The Simple Way</h1>
         <p class="lead-text">Personalized teaching that <strong>builds confidence</strong> and <em>unlocks potential</em> in your chosen subjects.</p>
         <div class="cta-wrapper">
           <a href="/contact" class="btn btn-primary pulse-effect">Schedule a Consultation</a>

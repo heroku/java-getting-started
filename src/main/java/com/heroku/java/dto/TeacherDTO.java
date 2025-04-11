@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeacherDTO{
+public class TeacherDTO implements Serializable {
     @Id
     @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
     private Long id;

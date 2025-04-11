@@ -8,12 +8,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class ContactForm {
+public class ContactForm implements Serializable {
     @NotEmpty
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private String name;

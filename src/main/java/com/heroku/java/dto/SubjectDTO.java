@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubjectDTO {
+public class SubjectDTO implements Serializable {
     @Id
     @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
     private Long id;
@@ -29,5 +29,5 @@ public class SubjectDTO {
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.ARRAY)
-    private List<TeacherDTO> teachers;
+    private List<Teacher> teachers;
 }

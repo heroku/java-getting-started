@@ -21,9 +21,10 @@
     </properties>
 
     <dependencies>
-        <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-redis</artifactId>
+       <dependency>
+        <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <version>6.3.2.RELEASE</version> <!-- Check for the latest version on Maven Central -->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

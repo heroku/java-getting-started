@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestimonialDTO {
+public class TestimonialDTO implements Serializable {
 //    @Id
 //    @JsonFormat(shape = JsonFormat.Shape.NUMBER_INT)
 //    private Long id;

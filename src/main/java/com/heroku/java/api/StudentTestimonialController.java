@@ -1,22 +1,22 @@
 package com.heroku.java.api;
 
 import com.heroku.java.dto.TestimonialDTO;
-import com.heroku.java.services.CacheService;
+import com.heroku.java.services.TestimonialService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class StudentTestimonialController {
-    private final CacheService cacheService;
+    private final TestimonialService testimonialService;
 
     @GetMapping("/api/testimonials")
-    public ResponseEntity<Iterable<TestimonialDTO>> getAllTestimonials() throws IOException, ClassNotFoundException {
-        return new ResponseEntity<>(cacheService.getAllTestimonials(), HttpStatus.OK);
+    public ResponseEntity<List<TestimonialDTO>> getAllTestimonials() {
+        return new ResponseEntity<>(testimonialService.getStudentTestimonialsDTO(), HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.heroku.java.services;
 
+import com.heroku.java.dto.TeacherDTO;
 import com.heroku.java.models.ContactRequest;
 import com.heroku.java.models.Subject;
 import com.heroku.java.models.Teacher;
@@ -32,8 +33,7 @@ public class EmailService {
 
     private final JavaMailSender emailSender;
     private final ContactRequestService requestService;
-    private final TeacherSubjectService teacherSubjectService;
-
+    private final TeacherService teacherService;
     /**
      * Sends an email asynchronously
      *
@@ -94,7 +94,7 @@ public class EmailService {
             }
 
             log.info("Processing {} unsent contact requests", requests.size());
-            Teacher teacher = teacherSubjectService.findTeacherById(1L);
+            TeacherDTO teacher = teacherService.findTeacherDTOById(1L);
 
             // Process emails asynchronously but collect futures
             List<CompletableFuture<Void>> futures = requests.stream()
@@ -133,7 +133,7 @@ public class EmailService {
     public static class EmailContactRequest {
         private String from;
         private String to;
-        private Teacher teacher;
+        private TeacherDTO teacher;
         private ContactRequest contactRequest;
     }
 }
