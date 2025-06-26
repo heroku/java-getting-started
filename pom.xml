@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <name>java-getting-started</name>
+    <name>portfolio-backend</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -13,7 +13,7 @@
     </parent>
 
     <groupId>com.heroku</groupId>
-    <artifactId>java-getting-started</artifactId>
+    <artifactId>portfolio-backend</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
@@ -40,6 +40,11 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jscience</groupId>
+            <artifactId>jscience</artifactId>
+            <version>4.3.1</version>
         </dependency>
     </dependencies>
 
