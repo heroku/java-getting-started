@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -69,6 +72,24 @@ public class KanbanApplication {
         String sql = "INSERT INTO task (id, title, description, due_date, assignee, story_points, status, rank) VALUES (" + SQLFormatter.formatUUID(id) + ", " + SQLFormatter.formatString(task.getTitle()) + ", " + SQLFormatter.formatString(task.getDescription()) + ", " + SQLFormatter.formatDate(task.getDueDate()) + ", " + SQLFormatter.formatUUID(task.getAssignee()) + ", " + task.getStoryPoints() + ", " + SQLFormatter.formatString(task.getStatus().toString()) + ", " + task.getRank() + ")";
         statement.executeUpdate(sql);
         return ResponseEntity.ok(task);
+    }
+
+    @PutMapping(value = "/task/{id}", produces = "application/json", consumes = "application/json")
+    public ResponseEntity<Task> updateTask(@PathVariable("id") UUID id, @RequestBody Task task) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        final var statement = connection.createStatement();
+        String sql = "UPDATE task SET title = " + SQLFormatter.formatString(task.getTitle()) + ", description = " + SQLFormatter.formatString(task.getDescription()) + ", due_date = " + SQLFormatter.formatDate(task.getDueDate()) + ", assignee = " + SQLFormatter.formatUUID(task.getAssignee()) + ", story_points = " + task.getStoryPoints() + ", status = " + SQLFormatter.formatString(task.getStatus().toString()) + ", rank = " + task.getRank() + " WHERE id = " + SQLFormatter.formatUUID(id);
+        statement.executeUpdate(sql);
+        return ResponseEntity.ok(task);
+    }
+
+    @DeleteMapping(value = "/task/{id}")
+    public ResponseEntity<Void> updateTask(@PathVariable("id") UUID id) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        final var statement = connection.createStatement();
+        String sql = "DELETE FROM task WHERE id = " + SQLFormatter.formatUUID(id);
+        statement.executeUpdate(sql);
+        return ResponseEntity.ok().build();
     }
 
     public static void main(String[] args) {
