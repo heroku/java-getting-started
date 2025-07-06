@@ -24,6 +24,7 @@ import javax.measure.unit.SI;
 
 import com.heroku.java.Task;
 import com.heroku.java.Status;
+import com.heroku.java.SQLFormatter;
 
 @SpringBootApplication
 @RestController
@@ -59,34 +60,13 @@ public class KanbanApplication {
         return ResponseEntity.ok(output);
     }
 
-    public String formatString(String str) {
-        if (str == null) {
-            return "NULL";
-        }
-        return "'" + str + "'";
-    }
-
-    public String formatDate(Date date) {
-        if (date == null) {
-            return "NULL";
-        }
-        return formatString(String.format("%tY-%tm-%td", date, date, date));
-    }
-
-    public String formatUUID(UUID id) {
-        if (id == null) {
-            return "NULL";
-        }
-        return formatString(id.toString());
-    }
-
     @PostMapping(value = "/task", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Task> createTask(@RequestBody Task task) throws SQLException {
         Connection connection = dataSource.getConnection();
         final var statement = connection.createStatement();
         UUID id = UUID.randomUUID();
         task.setId(id);
-        String sql = "INSERT INTO task (id, title, description, due_date, assignee, story_points, status, rank) VALUES (" + formatUUID(id) + ", " + formatString(task.getTitle()) + ", " + formatString(task.getDescription()) + ", " + formatDate(task.getDueDate()) + ", " + formatUUID(task.getAssignee()) + ", " + task.getStoryPoints() + ", " + formatString(task.getStatus().toString()) + ", " + task.getRank() + ")";
+        String sql = "INSERT INTO task (id, title, description, due_date, assignee, story_points, status, rank) VALUES (" + SQLFormatter.formatUUID(id) + ", " + SQLFormatter.formatString(task.getTitle()) + ", " + SQLFormatter.formatString(task.getDescription()) + ", " + SQLFormatter.formatDate(task.getDueDate()) + ", " + SQLFormatter.formatUUID(task.getAssignee()) + ", " + task.getStoryPoints() + ", " + SQLFormatter.formatString(task.getStatus().toString()) + ", " + task.getRank() + ")";
         statement.executeUpdate(sql);
         return ResponseEntity.ok(task);
     }
