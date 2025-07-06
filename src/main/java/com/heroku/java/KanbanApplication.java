@@ -84,7 +84,7 @@ public class KanbanApplication {
     }
 
     @DeleteMapping(value = "/task/{id}")
-    public ResponseEntity<Void> updateTask(@PathVariable("id") UUID id) throws SQLException {
+    public ResponseEntity<Void> deleteTask(@PathVariable("id") UUID id) throws SQLException {
         Connection connection = dataSource.getConnection();
         final var statement = connection.createStatement();
         String sql = "DELETE FROM task WHERE id = " + SQLFormatter.formatUUID(id);
