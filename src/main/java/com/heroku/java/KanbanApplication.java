@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -39,6 +40,7 @@ public class KanbanApplication {
         this.dataSource = dataSource;
     }
 
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @GetMapping(value = "/tasks", produces = "application/json")
     public ResponseEntity<ArrayList<Task>> getTasks() throws SQLException {
         Connection connection = dataSource.getConnection();
@@ -63,6 +65,7 @@ public class KanbanApplication {
         return ResponseEntity.ok(output);
     }
 
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @PostMapping(value = "/task", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Task> createTask(@RequestBody Task task) throws SQLException {
         Connection connection = dataSource.getConnection();
@@ -74,6 +77,7 @@ public class KanbanApplication {
         return ResponseEntity.ok(task);
     }
 
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @PutMapping(value = "/task/{id}", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Task> updateTask(@PathVariable("id") UUID id, @RequestBody Task task) throws SQLException {
         Connection connection = dataSource.getConnection();
@@ -83,6 +87,7 @@ public class KanbanApplication {
         return ResponseEntity.ok(task);
     }
 
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @DeleteMapping(value = "/task/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable("id") UUID id) throws SQLException {
         Connection connection = dataSource.getConnection();
