@@ -62,6 +62,8 @@ public class KanbanApplication {
             output.add(task);
         }
 
+        connection.close();
+
         return ResponseEntity.ok(output);
     }
 
@@ -74,6 +76,7 @@ public class KanbanApplication {
         task.setId(id);
         String sql = "INSERT INTO task (id, title, description, due_date, assignee, story_points, status, rank) VALUES (" + SQLFormatter.formatUUID(id) + ", " + SQLFormatter.formatString(task.getTitle()) + ", " + SQLFormatter.formatString(task.getDescription()) + ", " + SQLFormatter.formatDate(task.getDueDate()) + ", " + SQLFormatter.formatUUID(task.getAssignee()) + ", " + task.getStoryPoints() + ", " + SQLFormatter.formatString(task.getStatus().toString()) + ", " + task.getRank() + ")";
         statement.executeUpdate(sql);
+        connection.close();
         return ResponseEntity.ok(task);
     }
 
@@ -84,6 +87,7 @@ public class KanbanApplication {
         final var statement = connection.createStatement();
         String sql = "UPDATE task SET title = " + SQLFormatter.formatString(task.getTitle()) + ", description = " + SQLFormatter.formatString(task.getDescription()) + ", due_date = " + SQLFormatter.formatDate(task.getDueDate()) + ", assignee = " + SQLFormatter.formatUUID(task.getAssignee()) + ", story_points = " + task.getStoryPoints() + ", status = " + SQLFormatter.formatString(task.getStatus().toString()) + ", rank = " + task.getRank() + " WHERE id = " + SQLFormatter.formatUUID(id);
         statement.executeUpdate(sql);
+        connection.close();
         return ResponseEntity.ok(task);
     }
 
@@ -94,6 +98,7 @@ public class KanbanApplication {
         final var statement = connection.createStatement();
         String sql = "DELETE FROM task WHERE id = " + SQLFormatter.formatUUID(id);
         statement.executeUpdate(sql);
+        connection.close();
         return ResponseEntity.ok().build();
     }
 
