@@ -54,7 +54,7 @@ public class KanbanApplication {
             task.setTitle(resultSet.getString("title"));
             task.setDescription(resultSet.getString("description"));
             task.setDueDate(resultSet.getDate("due_date"));
-            task.setAssignee(resultSet.getObject("id", UUID.class));
+            task.setAssignee(resultSet.getObject("assignee", UUID.class));
             task.setStoryPoints(resultSet.getInt("story_points"));
             task.setStatus(Status.valueOf(resultSet.getString("status")));
             task.setRank(resultSet.getDouble("rank"));
