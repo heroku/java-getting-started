@@ -29,6 +29,7 @@ import javax.measure.unit.SI;
 import com.heroku.java.Task;
 import com.heroku.java.Status;
 import com.heroku.java.SQLFormatter;
+import com.heroku.java.KanbanUser;
 
 @SpringBootApplication
 @RestController
@@ -100,6 +101,27 @@ public class KanbanApplication {
         statement.executeUpdate(sql);
         connection.close();
         return ResponseEntity.ok().build();
+    }
+
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
+    @GetMapping(value = "/kanban-users", produces = "application/json")
+    public ResponseEntity<ArrayList<KanbanUser>> getKanbanUser() throws SQLException {
+        Connection connection = dataSource.getConnection();
+        final var statement = connection.createStatement();
+        final var resultSet = statement.executeQuery("SELECT * FROM kanban_user");
+        final ArrayList<KanbanUser> output = new ArrayList<>();
+
+        while(resultSet.next()) {
+            final KanbanUser kanbanUser = new KanbanUser();
+            kanbanUser.setId(resultSet.getObject("id", UUID.class));
+            kanbanUser.setName(resultSet.getString("name"));
+
+            output.add(kanbanUser);
+        }
+        
+        connection.close();
+
+        return ResponseEntity.ok(output);
     }
 
     public static void main(String[] args) {
