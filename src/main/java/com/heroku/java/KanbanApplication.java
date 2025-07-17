@@ -59,6 +59,7 @@ public class KanbanApplication {
             task.setStoryPoints(resultSet.getInt("story_points"));
             task.setStatus(Status.valueOf(resultSet.getString("status")));
             task.setRank(resultSet.getDouble("rank"));
+            task.setTicketNumber(resultSet.getInt("ticket_number"));
 
             output.add(task);
         }
@@ -77,8 +78,20 @@ public class KanbanApplication {
         task.setId(id);
         String sql = "INSERT INTO task (id, title, description, due_date, assignee, story_points, status, rank) VALUES (" + SQLFormatter.formatUUID(id) + ", " + SQLFormatter.formatString(task.getTitle()) + ", " + SQLFormatter.formatString(task.getDescription()) + ", " + SQLFormatter.formatDate(task.getDueDate()) + ", " + SQLFormatter.formatUUID(task.getAssignee()) + ", " + task.getStoryPoints() + ", " + SQLFormatter.formatString(task.getStatus().toString()) + ", " + task.getRank() + ")";
         statement.executeUpdate(sql);
+        final var resultSet = statement.executeQuery("SELECT * FROM task WHERE id = " + SQLFormatter.formatUUID(id));
+        resultSet.next();
+        final Task updatedTask = new Task();
+        updatedTask.setId(resultSet.getObject("id", UUID.class));
+        updatedTask.setTitle(resultSet.getString("title"));
+        updatedTask.setDescription(resultSet.getString("description"));
+        updatedTask.setDueDate(resultSet.getDate("due_date"));
+        updatedTask.setAssignee(resultSet.getObject("assignee", UUID.class));
+        updatedTask.setStoryPoints(resultSet.getInt("story_points"));
+        updatedTask.setStatus(Status.valueOf(resultSet.getString("status")));
+        updatedTask.setRank(resultSet.getDouble("rank"));
+        updatedTask.setTicketNumber(resultSet.getInt("ticket_number"));
         connection.close();
-        return ResponseEntity.ok(task);
+        return ResponseEntity.ok(updatedTask);
     }
 
     @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
@@ -118,7 +131,7 @@ public class KanbanApplication {
 
             output.add(kanbanUser);
         }
-        
+
         connection.close();
 
         return ResponseEntity.ok(output);

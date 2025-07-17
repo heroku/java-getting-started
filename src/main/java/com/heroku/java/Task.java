@@ -13,6 +13,7 @@ public class Task {
     private int storyPoints;
     private Status status;
     private double rank;
+    private int ticketNumber;
 
     public UUID getId() {
         return id;
@@ -76,5 +77,13 @@ public class Task {
 
     public void setRank(double rank) {
         this.rank = rank;
+    }
+
+    public int getTicketNumber() {
+        return ticketNumber;
+    }
+
+    public void setTicketNumber(int ticketNumber) {
+        this.ticketNumber = ticketNumber;
     }
 }
