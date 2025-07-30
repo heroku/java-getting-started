@@ -14,127 +14,57 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.UUID;
-import java.util.Date;
 import java.sql.SQLException;
 
-import org.jscience.physics.amount.Amount;
-import org.jscience.physics.model.RelativisticModel;
-import javax.measure.unit.SI;
-
 import com.heroku.java.Task;
-import com.heroku.java.Status;
-import com.heroku.java.SQLFormatter;
 import com.heroku.java.KanbanUser;
+import com.heroku.java.KanbanService;
 
 @SpringBootApplication
 @RestController
 public class Application {
-    private final DataSource dataSource;
+    private final KanbanService kanbanService;
 
     @Autowired
-    public Application(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public Application(KanbanService kanbanService) {
+        this.kanbanService = kanbanService;
     }
 
     @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @GetMapping(value = "/tasks", produces = "application/json")
     public ResponseEntity<ArrayList<Task>> getTasks() throws SQLException {
-        Connection connection = dataSource.getConnection();
-        final var statement = connection.createStatement();
-        final var resultSet = statement.executeQuery("SELECT * FROM task");
-        final ArrayList<Task> output = new ArrayList<>();
-
-        while (resultSet.next()) {
-            final Task task = new Task();
-            task.setId(resultSet.getObject("id", UUID.class));
-            task.setTitle(resultSet.getString("title"));
-            task.setDescription(resultSet.getString("description"));
-            task.setDueDate(resultSet.getDate("due_date"));
-            task.setAssignee(resultSet.getObject("assignee", UUID.class));
-            task.setStoryPoints(resultSet.getInt("story_points"));
-            task.setStatus(Status.valueOf(resultSet.getString("status")));
-            task.setRank(resultSet.getDouble("rank"));
-            task.setTicketNumber(resultSet.getInt("ticket_number"));
-
-            output.add(task);
-        }
-
-        connection.close();
-
+        final ArrayList<Task> output = kanbanService.getTasks();
         return ResponseEntity.ok(output);
     }
 
     @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @PostMapping(value = "/task", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Task> createTask(@RequestBody Task task) throws SQLException {
-        Connection connection = dataSource.getConnection();
-        final var statement = connection.createStatement();
-        UUID id = UUID.randomUUID();
-        task.setId(id);
-        String sql = "INSERT INTO task (id, title, description, due_date, assignee, story_points, status, rank) VALUES (" + SQLFormatter.formatUUID(id) + ", " + SQLFormatter.formatString(task.getTitle()) + ", " + SQLFormatter.formatString(task.getDescription()) + ", " + SQLFormatter.formatDate(task.getDueDate()) + ", " + SQLFormatter.formatUUID(task.getAssignee()) + ", " + task.getStoryPoints() + ", " + SQLFormatter.formatString(task.getStatus().toString()) + ", " + task.getRank() + ")";
-        statement.executeUpdate(sql);
-        final var resultSet = statement.executeQuery("SELECT * FROM task WHERE id = " + SQLFormatter.formatUUID(id));
-        resultSet.next();
-        final Task updatedTask = new Task();
-        updatedTask.setId(resultSet.getObject("id", UUID.class));
-        updatedTask.setTitle(resultSet.getString("title"));
-        updatedTask.setDescription(resultSet.getString("description"));
-        updatedTask.setDueDate(resultSet.getDate("due_date"));
-        updatedTask.setAssignee(resultSet.getObject("assignee", UUID.class));
-        updatedTask.setStoryPoints(resultSet.getInt("story_points"));
-        updatedTask.setStatus(Status.valueOf(resultSet.getString("status")));
-        updatedTask.setRank(resultSet.getDouble("rank"));
-        updatedTask.setTicketNumber(resultSet.getInt("ticket_number"));
-        connection.close();
+        final Task updatedTask = kanbanService.createTask(task);
         return ResponseEntity.ok(updatedTask);
     }
 
     @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @PutMapping(value = "/task/{id}", produces = "application/json", consumes = "application/json")
     public ResponseEntity<Task> updateTask(@PathVariable("id") UUID id, @RequestBody Task task) throws SQLException {
-        Connection connection = dataSource.getConnection();
-        final var statement = connection.createStatement();
-        String sql = "UPDATE task SET title = " + SQLFormatter.formatString(task.getTitle()) + ", description = " + SQLFormatter.formatString(task.getDescription()) + ", due_date = " + SQLFormatter.formatDate(task.getDueDate()) + ", assignee = " + SQLFormatter.formatUUID(task.getAssignee()) + ", story_points = " + task.getStoryPoints() + ", status = " + SQLFormatter.formatString(task.getStatus().toString()) + ", rank = " + task.getRank() + " WHERE id = " + SQLFormatter.formatUUID(id);
-        statement.executeUpdate(sql);
-        connection.close();
-        return ResponseEntity.ok(task);
+        final Task updatedTask = kanbanService.updateTask(id, task);
+        return ResponseEntity.ok(updatedTask);
     }
 
     @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @DeleteMapping(value = "/task/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable("id") UUID id) throws SQLException {
-        Connection connection = dataSource.getConnection();
-        final var statement = connection.createStatement();
-        String sql = "DELETE FROM task WHERE id = " + SQLFormatter.formatUUID(id);
-        statement.executeUpdate(sql);
-        connection.close();
+        kanbanService.deleteTask(id);
         return ResponseEntity.ok().build();
     }
 
     @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
     @GetMapping(value = "/kanban-users", produces = "application/json")
-    public ResponseEntity<ArrayList<KanbanUser>> getKanbanUser() throws SQLException {
-        Connection connection = dataSource.getConnection();
-        final var statement = connection.createStatement();
-        final var resultSet = statement.executeQuery("SELECT * FROM kanban_user");
-        final ArrayList<KanbanUser> output = new ArrayList<>();
-
-        while(resultSet.next()) {
-            final KanbanUser kanbanUser = new KanbanUser();
-            kanbanUser.setId(resultSet.getObject("id", UUID.class));
-            kanbanUser.setName(resultSet.getString("name"));
-
-            output.add(kanbanUser);
-        }
-
-        connection.close();
-
-        return ResponseEntity.ok(output);
+    public ResponseEntity<ArrayList<KanbanUser>> getKanbanUsers() throws SQLException {
+        final ArrayList<KanbanUser> users = kanbanService.getKanbanUsers();
+        return ResponseEntity.ok(users);
     }
 
     public static void main(String[] args) {
