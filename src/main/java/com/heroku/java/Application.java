@@ -33,11 +33,11 @@ import com.heroku.java.KanbanUser;
 
 @SpringBootApplication
 @RestController
-public class KanbanApplication {
+public class Application {
     private final DataSource dataSource;
 
     @Autowired
-    public KanbanApplication(DataSource dataSource) {
+    public Application(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -138,6 +138,6 @@ public class KanbanApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(KanbanApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }

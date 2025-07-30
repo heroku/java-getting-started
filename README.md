@@ -1,3 +1,6 @@
+# Building the local server
+To build, run `./mvnw clean install` from the command line.
+
 # Running the local server
 To run the app locally, run `heroku local --port 5001` from the command line.
 
