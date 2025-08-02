@@ -1,4 +1,4 @@
-package com.heroku.java;
+package com.heroku.java.kanban;
 
 public enum Status {
     TO_DO,

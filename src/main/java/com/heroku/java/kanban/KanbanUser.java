@@ -1,4 +1,4 @@
-package com.heroku.java;
+package com.heroku.java.kanban;
 import java.util.UUID;
 
 public class KanbanUser {
@@ -16,6 +16,7 @@ public class KanbanUser {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }

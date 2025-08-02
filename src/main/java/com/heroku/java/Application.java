@@ -3,7 +3,6 @@ package com.heroku.java;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,18 +17,22 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.sql.SQLException;
 
-import com.heroku.java.Task;
-import com.heroku.java.KanbanUser;
-import com.heroku.java.KanbanService;
+import com.heroku.java.kanban.Task;
+
+import com.heroku.java.kanban.KanbanUser;
+import com.heroku.java.concerto.ConcertoService;
+import com.heroku.java.kanban.KanbanService;
 
 @SpringBootApplication
 @RestController
 public class Application {
     private final KanbanService kanbanService;
+    private final ConcertoService concertoService;
 
     @Autowired
-    public Application(KanbanService kanbanService) {
+    public Application(KanbanService kanbanService, ConcertoService concertoService) {
         this.kanbanService = kanbanService;
+        this.concertoService = concertoService;
     }
 
     @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
@@ -65,6 +68,13 @@ public class Application {
     public ResponseEntity<ArrayList<KanbanUser>> getKanbanUsers() throws SQLException {
         final ArrayList<KanbanUser> users = kanbanService.getKanbanUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
+    @PostMapping(value = "/concerto-data", produces = "application/json")
+    public ResponseEntity<Void> createConcertoData(@RequestBody String password) throws SQLException {
+        concertoService.generateData(password);
+        return ResponseEntity.ok().build();
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,5 @@
-package com.heroku.java;
+package com.heroku.java.kanban;
 
-import com.heroku.java.Status;
 import java.util.UUID;
 import java.util.Date;
 

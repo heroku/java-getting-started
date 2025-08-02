@@ -1,15 +1,11 @@
-package com.heroku.java;
+package com.heroku.java.kanban;
 
-import com.heroku.java.Task;
-import com.heroku.java.Status;
-import com.heroku.java.SQLFormatter;
-import com.heroku.java.KanbanUser;
+import com.heroku.java.utils.SQLFormatter;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.Date;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
