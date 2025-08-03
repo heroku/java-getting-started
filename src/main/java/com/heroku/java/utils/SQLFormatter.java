@@ -33,7 +33,7 @@ public class SQLFormatter {
         for (int i = 0; i < arr.length; i++) {
             values[i] = formatString(arr[i]);
         }
-        return "Array [ " + String.join(", ", values) + " ]";
+        return "ARRAY [ " + String.join(", ", values) + " ]";
     }
 
     public static String formatUUIDArray(UUID[] arr) {

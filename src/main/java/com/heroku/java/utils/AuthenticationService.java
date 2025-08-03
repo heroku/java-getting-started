@@ -19,7 +19,7 @@ public class AuthenticationService {
     public boolean checkAdminPrivilege(String password) throws SQLException {
         Connection connection = dataSource.getConnection();
         final var statement = connection.createStatement();
-        final var resultSet = statement.executeQuery("select * from role where permission = 'admin'");
+        final var resultSet = statement.executeQuery("SELECT * FROM role WHERE permission = 'admin'");
         
         while (resultSet.next()) {
             String pwd = resultSet.getString("password");

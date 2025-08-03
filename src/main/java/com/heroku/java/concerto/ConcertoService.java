@@ -27,7 +27,7 @@ public class ConcertoService {
     }
 
     private void saveArtists(Connection connection, Artist[] artists) throws SQLException {
-        String query = "insert into artist (id, name, genre, image, image_offset, description, tour) values ";
+        String query = "INSERT INTO artist (id, name, genre, image, image_offset, description, tour) VALUES ";
         String[] values = new String[artists.length];
         for (int i = 0; i < artists.length; i++) {
             Artist artist = artists[i];
@@ -71,7 +71,7 @@ public class ConcertoService {
     }
 
     private void saveCities(Connection connection, City[] cities) throws SQLException {
-        String query = "insert into city (id, image, image_offset, name, state, locations) values ";
+        String query = "INSERT INTO city (id, image, image_offset, name, state, locations) VALUES ";
         String[] values = new String[cities.length];
         for (int i = 0; i < cities.length; i++) {
             City city = cities[i];
@@ -127,7 +127,7 @@ public class ConcertoService {
     }
 
     private void saveTickets(Connection connection, Ticket[] tickets) throws SQLException {
-        String query = "insert into ticket (id, amount_available, price, seat_group) values ";
+        String query = "INSERT INTO ticket (id, amount_available, price, seat_group) VALUES ";
         String[] values = new String[tickets.length];
         for (int i = 0; i < tickets.length; i++) {
             Ticket ticket = tickets[i];
@@ -153,7 +153,7 @@ public class ConcertoService {
     }
 
     private void saveVenues(Connection connection, Venue[] venues) throws SQLException {
-        String query = "insert into venue (id, city_id, location, timestamp) values ";
+        String query = "INSERT INTO venue (id, city_id, location, timestamp) VALUES ";
         String[] values = new String[venues.length];
         for (int i = 0; i < venues.length; i++) {
             Venue venue = venues[i];
@@ -188,7 +188,7 @@ public class ConcertoService {
     }
 
     private void saveEvents(Connection connection, Event[] events) throws SQLException {
-        String query = "insert into event (id, artist_id, ticket_ids, title, venue_id) values ";
+        String query = "INSERT INTO event (id, artist_id, ticket_ids, title, venue_id) VALUES ";
         String[] values = new String[events.length];
         for (int i = 0; i < events.length; i++) {
             Event event = events[i];
@@ -224,17 +224,17 @@ public class ConcertoService {
         if (authenticationService.checkAdminPrivilege(password)) {
             Connection connection = dataSource.getConnection();
             final var statement = connection.createStatement();
-            statement.executeUpdate("drop table if exists event cascade");
-            statement.executeUpdate("drop table if exists venue cascade");
-            statement.executeUpdate("drop table if exists ticket cascade");
-            statement.executeUpdate("drop table if exists city cascade");
-            statement.executeUpdate("drop table if exists artist cascade");
+            statement.executeUpdate("DROP TABLE IF EXISTS event CASCADE");
+            statement.executeUpdate("DROP TABLE IF EXISTS venue CASCADE");
+            statement.executeUpdate("DROP TABLE IF EXISTS ticket CASCADE");
+            statement.executeUpdate("DROP TABLE IF EXISTS city CASCADE");
+            statement.executeUpdate("DROP TABLE IF EXISTS artist CASCADE");
 
-            statement.executeUpdate("create table artist (id uuid primary key, name text, genre text, image text, image_offset int, description text, tour text)");
-            statement.executeUpdate("create table city (id uuid primary key, image text, image_offset int, locations text[], name text, state text)");
-            statement.executeUpdate("create table ticket (id uuid primary key, amount_available int, price decimal, seat_group text)");
-            statement.executeUpdate("create table venue (id uuid primary key, city_id uuid references city(id), location text, timestamp timestamptz)");
-            statement.executeUpdate("create table event (id uuid primary key, artist_id uuid references artist(id), ticket_ids uuid[], title text, venue_id uuid references venue(id))");
+            statement.executeUpdate("CREATE TABLE artist (id UUID PRIMARY KEY, name TEXT, genre TEXT, image TEXT, image_offset INT, description TEXT, tour TEXT)");
+            statement.executeUpdate("CREATE TABLE city (id UUID PRIMARY KEY, image TEXT, image_offset INT, locations TEXT[], name TEXT, state TEXT)");
+            statement.executeUpdate("CREATE TABLE ticket (id UUID PRIMARY KEY, amount_available INT, price DECIMAL, seat_group TEXT)");
+            statement.executeUpdate("CREATE TABLE venue (id UUID PRIMARY KEY, city_id UUID REFERENCES city(id), location TEXT, timestamp TIMESTAMPTZ)");
+            statement.executeUpdate("CREATE TABLE event (id UUID PRIMARY KEY, artist_id UUID REFERENCES artist(id), ticket_ids UUID[], title TEXT, venue_id UUID REFERENCES venue(id))");
 
             Artist[] artists = generateArtists(connection);
             City[] cities = generateCities(connection);
