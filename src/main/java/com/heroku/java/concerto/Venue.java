@@ -7,7 +7,7 @@ public class Venue {
     private UUID id;
     private UUID cityId;
     private String location;
-    private Date timeStamp;
+    private Date timestamp;
 
     public UUID getId() {
         return id;
@@ -36,12 +36,12 @@ public class Venue {
         return this;
     }
 
-    public Date getTimeStamp() {
-        return timeStamp;
+    public Date getTimestamp() {
+        return timestamp;
     }
     
-    public Venue setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
+    public Venue setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
         return this;
     }
 }

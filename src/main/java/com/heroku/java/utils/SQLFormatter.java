@@ -1,7 +1,9 @@
 package com.heroku.java.utils;
 
 import java.util.UUID;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class SQLFormatter {
     public static String formatString(String str) {
@@ -16,6 +18,15 @@ public class SQLFormatter {
             return "NULL";
         }
         return formatString(String.format("%tY-%tm-%td", date, date, date));
+    }
+
+    public static String formatTimestamp(Date timestamp) {
+        if (timestamp == null) {
+            return "NULL";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return formatString(sdf.format(timestamp));
     }
 
     public static String formatUUID(UUID id) {

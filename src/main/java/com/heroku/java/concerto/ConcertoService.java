@@ -159,7 +159,7 @@ public class ConcertoService {
         String[] values = new String[venues.length];
         for (int i = 0; i < venues.length; i++) {
             Venue venue = venues[i];
-            values[i] = "(" + SQLFormatter.formatUUID(venue.getId()) + ", " + SQLFormatter.formatUUID(venue.getCityId()) + ", " + SQLFormatter.formatString(venue.getLocation()) + ", " + SQLFormatter.formatDate(venue.getTimeStamp()) + ")";
+            values[i] = "(" + SQLFormatter.formatUUID(venue.getId()) + ", " + SQLFormatter.formatUUID(venue.getCityId()) + ", " + SQLFormatter.formatString(venue.getLocation()) + ", " + SQLFormatter.formatTimestamp(venue.getTimestamp()) + ")";
         }
         query += String.join(", ", values);
         final var statement = connection.createStatement();
@@ -179,9 +179,9 @@ public class ConcertoService {
             String location = locations[random.nextInt(locations.length)];
             for (int j = 0; j < 10; j++) {
                 date.setTime(date.getTime() + millisInDay);
-                venues[10 * i + j] = new Venue().setId(UUID.randomUUID()).setCityId(cities[i].getId()).setLocation(location).setTimeStamp(date);
+                venues[10 * i + j] = new Venue().setId(UUID.randomUUID()).setCityId(cities[i].getId()).setLocation(location).setTimestamp(new Date(date.getTime()));
             }
-            date.setTime(date.getTime() + millisInDay);
+            date.setTime(date.getTime() + random.nextInt(millisInDay));
         }
 
         saveVenues(connection, venues);
@@ -304,7 +304,7 @@ public class ConcertoService {
         final ArrayList<Venue> output = new ArrayList<>();
 
         while (resultSet.next()) {
-            final Venue venue = new Venue().setId(resultSet.getObject("id", UUID.class)).setCityId(resultSet.getObject("city_id", UUID.class)).setLocation(resultSet.getString("location")).setTimeStamp(resultSet.getTimestamp("timestamp"));
+            final Venue venue = new Venue().setId(resultSet.getObject("id", UUID.class)).setCityId(resultSet.getObject("city_id", UUID.class)).setLocation(resultSet.getString("location")).setTimestamp(resultSet.getTimestamp("timestamp"));
             
             output.add(venue);
         }
