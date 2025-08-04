@@ -20,7 +20,10 @@ import java.sql.SQLException;
 import com.heroku.java.kanban.Task;
 
 import com.heroku.java.kanban.KanbanUser;
+import com.heroku.java.concerto.Artist;
+import com.heroku.java.concerto.City;
 import com.heroku.java.concerto.ConcertoService;
+import com.heroku.java.concerto.EventDTO;
 import com.heroku.java.kanban.KanbanService;
 
 @SpringBootApplication
@@ -75,6 +78,27 @@ public class Application {
     public ResponseEntity<Void> createConcertoData(@RequestBody String password) throws SQLException {
         concertoService.generateData(password);
         return ResponseEntity.ok().build();
+    }
+
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
+    @GetMapping(value = "/artists", produces = "application/json")
+    public ResponseEntity<ArrayList<Artist>> getArtists() throws SQLException {
+        final ArrayList<Artist> output = concertoService.getArtists();
+        return ResponseEntity.ok(output);
+    }
+
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
+    @GetMapping(value = "/cities", produces = "application/json")
+    public ResponseEntity<ArrayList<City>> getCities() throws SQLException {
+        final ArrayList<City> output = concertoService.getCities();
+        return ResponseEntity.ok(output);
+    }
+
+    @CrossOrigin(origins = {"http://localhost:5173", "https://priyanjoli-mukherjee.github.io"})
+    @GetMapping(value = "/events", produces = "application/json")
+    public ResponseEntity<ArrayList<EventDTO>> getEvents() throws SQLException {
+        final ArrayList<EventDTO> output = concertoService.getEvents();
+        return ResponseEntity.ok(output);
     }
 
     public static void main(String[] args) {

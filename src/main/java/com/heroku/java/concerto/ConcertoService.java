@@ -1,11 +1,13 @@
 package com.heroku.java.concerto;
 
 import javax.sql.DataSource;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 
@@ -39,29 +41,29 @@ public class ConcertoService {
     }
 
     private Artist[] generateArtists(Connection connection) throws SQLException {
-        final Artist taylorSwift = new Artist().setId(UUID.randomUUID()).setName("Taylor Swift").setDescription("").setGenre("Pop").setImage("/public/images/concerto/artists/Taylor_Swift.jpg").setImageOffset(15).setTour("Eras Tour");
+        final Artist taylorSwift = new Artist().setId(UUID.randomUUID()).setName("Taylor Swift").setDescription("").setGenre("Pop").setImage("/images/concerto/artists/Taylor_Swift.jpg").setImageOffset(15).setTour("Eras Tour");
 
-        final Artist dublinPhilharmonic = new Artist().setId(UUID.randomUUID()).setName("Dublin Philharmonic").setDescription("").setGenre("Classical").setImage("/public/images/concerto/artists/Philharmonic.jpg").setImageOffset(30).setTour("An Evening With Mozart");
+        final Artist dublinPhilharmonic = new Artist().setId(UUID.randomUUID()).setName("Dublin Philharmonic").setDescription("").setGenre("Classical").setImage("/images/concerto/artists/Philharmonic.jpg").setImageOffset(30).setTour("An Evening With Mozart");
 
-        final Artist metallica = new Artist().setId(UUID.randomUUID()).setName("Metallica").setDescription("").setGenre("Heavy Metal").setImage("/public/images/concerto/artists/Metallica.jpg").setImageOffset(5).setTour("Time Marches On");
+        final Artist metallica = new Artist().setId(UUID.randomUUID()).setName("Metallica").setDescription("").setGenre("Heavy Metal").setImage("/images/concerto/artists/Metallica.jpg").setImageOffset(5).setTour("Time Marches On");
 
-        final Artist adele = new Artist().setId(UUID.randomUUID()).setName("Adele").setDescription("").setGenre("Soul").setImage("/public/images/concerto/artists/Adele.png").setImageOffset(5).setTour("Weekends with Adele");
+        final Artist adele = new Artist().setId(UUID.randomUUID()).setName("Adele").setDescription("").setGenre("Soul").setImage("/images/concerto/artists/Adele.png").setImageOffset(5).setTour("Weekends with Adele");
 
-        final Artist edSheeran = new Artist().setId(UUID.randomUUID()).setName("Ed Sheeran").setDescription("").setGenre("Pop").setImage("/public/images/concerto/artists/Ed_Sheeran.jpg").setImageOffset(5).setTour("Mathematics tour");
+        final Artist edSheeran = new Artist().setId(UUID.randomUUID()).setName("Ed Sheeran").setDescription("").setGenre("Pop").setImage("/images/concerto/artists/Ed_Sheeran.jpg").setImageOffset(5).setTour("Mathematics tour");
 
-        final Artist daftPunk = new Artist().setId(UUID.randomUUID()).setName("Daft Punk").setDescription("").setGenre("Electronic").setImage("/public/images/concerto/artists/Daft_Punk.jpg").setImageOffset(10).setTour("Interstella 5555");
+        final Artist daftPunk = new Artist().setId(UUID.randomUUID()).setName("Daft Punk").setDescription("").setGenre("Electronic").setImage("/images/concerto/artists/Daft_Punk.jpg").setImageOffset(10).setTour("Interstella 5555");
 
-        final Artist mariachiHuenachi = new Artist().setId(UUID.randomUUID()).setName("Mariachi Huenachi").setDescription("").setGenre("Latin").setImage("/public/images/concerto/artists/Mariachi_Huenachi.jpg").setImageOffset(10).setTour("Musica de la noche");
+        final Artist mariachiHuenachi = new Artist().setId(UUID.randomUUID()).setName("Mariachi Huenachi").setDescription("").setGenre("Latin").setImage("/images/concerto/artists/Mariachi_Huenachi.jpg").setImageOffset(10).setTour("Musica de la noche");
 
-        final Artist bhangraBoys = new Artist().setId(UUID.randomUUID()).setName("Bhangra Boys").setDescription("").setGenre("Punjabi").setImage("/public/images/concerto/artists/Bhangra.jpg").setImageOffset(15).setTour("North American Tour");
+        final Artist bhangraBoys = new Artist().setId(UUID.randomUUID()).setName("Bhangra Boys").setDescription("").setGenre("Punjabi").setImage("/images/concerto/artists/Bhangra.jpg").setImageOffset(15).setTour("North American Tour");
 
-        final Artist flamencoAndalusia = new Artist().setId(UUID.randomUUID()).setName("Flamenco Andalusia").setDescription("").setGenre("Latin").setImage("/public/images/concerto/artists/Flamenco.jpg").setImageOffset(10).setTour("Torneo de las rosas");
+        final Artist flamencoAndalusia = new Artist().setId(UUID.randomUUID()).setName("Flamenco Andalusia").setDescription("").setGenre("Latin").setImage("/images/concerto/artists/Flamenco.jpg").setImageOffset(10).setTour("Torneo de las rosas");
 
-        final Artist popsInThePark = new Artist().setId(UUID.randomUUID()).setName("Pops in the Park").setDescription("").setGenre("Classical").setImage("/public/images/concerto/artists/4th_of_July.jpg").setImageOffset(20).setTour("John Williams'' Greatest Hits");
+        final Artist popsInThePark = new Artist().setId(UUID.randomUUID()).setName("Pops in the Park").setDescription("").setGenre("Classical").setImage("/images/concerto/artists/4th_of_July.jpg").setImageOffset(20).setTour("John Williams'' Greatest Hits");
 
-        final Artist chrisStapleton = new Artist().setId(UUID.randomUUID()).setName("Chris Stapleton").setDescription("").setGenre("Country").setImage("/public/images/concerto/artists/Chris_Stapleton.jpg").setImageOffset(15).setTour("All-American Road Show Tour");
+        final Artist chrisStapleton = new Artist().setId(UUID.randomUUID()).setName("Chris Stapleton").setDescription("").setGenre("Country").setImage("/images/concerto/artists/Chris_Stapleton.jpg").setImageOffset(15).setTour("All-American Road Show Tour");
 
-        final Artist hulaGals = new Artist().setId(UUID.randomUUID()).setName("The Hula Gals").setDescription("").setGenre("Polynesian").setImage("/public/images/concerto/artists/Polynesian.jpg").setImageOffset(10).setTour("Songs of my ancestors");
+        final Artist hulaGals = new Artist().setId(UUID.randomUUID()).setName("The Hula Gals").setDescription("").setGenre("Polynesian").setImage("/images/concerto/artists/Polynesian.jpg").setImageOffset(10).setTour("Songs of my ancestors");
 
         final Artist[] artists = {taylorSwift, dublinPhilharmonic, metallica, adele, edSheeran, daftPunk, mariachiHuenachi, bhangraBoys, flamencoAndalusia, popsInThePark, chrisStapleton, hulaGals};
 
@@ -84,40 +86,40 @@ public class ConcertoService {
 
     private City[] generateCities(Connection connection) throws SQLException {
         final String[] seattleLocations = {"Space Needle", "Pike''s Place"};
-        final City seattle = new City().setId(UUID.randomUUID()).setName("Seattle").setState("WA").setLocations(seattleLocations).setImage("/public/images/concerto/cities/Seattle.jpg").setImageOffset(15);
+        final City seattle = new City().setId(UUID.randomUUID()).setName("Seattle").setState("WA").setLocations(seattleLocations).setImage("/images/concerto/cities/Seattle.jpeg").setImageOffset(15);
 
         final String[] sanFranciscoLocations = {"Dolores Park", "Golden Gate Park"};
-        final City sanFrancisco = new City().setId(UUID.randomUUID()).setName("San Francisco").setState("CA").setLocations(sanFranciscoLocations).setImage("/public/images/concerto/cities/Golden_Gate.jpg").setImageOffset(20);
+        final City sanFrancisco = new City().setId(UUID.randomUUID()).setName("San Francisco").setState("CA").setLocations(sanFranciscoLocations).setImage("/images/concerto/cities/Golden_Gate.jpg").setImageOffset(20);
         
         final String[] losAngelesLocations = {"Hollywood Bowl", "Griffith Observatory"};
-        final City losAngeles = new City().setId(UUID.randomUUID()).setName("Los Angeles").setState("CA").setLocations(losAngelesLocations).setImage("/public/images/concerto/cities/Los_Angeles.jpg").setImageOffset(30);
+        final City losAngeles = new City().setId(UUID.randomUUID()).setName("Los Angeles").setState("CA").setLocations(losAngelesLocations).setImage("/images/concerto/cities/Los_Angeles.jpg").setImageOffset(30);
 
         final String[] newYorkLocations = {"Madison Square Garden", "Times Square"};
-        final City newYork = new City().setId(UUID.randomUUID()).setName("New York").setState("NY").setLocations(newYorkLocations).setImage("/public/images/concerto/cities/Statue_of_Liberty.jpg").setImageOffset(10);
+        final City newYork = new City().setId(UUID.randomUUID()).setName("New York").setState("NY").setLocations(newYorkLocations).setImage("/images/concerto/cities/Statue_of_Liberty.jpg").setImageOffset(10);
 
         final String[] orlandoLocations = {"Disneyworld", "Universal Studios"};
-        final City orlando = new City().setId(UUID.randomUUID()).setName("Orlando").setState("FL").setLocations(orlandoLocations).setImage("/public/images/concerto/cities/Disney.jpg").setImageOffset(20);
+        final City orlando = new City().setId(UUID.randomUUID()).setName("Orlando").setState("FL").setLocations(orlandoLocations).setImage("/images/concerto/cities/Disney.jpg").setImageOffset(20);
 
         final String[] charlestonLocations = {"Charleston Music Hall", "The Charleston Pour House"};
-        final City charleston = new City().setId(UUID.randomUUID()).setName("Charleston").setState("SC").setLocations(charlestonLocations).setImage("/public/images/concerto/cities/Charleston.jpg").setImageOffset(20);
+        final City charleston = new City().setId(UUID.randomUUID()).setName("Charleston").setState("SC").setLocations(charlestonLocations).setImage("/images/concerto/cities/Charleston.jpg").setImageOffset(20);
 
         final String[] austinLocations = {"Mohawk Austin"};
-        final City austin = new City().setId(UUID.randomUUID()).setName("Austin").setState("TX").setLocations(austinLocations).setImage("/public/images/concerto/cities/Austin.jpg").setImageOffset(20);
+        final City austin = new City().setId(UUID.randomUUID()).setName("Austin").setState("TX").setLocations(austinLocations).setImage("/images/concerto/cities/Austin.jpg").setImageOffset(20);
 
         final String[] honoluluLocations = {"Blue Note Hawaii", "Waikiki Shell"};
-        final City honolulu = new City().setId(UUID.randomUUID()).setName("Honolulu").setState("HI").setLocations(honoluluLocations).setImage("/public/images/concerto/cities/Kuaui.jpg").setImageOffset(30);
+        final City honolulu = new City().setId(UUID.randomUUID()).setName("Honolulu").setState("HI").setLocations(honoluluLocations).setImage("/images/concerto/cities/Kuaui.jpg").setImageOffset(30);
         
         final String[] phoenixLocations = {"PHX Arena", "The Van Buren"};
-        final City phoenix = new City().setId(UUID.randomUUID()).setName("Phoenix").setState("AZ").setLocations(phoenixLocations).setImage("/public/images/concerto/cities/Saguaro.jpg").setImageOffset(20);
+        final City phoenix = new City().setId(UUID.randomUUID()).setName("Phoenix").setState("AZ").setLocations(phoenixLocations).setImage("/images/concerto/cities/Saguaro.jpg").setImageOffset(20);
 
         final String[] denverLocations = {"Red Rock Amphitheater"};
-        final City denver = new City().setId(UUID.randomUUID()).setName("Denver").setState("CO").setLocations(denverLocations).setImage("/public/images/concerto/cities/Red_Rocks_Amphitheatre.jpg").setImageOffset(20);
+        final City denver = new City().setId(UUID.randomUUID()).setName("Denver").setState("CO").setLocations(denverLocations).setImage("/images/concerto/cities/Red_Rocks_Amphitheatre.jpg").setImageOffset(20);
 
         final String[] bostonLocations = {"MGM Music Hall"};
-        final City boston = new City().setId(UUID.randomUUID()).setName("Boston").setState("MA").setLocations(bostonLocations).setImage("/public/images/concerto/cities/Boston.jpg").setImageOffset(50);
+        final City boston = new City().setId(UUID.randomUUID()).setName("Boston").setState("MA").setLocations(bostonLocations).setImage("/images/concerto/cities/Boston.jpg").setImageOffset(50);
 
         final String[] nashvilleLocations = {"Ryman Auditorium", "Grand Ole Opry"};
-        final City nashville = new City().setId(UUID.randomUUID()).setName("Nashville").setState("TN").setLocations(nashvilleLocations).setImage("/public/images/concerto/cities/Nashville.jpg").setImageOffset(20);
+        final City nashville = new City().setId(UUID.randomUUID()).setName("Nashville").setState("TN").setLocations(nashvilleLocations).setImage("/images/concerto/cities/Nashville.jpg").setImageOffset(20);
 
         final City[] cities = {seattle, sanFrancisco, losAngeles, newYork, orlando, charleston, austin, honolulu, phoenix, denver, boston, nashville};
 
@@ -242,5 +244,110 @@ public class ConcertoService {
             generateEvents(connection, artists, venues);
             connection.close();
         }
+    }
+
+    public ArrayList<Artist> getArtists() throws SQLException {
+        Connection connection = dataSource.getConnection();
+        final var statement = connection.createStatement();
+        final var resultSet = statement.executeQuery("SELECT * FROM artist");
+        final ArrayList<Artist> output = new ArrayList<>();
+
+        while (resultSet.next()) {
+            final Artist artist = new Artist().setId(resultSet.getObject("id", UUID.class)).setName(resultSet.getString("name")).setGenre(resultSet.getString("genre")).setImage(resultSet.getString("image")).setImageOffset(resultSet.getInt("image_offset")).setDescription(resultSet.getString("description")).setTour(resultSet.getString("tour"));
+            
+            output.add(artist);
+        }
+
+        connection.close();
+
+        return output;
+    }
+
+    public ArrayList<City> getCities() throws SQLException {
+        Connection connection = dataSource.getConnection();
+        final var statement = connection.createStatement();
+        final var resultSet = statement.executeQuery("SELECT * FROM city");
+        final ArrayList<City> output = new ArrayList<>();
+
+        while (resultSet.next()) {
+            final City city = new City().setId(resultSet.getObject("id", UUID.class)).setImage(resultSet.getString("image")).setImageOffset(resultSet.getInt("image_offset")).setLocations((String[]) resultSet.getArray("locations").getArray()).setName(resultSet.getString("name")).setState(resultSet.getString("state"));
+            
+            output.add(city);
+        }
+
+        connection.close();
+
+        return output;
+    }
+
+    public ArrayList<Ticket> getTickets() throws SQLException {
+        Connection connection = dataSource.getConnection();
+        final var statement = connection.createStatement();
+        final var resultSet = statement.executeQuery("SELECT * FROM ticket");
+        final ArrayList<Ticket> output = new ArrayList<>();
+
+        while (resultSet.next()) {
+            final Ticket ticket = new Ticket().setId(resultSet.getObject("id", UUID.class)).setAmountAvailable(resultSet.getInt("amount_available")).setPrice(resultSet.getDouble("price")).setSeatGroup(resultSet.getString("seat_group"));
+            
+            output.add(ticket);
+        }
+
+        connection.close();
+
+        return output;
+    }
+
+    public ArrayList<Venue> getVenues() throws SQLException {
+        Connection connection = dataSource.getConnection();
+        final var statement = connection.createStatement();
+        final var resultSet = statement.executeQuery("SELECT * FROM venue");
+        final ArrayList<Venue> output = new ArrayList<>();
+
+        while (resultSet.next()) {
+            final Venue venue = new Venue().setId(resultSet.getObject("id", UUID.class)).setCityId(resultSet.getObject("city_id", UUID.class)).setLocation(resultSet.getString("location")).setTimeStamp(resultSet.getTimestamp("timestamp"));
+            
+            output.add(venue);
+        }
+
+        connection.close();
+
+        return output;
+    }
+
+    public ArrayList<EventDTO> getEvents() throws SQLException {
+        final ArrayList<Ticket> tickets = getTickets(); 
+        final HashMap<UUID, Ticket> ticketById = new HashMap<>();
+        for (int i = 0; i < tickets.size(); i++) {
+            ticketById.put(tickets.get(i).getId(), tickets.get(i));
+        }
+
+        final ArrayList<Venue> venues = getVenues(); 
+        final HashMap<UUID, Venue> venueById = new HashMap<>();
+        for (int i = 0; i < venues.size(); i++) {
+            venueById.put(venues.get(i).getId(), venues.get(i));
+        }
+
+        Connection connection = dataSource.getConnection();
+        final var statement = connection.createStatement();
+        final var resultSet = statement.executeQuery("SELECT * FROM event");
+        final ArrayList<EventDTO> output = new ArrayList<>();
+
+        while (resultSet.next()) {
+            UUID[] ticketIds = (UUID[]) resultSet.getArray("ticket_ids").getArray();
+            UUID venueId = resultSet.getObject("venue_id", UUID.class);
+
+            Ticket[] eventTickets = new Ticket[ticketIds.length];
+            for (int i = 0; i < ticketIds.length; i++) {
+                eventTickets[i] = ticketById.get(ticketIds[i]);
+            }
+
+            final EventDTO event = new EventDTO().setId(resultSet.getObject("id", UUID.class)).setArtistId(resultSet.getObject("artist_id", UUID.class)).setTickets(eventTickets).setTitle(resultSet.getString("title")).setVenue(venueById.get(venueId));
+
+            output.add(event);
+        }
+
+        connection.close();
+
+        return output;
     }
 }
