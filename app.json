@@ -4,7 +4,7 @@
   "addons": ["heroku-postgresql"],
   "environments": {
     "test": {
-      "addons": ["heroku-postgresql:essential-0"]
+      "addons": ["heroku-postgresql:in-dyno"]
     }
   }
 }
