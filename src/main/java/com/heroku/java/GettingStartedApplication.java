@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import jakarta.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public class GettingStartedApplication {
     }
 
     @GetMapping("/database")
-    String database(Map<String, Object> model, HttpServletResponse response) {
+    String database(Map<String, Object> model) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             final var statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
@@ -42,11 +42,6 @@ public class GettingStartedApplication {
 
             model.put("records", output);
             return "database";
-
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            model.put("message", e.getMessage());
-            return "error";
         }
     }
 
